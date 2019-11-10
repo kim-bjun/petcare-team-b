@@ -18,7 +18,7 @@ import com.petcare.web.utills.Proxy;
 
 @RestController
 @RequestMapping("/sch")
-public class SearchHospitalList extends HttpServlet {
+public class SearchHospitalController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired Map<String, Object>map;
 	@Autowired HospitalBean hbean;
