@@ -27,7 +27,7 @@ public class SearchHospitalController extends HttpServlet {
 	
 	@GetMapping("/{pageNo}")  
 	public Map<?,?> selectAllHospitalList(@PathVariable String pageNo){
-		pxy.setPageNum(pxy.parseInt(pageNo));
+		pxy.setPageNum(pxy.parseInt(pageNo)); 
 		Supplier<Integer> s = ()->hospitalMapper.countHospital();
 		pxy.paging(s.get());	
 		
