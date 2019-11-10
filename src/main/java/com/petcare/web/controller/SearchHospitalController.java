@@ -37,7 +37,7 @@ public class SearchHospitalController extends HttpServlet {
 		map.put("result","SUCCESS");
 		return map;
 	}
-	
+	  
 	@GetMapping("/detail/{hcode}")
 	public Map<?,?> selectHospitalDetail(@PathVariable String hcode){
 //		pxy.setSearchWrd(param);
