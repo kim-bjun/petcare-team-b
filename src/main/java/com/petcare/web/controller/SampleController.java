@@ -25,4 +25,5 @@ public class SampleController {
     public String sampleView() {
         return "sampleView";
     }
+    
 }
