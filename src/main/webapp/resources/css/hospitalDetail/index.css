@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.hospital-detail {
+	padding: 1.3rem;
+	min-width: 100vw;
+	background: rgb(244, 246, 248);
+}
