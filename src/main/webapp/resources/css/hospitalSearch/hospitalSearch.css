@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+/* main */
+.hospital-search {
+	padding: 1.3rem;
+	min-width: 100vw;
+	background: rgb(244, 246, 248);
+}
+
+.hospital-search-form {
+	margin: 20px auto;
+	max-width: 70vw;
+	padding: 1rem;
+	background: white;
+}
+.section-title {
+	color: #7950f2;
+	font-weight: 600;
+}
+
+.search-title {
+	font-size: 0.9rem; }	
+	.search-title-description {
+		font-size: 0.5rem; }
+
+.search-subtitle {
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: #7950f2;
+}
+
+/* selectBox */
+.custom-select {         
+	max-height: 200px;
+	overflow-y: auto;
+}
+.btn-info {
+	background: #7950f2;
+	border-color: #7950f2;
+	font-size: 0.7rem;
+}
+option:hover {
+	cursor: pointer;
+	background: #7950f2;
+}
+
+/* checkBox */
+.field-set {
+	margin-top: 15px;
+	padding: 1rem 1rem 1rem 2rem;
+	background: white;
+}
+.custom-control-label::before, 
+.custom-control-label::after {
+top: .2rem;
+width: 0.8rem;
+height: 0.8rem;
+}
+.custom-control-label {
+	font-size: 0.7rem;
+}
+
+/* submit button*/
+.search-button {
+	width: 100px;
+	border: 1px solid #7950f2;
+	background: #7950f2;
+	font-size: 1rem;
+}
+
+/* hospital list */
+.hospital-list-wrap {
+}
+.hospital-list {
+	margin-top: -1px;
+	border: 1px;
+	border-style: solid none solid none;
+	border-color: rgb(244, 246, 248);
+	background: white;
+}
+.hospital-detail-wrap {
+	padding: 1rem;
+}
+.hospital-detail {
+	margin-top: 5px;
+	font-size: 0.8rem; }
+	.title {
+		font-size: 0.9rem; }
+		

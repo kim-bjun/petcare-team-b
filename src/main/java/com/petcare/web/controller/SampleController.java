@@ -21,8 +21,18 @@ public class SampleController {
         return "hi " +sampleService.getName() + " : " + sampleService.now();
     }
 
-    @GetMapping("/sampleview")
+    @GetMapping("/home")
     public String sampleView() {
-        return "sampleView";
+        return "home";
+    }
+    
+    @GetMapping("/hospitaldetail")
+    public String hospitalDetail() {
+    	return "hospitalDetail";
+    }
+    
+    @GetMapping("/hospitalsearch")
+    public String hospitalSearch() {
+    	return "hospitalSearch";
     }
 }
