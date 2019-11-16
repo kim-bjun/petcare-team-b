@@ -1,3 +1,4 @@
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <html>
@@ -11,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common/template.css" />
     <link rel="stylesheet" href="/resources/css/home/home.css" />
-
+    <link rel="stylesheet" href="/resources/css/hospitalSearch/hospitalSearch.css" />
 </head>
 <body>
 	<div id="root">
@@ -19,29 +20,29 @@
 			<%@ include file="./common/header.jsp" %>
 		</header>
 		<main class="main">
-			<div id="home">
+			<div class="hospital-search">
 				<section>
-					<div class="row">
-						<div class="description col-sm-12">
-							sdfsdf
-						</div>
+					<div class="container">
+						<h6 class="section-title">동물 병원 검색</h6>
+						<form class="shadow-sm rounded hospital-search-form">
+							<div class="form-group">
+								<%@ include file="./hospitalSearch/selectBox.jsp" %>
+							</div>
+							<hr />
+							<div class="form-group">
+								<%@ include file="./hospitalSearch/checkBox.jsp" %>
+							</div>
+							<div>
+								<%@ include file="./hospitalSearch/submitButton.jsp" %>
+							</div>
+						</form>
 					</div>
 				</section>
+				<br />
 				<section>
-					<div class="row doctor">					
-						<div class="doctor-img col-sm-6">
-							<img class="img" src="/resources/img/home/doctor.jpg" width="100%"/>
-						</div>
-						<div class="doctor-description  col-sm-6">
-							최적의 병원을 찾아드립니다.
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="row">					
-						<div class="epilogue">
-							
-						</div>
+					<div class="container">
+						<h6 class="section-title">검색 결과</h6>
+						<%@ include file="./hospitalSearch/hospitalList.jsp" %>
 					</div>
 				</section>
 			</div>
@@ -58,5 +59,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/b98d20d346.js" crossorigin="anonymous"></script>
 	<script src="/resources/js/common/template.js"></script>
+	<script src="/resources/js/hospitalSearch/hospitalSearch.js"></script>
 </body>
 </html>

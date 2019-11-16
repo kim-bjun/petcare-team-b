@@ -4,7 +4,9 @@
 		<div class="row align-items-center">
 			<div class="top-left">
 				<h1 class="logo">
-					<img class="logo-img" src="/resources/img/common/logo.png" width="90%"/>
+					<a href="/sample/home">
+						<img class="logo-img" src="/resources/img/common/logo.png" width="90%"/>
+					</a>
 				</h1>
 			</div>
 		    <div class="top-center">
@@ -24,16 +26,16 @@
 		<div class="row align-items-center justify-content-center">
 		    <div class="col-md-6 ">
 		    	<div class="row justify-content-around">
-			    	<div class="search-hospital nav">
-			    		<a href="">병원찾기</a>
+			    	<div class="search-hospital header-nav">
+			    		<a href="/sample/hospitalsearch">병원찾기</a>
 	    			</div>
-					<div class="reservation-confirm nav">
+					<div class="reservation-confirm header-nav">
 						<a href="">예약내역</a>
 					</div>
-					<div class="community nav">
+					<div class="community header-nav">
 						<a href="">커뮤니티</a>
 					</div>
-					<div class="faq nav">
+					<div class="faq header-nav">
 						<a href="">FAQ</a>
 					</div>
 		    	</div>
@@ -41,4 +43,5 @@
 	  	</div>
 	  	
 	</div>
+
 </body>

@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common/template.css" />
-    <link rel="stylesheet" href="/resources/css/home/home.css" />
-
+    <link rel="stylesheet" href="/resources/css/hospitalDetail/index.css" />
+    <link rel="stylesheet" href="/resources/css/hospitalDetail/tabMenu.css" />
+    <link rel="stylesheet" href="/resources/css/hospitalDetail/detailAndReservation.css" />    
 </head>
 <body>
 	<div id="root">
@@ -19,29 +20,16 @@
 			<%@ include file="./common/header.jsp" %>
 		</header>
 		<main class="main">
-			<div id="home">
+			<div class="container hospital-detail">
 				<section>
-					<div class="row">
-						<div class="description col-sm-12">
-							sdfsdf
-						</div>
+					<div class="container">
+						<h6 class="section-title">동물 병원 검색</h6>
+						<%@ include file="./hospitalDetail/detailAndReservation.jsp" %>
 					</div>
 				</section>
 				<section>
-					<div class="row doctor">					
-						<div class="doctor-img col-sm-6">
-							<img class="img" src="/resources/img/home/doctor.jpg" width="100%"/>
-						</div>
-						<div class="doctor-description  col-sm-6">
-							최적의 병원을 찾아드립니다.
-						</div>
-					</div>
-				</section>
-				<section>
-					<div class="row">					
-						<div class="epilogue">
-							
-						</div>
+					<div class="container">
+						<%@ include file="./hospitalDetail/tabMenu.jsp" %>
 					</div>
 				</section>
 			</div>

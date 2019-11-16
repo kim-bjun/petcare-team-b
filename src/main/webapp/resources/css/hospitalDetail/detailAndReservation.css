@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.detailAndReservation {
+	background: white;
+	padding: 1rem;
+}
+.card {
+	border-style: none; }
+	.card-header {
+		background: white;
+		border-style: none;
+		box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; }		
+	.card-body-part {
+		padding: 1.5rem; }
+	.card-body-wrap {
+		padding: 0.8rem;
+	}
+.detail-label {
+	font-weight: 600;
+	color: #7950f2;
+}
+.hospital-image {
+	width: 100%;
+	min-height: 100%;
+	border-radius: .25rem;
+	box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.hospital-info { }
+	.hospital-info-title {
+		margin-bottom: .8rem;
+		padding: .1rem 0 0 .7rem;
+		font-size: 1rem; }
+	.hospital-info-text {
+		margin-bottom: .8rem;
+		padding: .3rem 0 .3rem .7rem;
+	 	border-bottom: 1px solid #f3f3f3;
+	 	font-size: .7rem; }
+
+.detail-icon-btn-wrap {
+	text-align: end;
+}
+.detail-icon-btn {
+	font-size: 1.5rem; }
+	 .detail-icon-btn:hover {
+	 	cursor: pointer;
+	 	transition: all .15s ease-in-out;
+	 	transform: scale(1.2, 1.2);
+	 }
