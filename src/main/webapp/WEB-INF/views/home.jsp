@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common/template.css" />
     <link rel="stylesheet" href="/resources/css/home/home.css" />
+
 </head>
 <body>
 	<div id="root">

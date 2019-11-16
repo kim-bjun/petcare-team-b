@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcare.web.mapper.ReservationMapper">
+
+	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
+		<id column="res_no" property="res_no" />
+		<id column="user_no" property="user_no" />
+		<id column="ani_no" property="ani_no" />
+		<id column="hos_no" property="hos_no" />
+		<id column="res_dt" property="res_dt" />
+		<id column="res_time" property="res_time" />
+		<id column="res_item" property="res_item" />
+		<id column="reg_dt" property="reg_dt" />
+		
+	</resultMap>
+
+	<select id="getList" resultMap="ReservationVo">
+		select * from reservation 
+	</select>
+
+	<select id="read" resultMap="ReservationVo">
+		select * from reservation where res_no=#{res_no}
+	</select>
+	
+	<insert id="insert">
+		insert into reservation (ani_no,res_dt,res_time,res_item)
+		values
+		(#{ani_no},#{res_dt},#{res_time},#{res_item})
+	</insert>
+
+	<update id="update">
+		update reservation set ani_no = #{ani_no} ,
+		res_dt= #{res_dt}
+		,res_time= #{res_time},res_item=#{res_item} 
+		where res_no = #{res_no}
+	</update>
+
+	<delete id="delete">
+		delete from reservation where res_no = #{res_no}
+	</delete>
+
+
+
+
+</mapper>

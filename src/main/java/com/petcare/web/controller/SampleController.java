@@ -35,4 +35,5 @@ public class SampleController {
     public String hospitalSearch() {
     	return "hospitalSearch";
     }
+    
 }
