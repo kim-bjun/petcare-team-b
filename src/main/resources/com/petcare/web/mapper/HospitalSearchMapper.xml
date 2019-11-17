@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcare.web.mapper.HospitalSearchMapper">
+<select id="selectPostIn" resultType="com.petcare.web.domains.HospitalBean">
+  SELECT *
+  FROM POST P
+<trim prefix="WHERE" prefixOverrides="AND |OR ">
+   hos_courseOfTreatment like 
+  	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{item}
+  	</foreach>
+  	and hos_major_treatment_target like
+	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{item}
+	</foreach>
+  	and hos_feature like
+	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{item}
+	</foreach>
+  	and hos_service like
+	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{item}
+	</foreach>
+</trim>
+</select>
+
+</mapper>
