@@ -103,6 +103,9 @@ a:link {
 /* main */
 .main {
 	min-height: calc(90vh - 100px);
+	padding: 1.3rem;
+	min-width: 100vw;
+	background: rgb(244, 246, 248);
 }
 .section-title {
 	color: #7950f2;
