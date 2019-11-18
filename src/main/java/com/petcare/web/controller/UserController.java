@@ -25,7 +25,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/loginPost",method=RequestMethod.GET)
+	@RequestMapping(value="/loginPost",method=RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
 		UserVO vo=service.login(dto);
 		if(vo==null) {
