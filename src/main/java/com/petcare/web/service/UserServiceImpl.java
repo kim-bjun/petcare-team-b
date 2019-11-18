@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.domains.LoginDTO;
 import com.petcare.web.domains.UserVO;
-import com.petcare.web.mapper.UserMapper;
+import com.petcare.web.mapper.UserMapperImpl;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserMapper mapper;
+	private UserMapperImpl mapper;
 	
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
