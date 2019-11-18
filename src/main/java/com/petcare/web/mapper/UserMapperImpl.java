@@ -9,7 +9,7 @@ import com.petcare.web.domains.UserVO;
 
 @Repository
 public class UserMapperImpl implements UserMapper {
-
+	
 	@Autowired
 	private SqlSession session;
 	
@@ -17,8 +17,6 @@ public class UserMapperImpl implements UserMapper {
 
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
-
-		
 		return session.selectOne(namespace+".login",dto);
 	}
 
