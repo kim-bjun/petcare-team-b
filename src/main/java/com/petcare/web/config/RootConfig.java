@@ -68,10 +68,5 @@ public class RootConfig {
         return dataSourceTransactionManager;
     }
     
-    @Bean
-    public SqlSession sqlSession() throws Exception{
-    	SqlSessionTemplate sqlSessionTemplate=new SqlSessionTemplate(sqlSessionFactory());
-    	return sqlSessionTemplate;
-    }
-
+  
 }

@@ -4,4 +4,12 @@
     <select id="login" resultType="UserVO">
         select userid, userpass,username from tbl_user where userid=#{userid} and userpass=#{userpass}
     </select>
+    
+    <update id="keepLogin">
+    update tbl_user set sessionKey=#{sessionId}, sessionLimit=#{next} where userId = #{userid}
+    </update>
+    
+    <select id="checkUserWithSessionKey" resultType="UserVO">
+    select * from tbl_user where sessionKey=#{value} and sessionLimit > now()
+    </select>
 </mapper>
