@@ -205,7 +205,7 @@ function setHospitalList(x){
 				}
 					$(divClass +
 						'		<div class="col-sm-4">'+
-						'			<img />'+
+						'			<img src="'+j.hosPhoto+'" height = "100%" width = "80%"/>'+
 						'		</div>'+
 						'		<div class="col-sm-8 hospital-detail-wrap">'+
 						'			<div class="hospital-detail title">'+j.hosName+'</div>'+
@@ -213,21 +213,17 @@ function setHospitalList(x){
 						'			<div class="hospital-detail">'+j.hosAddress+'</div>'+
 						'			<div class="hospital-detail">'+j.hosMajorTreatmentTarget+'</div>'+
 						'			<div class="hospital-detail">'+j.hosCourseOfTreatment+'</div>'+
-						'			<div class="hospital-detail">'+j.hosFeature+'</div>'+
+						//'			<div class="hospital-detail">'+j.hosFeature+'</div>'+
 						'		</div>'+
 						'	</div>')
 						.click(()=>{
 							setDetailView(j)
 						})
 						.appendTo('div.container.hospital-list-wrap')
-				
-				
-				
 			})
 
 		},
 		error : e=>{
-			
 		}
 	})
 	

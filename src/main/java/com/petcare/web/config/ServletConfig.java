@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.petcare.web.interceptor.SampleInterceptor;
 
 @EnableWebMvc
-@ComponentScan(basePackages = "package com.petcare.web.controller")
+@ComponentScan(basePackages = "package com.petcare.web")
 public class ServletConfig implements WebMvcConfigurer {
 
     @Override

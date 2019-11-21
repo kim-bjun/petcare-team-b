@@ -24,7 +24,7 @@
 			  <div class="col-sm-6">
 			    <div class="card">
 			      <div class="card-body card-body-part">
-					<img class="hospital-image" src="/resources/img/hospitalDetail/animal_hospital.jpg" style="width: 100%;"/>
+					<img class="hospital-image" src=${result.hosPhoto} style="width: 100%;"/>
 			      </div>
 			    </div>
 			  </div>

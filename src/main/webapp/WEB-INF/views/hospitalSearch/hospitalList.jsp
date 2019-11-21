@@ -52,6 +52,6 @@
 			<div class="hospital-detail">설명</div>
 			<div class="hospital-detail">진료 동물</div>
 			<div class="hospital-detail">진료 과목</div>
-		</div> -->
-	</div>
+		</div> 
+	</div>-->
 </div>
