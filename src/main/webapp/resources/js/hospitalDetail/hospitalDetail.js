@@ -2,16 +2,20 @@
 var hospitalDetail = hospitalDetail || {}
 hospitalDetail = (()=>{
 	
-	
-	let onCreate =()=>{
-			setReviewList()
+	let hosNo;
+	let init =(x)=>{
+		hosNo = x
+	}
+	let onCreate =(x)=>{
+		init(x)
+		setReviewList()
 	}
 	
-	let setReviewList =()=>{
+	let setReviewList =(x)=>{
 		$('#reviewList').empty()
 		var pageNo= ($('input[name="pageNo"]').val() == null ) ? 1 : $('input[name="pageNo"]').val() ;
 		$.ajax({
-			url : '/sch/'+'120'+'/pageNo/'+pageNo ,
+			url : '/sch/'+hosNo+'/pageNo/'+pageNo ,
 			type : 'GET',
 			contentType: 'application/json',
 			success : d=>{

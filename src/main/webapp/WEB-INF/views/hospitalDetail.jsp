@@ -50,7 +50,7 @@
 	<script src="/resources/js/common/template.js"></script>
 	<script src="/resources/js/hospitalDetail/hospitalDetail.js"></script>
 	<script>
-	hospitalDetail.onCreate()
+	hospitalDetail.onCreate(${result.hosNo})
 	</script>	
 </body>
 </html>

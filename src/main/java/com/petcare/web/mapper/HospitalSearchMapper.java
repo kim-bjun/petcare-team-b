@@ -10,7 +10,7 @@ import com.petcare.web.utills.Proxy;
 @Repository
 public interface HospitalSearchMapper {
 	
-	public ArrayList<HospitalVo> selectAllHospitalList();
+	public ArrayList<HospitalVo> selectHospitalList(Proxy pxy);
 	public ArrayList<HospitalVo> selectHospitalListByConodition(Proxy pxy);
 	public HospitalVo selectHospitalDetail(String hosNo);
 	public int countHospital(); 

@@ -37,12 +37,17 @@ public class SearchHospitalController {
 	@Autowired Proxy pxy;
 
 	
-	@PostMapping("/hospitalList")  
-	public @ResponseBody Map<?,?> selectAllHospitalList( @RequestBody Map<String,Object> paramMap ){
+	@PostMapping("/hospitalList/{pageNo}")  
+	public @ResponseBody Map<?,?> selectAllHospitalList(@PathVariable String pageNo, Model model ){
 		Map<String, Object> map = new HashMap<String, Object>();
+		Supplier<Integer> n = () -> hospitalSearchMapper.countHospital();
+		pxy.setPageNo(Integer.parseInt(pageNo));
+		pxy.paging(n.get());
+		System.out.println(pxy.toString());
 		
-		Supplier<List<HospitalVo>> n = () -> hospitalSearchMapper.selectAllHospitalList();
-		map.put("result", n.get());
+		Function<Object,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalList(pxy);
+		map.put("result", c.apply(pxy));
+		map.put("pagination", pxy);
 		map.put("msg","SUCCESS");
 		return map;
 	}
@@ -58,14 +63,14 @@ public class SearchHospitalController {
 	}
 	
 	@GetMapping("/{hosNo}/pageNo/{pageNo}")  
-	public @ResponseBody Map<String,Object> selectAllReview(@PathVariable String hosNo,@PathVariable String pageNo){
+	public @ResponseBody Map<String,Object> selectAllReview(@PathVariable String hosNo, @PathVariable String pageNo){
 		Map<String, Object> tempMap =new HashMap<String, Object>();
 		Function<String,Integer> c = t -> reviewBrdMapper.cntReview(t);		
 		pxy.setHosNo(Integer.parseInt(hosNo));
 		pxy.setPageNo(Integer.parseInt(pageNo));
 		pxy.paging(c.apply(hosNo));
-		Supplier<List<ReviewBrdVo>> r = () -> reviewBrdMapper.selectReview(pxy);
-		tempMap.put("review", r.get());
+		Function<Object,List<ReviewBrdVo>> r = t -> reviewBrdMapper.selectReview(pxy);
+		tempMap.put("review", r.apply(pxy));
 		tempMap.put("pagenation", pxy);
 		
 		return tempMap;

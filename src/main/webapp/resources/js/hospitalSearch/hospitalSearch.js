@@ -187,10 +187,11 @@ class Search {
 
 function setHospitalList(x){
 	console.log(x.selectedCheck);
-	
+	$('div.container.hospital-list-wrap').empty()
+	var pageNo= ($('input[name="pageNo"]').val() == null ) ? 1 : $('input[name="pageNo"]').val() ;
 	let arr = x.selectedCheck
 	$.ajax({
-		url : '/sch/hospitalList',//+$('input[name=pageno]').val(),
+		url : '/sch/hospitalList/'+pageNo,
 		type:'POST',
 		dataType:'json',
 		data:JSON.stringify(arr),
@@ -220,14 +221,59 @@ function setHospitalList(x){
 							setDetailView(j)
 						})
 						.appendTo('div.container.hospital-list-wrap')
+						
+						pagination(d.pagination)
+						
 			})
-
 		},
 		error : e=>{
 		}
 	})
 	
 }
+
+function pagination (d){
+	var cnt = 0;
+	$('ul[class="pagination pagination-sm justify-content-center"]').empty()
+	if(d.existPrev) {$(' <li class="page-item"><a class="page-link" href="#">Previous</a></li>')
+	.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+	.click(e=>{
+		$('input[name="pageNo"]').val(d.blist[0]-5),
+		setHospitalList(Search.constructor)
+		})
+	}
+	
+	$.each(d.blist, (i,j)=>{
+		if(j != d.pageNo){
+			$('<li class="page-item"><a class="page-link"  href="#">'+j+'</a></li>')
+			.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+			.click(e=>{
+				e.preventDefault()
+				$('input[name="pageNo"]').val(j)
+				setHospitalList(Search.constructor)
+			})
+		}else if(j == d.pageNo){
+			$('<li class="page-item"><a class="page-link"  href="#">'+j+'</a></li>')
+			.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+			.addClass('active')
+		}
+		
+	})			
+	
+	if(d.existNext) {
+		$('    <li class="page-item"><a class="page-link" href="#">Next</a></li>')
+			.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+		.click(e=>{
+			e.preventDefault()
+			$('input[name="pageNo"]').val(d.blist[0]+5),
+			setHospitalList(Search.constructor)
+		})		
+	}
+
+}	
+
+
+
 
 function setDetailView(x) {
 	location.assign('/sch/detail?hosNo='+x.hosNo)

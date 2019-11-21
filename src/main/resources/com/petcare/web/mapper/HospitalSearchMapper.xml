@@ -25,9 +25,16 @@
 		<id column="treat_no" property="treatNo" />
 	</resultMap>
 
-<select id="selectAllHospitalList" resultType="com.petcare.web.domains.HospitalVo">
-select * from hospital
+<select id="countHospital" resultType="int">
+select MAX(hos_no) from hospital
 </select>
+
+<select id="selectHospitalList" resultType="HospitalVo">
+select * from hospital
+order by hos_no desc
+LIMIT ${startRow} ,${PAGE_SIZE}
+</select>
+
 
 <select id="selectHospitalDetail" resultType="com.petcare.web.domains.HospitalVo">
 select * from hospital
