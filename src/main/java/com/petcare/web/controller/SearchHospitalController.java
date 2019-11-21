@@ -29,8 +29,6 @@ import com.petcare.web.utills.Proxy;
 @Controller
 @RequestMapping("/sch/*")
 public class SearchHospitalController {
-	//@Autowired Map<String, Object>map;
-	@Autowired HospitalVo hbean;
 	@Autowired HospitalSearchMapper hospitalSearchMapper;
 	@Autowired ReviewBrdMapper reviewBrdMapper;
 	@Autowired HospitalCrawlingProxy hospitalCrawlingProxy;
@@ -43,7 +41,6 @@ public class SearchHospitalController {
 		Supplier<Integer> n = () -> hospitalSearchMapper.countHospital();
 		pxy.setPageNo(Integer.parseInt(pageNo));
 		pxy.paging(n.get());
-		System.out.println(pxy.toString());
 		
 		Function<Object,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalList(pxy);
 		map.put("result", c.apply(pxy));
@@ -54,9 +51,8 @@ public class SearchHospitalController {
 	
 	@GetMapping("/detail")  
 	public String selectHospitalDetail(@RequestParam("hosNo") String hosNo, Model model){
-		Supplier<HospitalVo> n = () -> hospitalSearchMapper.selectHospitalDetail(hosNo);
-		System.out.println(n.get().toString());
-		model.addAttribute("result",n.get());
+		Function<String,HospitalVo> n = t -> hospitalSearchMapper.selectHospitalDetail(t);
+		model.addAttribute("result",n.apply(hosNo));
 		
 		return "hospitalDetail";
 		
@@ -69,6 +65,7 @@ public class SearchHospitalController {
 		pxy.setHosNo(Integer.parseInt(hosNo));
 		pxy.setPageNo(Integer.parseInt(pageNo));
 		pxy.paging(c.apply(hosNo));
+		
 		Function<Object,List<ReviewBrdVo>> r = t -> reviewBrdMapper.selectReview(pxy);
 		tempMap.put("review", r.apply(pxy));
 		tempMap.put("pagenation", pxy);
@@ -84,7 +81,6 @@ public class SearchHospitalController {
 		
 		try {
 			for (HospitalVo tempHosDetailDb : hospitalCrawlingProxy.animal()) {
-				//System.out.println(tempHosDetailDb.toString());
 				t.accept(tempHosDetailDb);
 			}
 		} catch (Exception e) {
