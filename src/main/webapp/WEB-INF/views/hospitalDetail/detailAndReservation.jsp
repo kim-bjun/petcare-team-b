@@ -32,12 +32,12 @@
 			    <div class="card">
 			      <div class="card-body card-body-part">
 			      	<div class="container hospital-info">
-				        <div class="card-title hospital-info-title">MS 동물 병원</div>
-				        <div class="card-text hospital-info-text">부산 연제구 연산동 104-82</div>
-				        <div class="card-text hospital-info-text">051-868-6631</div>
-				        <div class="card-text hospital-info-text">	http://blog.naver.com/vet4910</div>
-				        <div class="card-text hospital-info-text">내과, 외과, 안과, 치과, 피부과</div>
-				        <div class="card-text hospital-info-text">개,고양이</div>
+				        <div class="card-title hospital-info-title">${result.hosName}</div>
+				        <div class="card-text hospital-info-text">${result.hosPhone}</div>
+				        <div class="card-text hospital-info-text">${result.hosAddress}</div>
+				        <div class="card-text hospital-info-text">${result.hosSite}</div>
+				        <div class="card-text hospital-info-text">${result.hosMajorTreatmentTarget}</div>
+				        <div class="card-text hospital-info-text">${result.hosCourseOfTreatment}</div>
 			      	</div>
 			      </div>
 			    </div>
