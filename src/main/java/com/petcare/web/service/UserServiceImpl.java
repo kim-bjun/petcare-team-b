@@ -24,11 +24,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void keepLogin(String userid,String sessionId, Date next) throws Exception{
-		Map<String,Object> paramMap=new HashMap<String,Object>();
-		paramMap.put("userid",userid);
-		paramMap.put("sessionId",sessionId);
-		paramMap.put("next",next);
-		mapper.keepLogin(paramMap);
+		mapper.keepLogin(userid,sessionId,next);
 	}
 	
 	@Override
