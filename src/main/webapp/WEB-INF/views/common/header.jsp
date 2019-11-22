@@ -1,3 +1,4 @@
+
 <%@ page language="java" pageEncoding="utf-8"%>
 <body>
 	<div class="header">
@@ -19,7 +20,9 @@
 				</form>
 	    	</div>
 	    	<div class="top-right">
-	    		<button class="login btn btn-primary" type="button">로그인</button>
+	    		<a href="/sample/user/login">
+		    		<button class="login btn btn-primary" type="button">로그인</button>
+	    		</a>
 	    	</div>
 		</div>
 	
