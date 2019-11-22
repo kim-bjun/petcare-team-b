@@ -1,7 +1,4 @@
-/**
- * hospital search
- */
-
+"use strict"
 class Search {
 	constructor() {
 		this.city = ['서울특별시', '경기도', '인천', '부산', '대구', '광주', '대전', '울산',
@@ -16,14 +13,14 @@ class Search {
 		this.selectedAddress = {
 			city: '',
 			gu: '',
-			dong: '',
+			dong: ''
 		};
 		this.selectedCheck = {
 			animal: [],
 			time: [],
 			subject: [],
 			etc: [],
-			convenience: [],
+			convenience: []
 		};
 		this.limitSelect = 5;
 		
@@ -86,10 +83,14 @@ class Search {
 //			console.log(checked.length);
 			
 		});
-		$('.search-button').on('click', function() {
-			console.log(selectedCity);
+		$('.search-button').click(()=>{
+			setHospitalList(self.constructor)
 		})
+		
 	}
+	
+	
+	
 	cityRender() {
 		this.city.forEach((e, i) => {
 			$('#inputGroupSelect1').append(`<option value=${e}>${e}</option>`);
@@ -130,6 +131,7 @@ class Search {
 			+ selectedCheck.convenience.length;
 		return total;
 	}
+	
 	pushOrRemoveCheck(checkedState, category, selected) {
 		console.log(checkedState);
 		const selectedCheck = this.selectedCheck;
@@ -182,6 +184,101 @@ class Search {
 }
 
 
+
+function setHospitalList(x){
+	console.log(x.selectedCheck);
+	$('div.container.hospital-list-wrap').empty()
+	var pageNo= ($('input[name="pageNo"]').val() == null ) ? 1 : $('input[name="pageNo"]').val() ;
+	let arr = x.selectedCheck
+	$.ajax({
+		url : '/sch/hospitalList/'+pageNo,
+		type:'POST',
+		dataType:'json',
+		data:JSON.stringify(arr),
+		contentType:'application/json',
+		success: d=>{
+			$.each(d.result ,(i,j)=>{
+				let divClass;
+				if (i==0) {
+					divClass = '	<div class="row hospital-list shadow-sm rounded">'
+				}else{
+					divClass =  '	<div class="row hospital-list">'
+				}
+					$(divClass +
+						'		<div class="col-sm-4">'+
+						'			<img src="'+j.hosPhoto+'" height = "100%" width = "80%"/>'+
+						'		</div>'+
+						'		<div class="col-sm-8 hospital-detail-wrap">'+
+						'			<div class="hospital-detail title">'+j.hosName+'</div>'+
+						'			<div class="hospital-detail">'+j.hosPhone+'</div>'+
+						'			<div class="hospital-detail">'+j.hosAddress+'</div>'+
+						'			<div class="hospital-detail">'+j.hosMajorTreatmentTarget+'</div>'+
+						'			<div class="hospital-detail">'+j.hosCourseOfTreatment+'</div>'+
+						//'			<div class="hospital-detail">'+j.hosFeature+'</div>'+
+						'		</div>'+
+						'	</div>')
+						.click(()=>{
+							setDetailView(j)
+						})
+						.appendTo('div.container.hospital-list-wrap')
+						
+						pagination(d.pagination)
+						
+			})
+		},
+		error : e=>{
+		}
+	})
+	
+}
+
+function pagination (d){
+	var cnt = 0;
+	$('ul[class="pagination pagination-sm justify-content-center"]').empty()
+	if(d.existPrev) {$(' <li class="page-item"><a class="page-link" href="#">Previous</a></li>')
+	.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+	.click(e=>{
+		$('input[name="pageNo"]').val(d.blist[0]-5),
+		setHospitalList(Search.constructor)
+		})
+	}
+	
+	$.each(d.blist, (i,j)=>{
+		if(j != d.pageNo){
+			$('<li class="page-item"><a class="page-link"  href="#">'+j+'</a></li>')
+			.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+			.click(e=>{
+				e.preventDefault()
+				$('input[name="pageNo"]').val(j)
+				setHospitalList(Search.constructor)
+			})
+		}else if(j == d.pageNo){
+			$('<li class="page-item"><a class="page-link"  href="#">'+j+'</a></li>')
+			.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+			.addClass('active')
+		}
+		
+	})			
+	
+	if(d.existNext) {
+		$('    <li class="page-item"><a class="page-link" href="#">Next</a></li>')
+			.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
+		.click(e=>{
+			e.preventDefault()
+			$('input[name="pageNo"]').val(d.blist[0]+5),
+			setHospitalList(Search.constructor)
+		})		
+	}
+
+}	
+
+
+
+
+function setDetailView(x) {
+	location.assign('/sch/detail?hosNo='+x.hosNo)
+}
+
 (function() {
-	new Search()
+	new setHospitalList(new Search())
 })();
