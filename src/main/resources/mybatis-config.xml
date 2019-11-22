@@ -7,11 +7,11 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
+
     <typeAliases>
-
 		<typeAlias alias="UserVO" type="com.petcare.web.domains.UserVO"/>
-
-	</typeAliases>
+		<typeAlias alias="HospitalVo" type="com.petcare.web.domains.HospitalVo"/>
+    </typeAliases>
 
 
 </configuration>

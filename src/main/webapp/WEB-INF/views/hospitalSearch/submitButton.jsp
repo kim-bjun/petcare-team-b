@@ -10,12 +10,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<button
-					type="submit"
-					class="search-button btn btn-primary d-flex justify-content-center"
-				>
+				<div id ="schBtn"
+					class="search-button btn btn-primary d-flex justify-content-center">
 					검색
-				</button>
+				</div>
 			</div>
 		</div>
 	</div>

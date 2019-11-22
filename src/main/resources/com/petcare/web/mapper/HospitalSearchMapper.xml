@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcare.web.mapper.HospitalSearchMapper">
+
+	<resultMap type="com.petcare.web.domains.HospitalVo" id="HospitalVo">
+		<id column="hos_no" property="hosNo" />
+		<id column="hos_id" property="hosId" />
+		<id column="hos_pass" property="hosPass" />
+		<id column="hos_name" property="hosName" />
+		<id column="hos_email" property="hosEmail" />
+		<id column="hos_phone" property="hosPhone" />
+		<id column="hos_address" property="hosAddress" />
+		<id column="hos_site" property="hosSite" />
+		<id column="hos_optime" property="hosOptime" />
+		<id column="hos_open" property="hosOpen" />
+		<id column="hos_close" property="hosClose" />
+		<id column="hos_major_treatment_target" property="hosMajorTreatmentTarget" />
+		<id column="hos_course_of_treatment" property="hosCourseOfTreatment" />
+		<id column="hos_feature" property="hosFeature" />
+		<id column="hos_service" property="hosService" />
+		<id column="hos_intro" property="hosIntro" />
+		<id column="hos_photo" property="hosPhoto" />
+		<id column="treat_no" property="treatNo" />
+	</resultMap>
+
+<select id="countHospital" resultType="int">
+select MAX(hos_no) from hospital
+</select>
+
+<select id="selectHospitalList" resultType="HospitalVo">
+select * from hospital
+order by hos_no desc
+LIMIT ${startRow} ,${PAGE_SIZE}
+</select>
+
+
+<select id="selectHospitalDetail" resultType="com.petcare.web.domains.HospitalVo">
+select * from hospital
+WHERE hos_no like #{hosNo}
+</select>
+
+
+<select id="selectPostIn" resultType="com.petcare.web.domains.HospitalVo">
+  SELECT *
+  FROM POST hospital
+<trim prefix="WHERE" prefixOverrides="AND |OR ">
+   hos_courseOfTreatment like 
+  	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{hosMajorTreatmentTarget}
+  	</foreach>
+  	and hos_major_treatment_target like
+	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{hosCourseOfTreatment}
+	</foreach>
+  	and hos_feature like
+	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{hosFeature}
+	</foreach>
+  	and hos_service like
+	<foreach item="item" index="index" collection="list" open="%" close="%">
+        #{hosService}
+	</foreach>
+</trim>
+</select>
+
+<insert id = "insetHospitalDumpData" parameterType="HospitalVo">
+INSERT INTO HOSPITAL (hos_no, hos_id, hos_pass, hos_name, hos_phone, hos_address, hos_site, hos_optime,hos_open,hos_close, hos_major_treatment_target, hos_course_of_treatment, hos_feature, hos_service, hos_intro, hos_photo,treat_no)
+VALUES (#{hosNo},#{hosId},#{hosPass},#{hosName},#{hosPhone},#{hosAddress},#{hosSite},#{hosOptime},"09:00:00","18:00:00",#{hosMajorTreatmentTarget},#{hosCourseOfTreatment},#{hosFeature},#{hosService},#{hosIntro},#{hosPhoto},"0") 
+</insert>
+
+
+</mapper>
