@@ -11,6 +11,7 @@
     <typeAliases>
 		<typeAlias alias="UserVO" type="com.petcare.web.domains.UserVO"/>
 		<typeAlias alias="HospitalVo" type="com.petcare.web.domains.HospitalVo"/>
+		<typeAlias alias="FAQVO" type="com.petcare.web.domains.FAQVO"/>
     </typeAliases>
 
 
