@@ -27,8 +27,8 @@ public class UserController {
 	private UserService service;
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public void loginGET(@ModelAttribute("dto") LoginDTO dto) {
-		
+	public String loginGET(@ModelAttribute("dto") LoginDTO dto) {
+		return "login";
 	}
 	
 	@RequestMapping(value="/loginPost",method=RequestMethod.POST)

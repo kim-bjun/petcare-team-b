@@ -20,7 +20,7 @@
 				</form>
 	    	</div>
 	    	<div class="top-right">
-	    		<a href="/sample/user/login">
+	    		<a href="/user/login">
 		    		<button class="login btn btn-primary" type="button">로그인</button>
 	    		</a>
 	    	</div>
