@@ -33,7 +33,7 @@ a:link {
 	width: 20%;
 	text-align: center;
 }
-.login {
+.auth-button {
 	display: inline-block;
 	margin: 0px auto;
 	background: white;
@@ -41,7 +41,7 @@ a:link {
 	color: #7950f2;
 	font-weight: 600;
 }
-.login:hover {
+.auth-button:hover {
 	background: #7950f2;
 	border-color: #7950f2;
 	color: white;

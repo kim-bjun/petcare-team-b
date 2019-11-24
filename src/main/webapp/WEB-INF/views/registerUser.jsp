@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/common/template.css" />
-    <link rel="stylesheet" href="/resources/css/registerUser/registerUser.css" />
+    <link rel="stylesheet" href="/resources/css/user/registerUser/registerUser.css" />
 
 </head>
 <body>
@@ -19,7 +19,7 @@
 			<%@ include file="./common/header.jsp" %>
 		</header>
 		<main class="main">
-			<%@ include file="./registerUser/form.jsp" %>
+			<%@ include file="./user/registerUser/form.jsp" %>
 		</main>
 		<footer>
 			<%@ include file="./common/footer.jsp" %>
