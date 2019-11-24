@@ -23,6 +23,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		ModelMap modelMap=modelAndView.getModelMap();
 		Object userVO=modelMap.get("userVO");
 		
+//		System.out.println(userVO);
+		
 		if(userVO!=null) {
 			logger.info("new login sucess");
 			session.setAttribute(LOGIN, userVO);
