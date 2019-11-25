@@ -5,23 +5,28 @@ class Search {
 			'강원도', '경상남도', '경상북도', '전라남도', '전라북도', '충청남도', '충청북도', '제주도', '세종시'];
 		this.gu = ['oo구'];
 		this.dong = ['oo동'];
-		this.animal = ['강아지', '고양이', '새', '파충류', '특수동물'];
+		this.animal = {'101':'강아지', '102': '고양이', '103': '새', '104': '파충류', '105': '특수동물'};
+		this.time = {'201': '주간진료', '202': '24시간진료', '203': '야간응급진료'};
+		this.subject = {'301': '내과','302':  '외과', '303': '안과', '304': '피부과', '305': '치과', '306': '영상의학', '307': '동물행동학', '308': '한방'};
+		this.etc = {'401': '백신접종', '402': '중성화수술', '403': '건강검진', '404': '마이크로칩이식'};
+		this.convenience = {'501': '미용', '502': '호텔', '503': '주차'};	
+/*		this.animal = ['강아지', '고양이', '새', '파충류', '특수동물'];
 		this.time = ['주간진료', '24시간진료', '야간응급진료'];
 		this.subject = ['내과', '외과', '안과', '피부과', '치과', '영상의학', '동물행동학', '한방'];
 		this.etc = ['백신접종', '중성화수술', '건강검진', '마이크로칩이식'];
-		this.convenience = ['미용', '호텔', '주차'];
+		this.convenience = ['미용', '호텔', '주차'];*/
 		this.selectedAddress = {
 			city: '',
 			gu: '',
 			dong: ''
 		};
-		this.selectedCheck = {
-			animal: [],
-			time: [],
-			subject: [],
-			etc: [],
-			convenience: []
-		};
+		this.selectedCheck = [
+/*			animal: {},
+			time: {},
+			subject: {},
+			etc: {},
+			convenience: {}*/
+		];
 		this.limitSelect = 5;
 		
 		this.init();
@@ -30,6 +35,7 @@ class Search {
 		this.cityRender();
 		this.checkboxRender();
 		this.eventsTrigger();
+		setHospitalList(this.selectedCheck);
 	}
 	eventsTrigger() {
 		const self = this;
@@ -68,7 +74,7 @@ class Search {
 			const $this = $(this);
 			const checkedState = $this.prop('checked');
 			const category = $this.parent().parent();
-			const selectedCheck = $this.next('label').text();
+			const selectedCheck = $this.next('label').attr("for");
 			if(self.countSelect() < self.limitSelect) {
 				self.pushOrRemoveCheck(checkedState, category.attr('id'), selectedCheck);
 			} else {
@@ -84,7 +90,7 @@ class Search {
 			
 		});
 		$('.search-button').click(()=>{
-			setHospitalList(self.constructor)
+			setHospitalList(this.selectedCheck)
 		})
 		
 	}
@@ -110,11 +116,11 @@ class Search {
 		const subtitles = [this.animal, this.time, this.subject, this.etc, this.convenience];
 		let elements = "";
 		subtitles.forEach((elem, idx) => {
-			elem.forEach((e, i) => {
+			$.each(elem,(e,i) => {
 				const element = `
 				<div class="custom-control custom-checkbox col">
-					<input type="checkbox" id="checkbox${idx+1}-input${i+1}" class="custom-control-input">
-					<label class="custom-control-label" for="checkbox${idx+1}-input${i+1}">${e}</label>
+					<input type="checkbox" id="${e}" class="custom-control-input">
+					<label class="custom-control-label" for=${e}>${i}</label>
 				</div>`;
 				elements += element;
 			});
@@ -124,19 +130,15 @@ class Search {
 	}
 	countSelect() {
 		const selectedCheck = this.selectedCheck;
-		const total = selectedCheck.animal.length
-			+ selectedCheck.time.length
-			+ selectedCheck.subject.length
-			+ selectedCheck.etc.length
-			+ selectedCheck.convenience.length;
+		const total = selectedCheck.length;
 		return total;
 	}
-	
+	//self.pushOrRemoveCheck(checkedState, category.attr('id'), selectedCheck);
 	pushOrRemoveCheck(checkedState, category, selected) {
 		console.log(checkedState);
 		const selectedCheck = this.selectedCheck;
-		
-		switch(category) {
+		selectedCheck.push(selected);
+/*		switch(category) {
 			case 'checkbox1': {
 				console.log('dfsdf')
 				if(checkedState) {
@@ -179,17 +181,17 @@ class Search {
 			default: {
 				console.log('error');
 			}
-		}
+		}*/
 	}
 }
 
 
 
 function setHospitalList(x){
-	console.log(x.selectedCheck);
+	console.log(x);
 	$('div.container.hospital-list-wrap').empty()
 	var pageNo= ($('input[name="pageNo"]').val() == null ) ? 1 : $('input[name="pageNo"]').val() ;
-	let arr = x.selectedCheck
+	let arr = x
 	$.ajax({
 		url : '/sch/hospitalList/'+pageNo,
 		type:'POST',
@@ -206,15 +208,15 @@ function setHospitalList(x){
 				}
 					$(divClass +
 						'		<div class="col-sm-4">'+
-						'			<img src="'+j.hosPhoto+'" height = "100%" width = "80%"/>'+
+						'			<img src="'+j.hosPhoto+'"/>'+
 						'		</div>'+
 						'		<div class="col-sm-8 hospital-detail-wrap">'+
 						'			<div class="hospital-detail title">'+j.hosName+'</div>'+
+						'			<div class="hospital-detail">&nbsp;	 </div>'+
 						'			<div class="hospital-detail">'+j.hosPhone+'</div>'+
 						'			<div class="hospital-detail">'+j.hosAddress+'</div>'+
 						'			<div class="hospital-detail">'+j.hosMajorTreatmentTarget+'</div>'+
 						'			<div class="hospital-detail">'+j.hosCourseOfTreatment+'</div>'+
-						//'			<div class="hospital-detail">'+j.hosFeature+'</div>'+
 						'		</div>'+
 						'	</div>')
 						.click(()=>{
@@ -239,7 +241,7 @@ function pagination (d){
 	.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
 	.click(e=>{
 		$('input[name="pageNo"]').val(d.blist[0]-5),
-		setHospitalList(Search.constructor)
+		setHospitalList(Search.constructor.selectedCheck)
 		})
 	}
 	
@@ -250,7 +252,7 @@ function pagination (d){
 			.click(e=>{
 				e.preventDefault()
 				$('input[name="pageNo"]').val(j)
-				setHospitalList(Search.constructor)
+				setHospitalList(Search.constructor.selectedCheck)
 			})
 		}else if(j == d.pageNo){
 			$('<li class="page-item"><a class="page-link"  href="#">'+j+'</a></li>')
@@ -266,7 +268,7 @@ function pagination (d){
 		.click(e=>{
 			e.preventDefault()
 			$('input[name="pageNo"]').val(d.blist[0]+5),
-			setHospitalList(Search.constructor)
+			setHospitalList(Search.constructor.selectedCheck)
 		})		
 	}
 
@@ -280,5 +282,5 @@ function setDetailView(x) {
 }
 
 (function() {
-	new setHospitalList(new Search())
+	new Search()
 })();
