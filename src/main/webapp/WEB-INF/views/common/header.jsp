@@ -1,4 +1,5 @@
-<%@ page language="java" pageEncoding="utf-8"%>
+
+<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
 <body>
 	<div class="header">
 		<div class="row align-items-center">
@@ -19,7 +20,24 @@
 				</form>
 	    	</div>
 	    	<div class="top-right">
-	    		<button class="login btn btn-primary" type="button">로그인</button>
+	    		<% 
+    				UserVO obj = (UserVO)request.getSession().getAttribute("login");
+    	         	if( obj != null ) {
+    					String username = obj.getUsername();
+    	        %>
+    	        	<a href="/user/mypage">
+    	        		<button class="auth-button btn btn-primary" type="button"><%= username %> 님</button>
+    	        	</a>
+		    		<button id="logout" class="auth-button btn btn-primary" type="button">로그아웃</button>
+    	        <%
+    	         	} else {
+    	        %>
+		    		<a href="/user/login">
+			    		<button class="auth-button btn btn-primary" type="button">로그인</button>
+		    		</a>
+    	        <% 		
+    	         	}
+    			%>
 	    	</div>
 		</div>
 	
@@ -36,7 +54,7 @@
 						<a href="">커뮤니티</a>
 					</div>
 					<div class="faq header-nav">
-						<a href="">FAQ</a>
+						<a href="/faq/list">FAQ</a>
 					</div>
 		    	</div>
 		    </div>
