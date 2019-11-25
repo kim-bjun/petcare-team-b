@@ -21,6 +21,14 @@ public class Proxy {
 	private List<String> checkBoxList;	
 	@Autowired HospitalSearchMapper hospitalMapper;
 	
+	public List<String> getCheckBoxList() {
+		return this.checkBoxList;
+	} 
+	 
+	public void setCheckBoxList(List<String> checkBoxList) {
+		this.checkBoxList = checkBoxList;
+	}
+	
 	public boolean getExistPrev() {
 		return this.existPrev;
 	}
