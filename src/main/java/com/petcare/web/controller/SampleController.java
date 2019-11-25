@@ -1,7 +1,9 @@
 package com.petcare.web.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.mysql.fabric.Response;
+import com.petcare.web.domains.HosInfoCodeVo;
 import com.petcare.web.domains.LoginDTO;
 import com.petcare.web.domains.UserVO;
+import com.petcare.web.mapper.HospitalSearchMapper;
 import com.petcare.web.service.SampleService;
 import com.petcare.web.service.UserService;
 
@@ -29,7 +34,12 @@ public class SampleController {
     @Autowired
     private SampleService sampleService;
     @Autowired
-	private UserService service;
+	private UserService service;	
+    @Autowired 
+    private HospitalSearchMapper hospitalSearchMapper;
+    
+    
+    
     
     @GetMapping("/hi")
     @ResponseBody
@@ -49,6 +59,7 @@ public class SampleController {
     
     @GetMapping("/hospitalsearch")
     public String hospitalSearch() {
+    	
     	return "hospitalSearch";
     }
     

@@ -1,5 +1,6 @@
 package com.petcare.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.petcare.web.domains.HosInfoCodeVo;
 import com.petcare.web.domains.HospitalVo;
 import com.petcare.web.domains.ReviewBrdVo;
 import com.petcare.web.mapper.HospitalSearchMapper;
@@ -33,7 +37,42 @@ public class SearchHospitalController {
 	@Autowired ReviewBrdMapper reviewBrdMapper;
 	@Autowired HospitalCrawlingProxy hospitalCrawlingProxy;
 	@Autowired Proxy pxy;  // pagenation 및 검색어 VO
+	
 
+	
+	@GetMapping("/")  
+	public @ResponseBody Map<String,Object> selectHosInfoCode() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		ArrayList<HosInfoCodeVo> code = hospitalSearchMapper.selectHosInfoCode();
+		ArrayList<HosInfoCodeVo> tempforAnimal = new ArrayList<HosInfoCodeVo>();
+		ArrayList<HosInfoCodeVo> tempforTime = new ArrayList<HosInfoCodeVo>();
+		ArrayList<HosInfoCodeVo> tempforSubject = new ArrayList<HosInfoCodeVo>();
+		ArrayList<HosInfoCodeVo> tempforEtc = new ArrayList<HosInfoCodeVo>();
+		ArrayList<HosInfoCodeVo> tempforConvenience = new ArrayList<HosInfoCodeVo>();
+		ObjectMapper mapper = new ObjectMapper();		
+		for (HosInfoCodeVo hosInfoCodeVo : code) {
+			if(hosInfoCodeVo.getHosInfoCode() / 100 == 1 ) {
+				tempforAnimal.add(hosInfoCodeVo);
+			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 2 ) {
+				tempforTime.add(hosInfoCodeVo);
+			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 3 ) {
+				tempforSubject.add(hosInfoCodeVo);
+			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 4 ) {
+				tempforEtc.add(hosInfoCodeVo);
+			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 5 ) {
+				tempforConvenience.add(hosInfoCodeVo);
+			}
+		}
+
+		map.put("animal", mapper.writeValueAsString(tempforAnimal));
+		map.put("time", mapper.writeValueAsString(tempforTime));
+		map.put("subject", mapper.writeValueAsString(tempforSubject));
+		map.put("etc", mapper.writeValueAsString(tempforEtc));
+		map.put("convenience", mapper.writeValueAsString(tempforConvenience));
+		
+		return map;
+		
+	}
 	
 	@PostMapping("/hospitalList/{pageNo}")  
 	public @ResponseBody Map<String,Object> selectAllHospitalList(@PathVariable String pageNo, @RequestBody List<String> hosinfolist ){

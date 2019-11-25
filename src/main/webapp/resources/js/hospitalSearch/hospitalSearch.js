@@ -1,32 +1,21 @@
 "use strict"
 class Search {
-	constructor() {
+	constructor(d) {
 		this.city = ['서울특별시', '경기도', '인천', '부산', '대구', '광주', '대전', '울산',
 			'강원도', '경상남도', '경상북도', '전라남도', '전라북도', '충청남도', '충청북도', '제주도', '세종시'];
 		this.gu = ['oo구'];
 		this.dong = ['oo동'];
-		this.animal = {'101':'강아지', '102': '고양이', '103': '새', '104': '파충류', '105': '특수동물'};
-		this.time = {'201': '주간진료', '202': '24시간진료', '203': '야간응급진료'};
-		this.subject = {'301': '내과','302':  '외과', '303': '안과', '304': '피부과', '305': '치과', '306': '영상의학', '307': '동물행동학', '308': '한방'};
-		this.etc = {'401': '백신접종', '402': '중성화수술', '403': '건강검진', '404': '마이크로칩이식'};
-		this.convenience = {'501': '미용', '502': '호텔', '503': '주차'};	
-/*		this.animal = ['강아지', '고양이', '새', '파충류', '특수동물'];
-		this.time = ['주간진료', '24시간진료', '야간응급진료'];
-		this.subject = ['내과', '외과', '안과', '피부과', '치과', '영상의학', '동물행동학', '한방'];
-		this.etc = ['백신접종', '중성화수술', '건강검진', '마이크로칩이식'];
-		this.convenience = ['미용', '호텔', '주차'];*/
+		this.animal = d.animal;
+		this.time = d.time;
+		this.subject = d.subject;
+		this.etc = d.etc;
+		this.convenience = d.convenience;	
 		this.selectedAddress = {
 			city: '',
 			gu: '',
 			dong: ''
 		};
-		this.selectedCheck = [
-/*			animal: {},
-			time: {},
-			subject: {},
-			etc: {},
-			convenience: {}*/
-		];
+		this.selectedCheck = [];
 		this.limitSelect = 5;
 		
 		this.init();
@@ -282,5 +271,8 @@ function setDetailView(x) {
 }
 
 (function() {
-	new Search()
+	$.getJSON('/sch/', d=>{
+		new Search(d)
+	})
+
 })();

@@ -14,6 +14,7 @@
 	background: white;
 }
 .section-title {
+	margin-left
 	color: #7950f2;
 	font-weight: 600;
 }
@@ -33,6 +34,7 @@
 .custom-select {         
 	max-height: 200px;
 	overflow-y: auto;
+	margin: 10px;
 }
 .btn-info {
 	background: #7950f2;
