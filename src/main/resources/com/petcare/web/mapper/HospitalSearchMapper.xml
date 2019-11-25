@@ -29,21 +29,25 @@
 select MAX(hos_no) from hospital
 </select>
 
-<select id="countHospital" resultType="int" parameterType="list">
-
-SELECT h.* hosNo
+<select id="countHospitalByCondition" resultType="int" parameterType="com.petcare.web.utills.Proxy">
+SELECT count(*) 
 FROM HOSPITAL as h 
 JOIN (SELECT a.hos_no 
 		FROM ( SELECT hos_no , COUNT(*) as cnt 
 				FROM hos_info 
 				WHERE hos_info_code IN 
-  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
         #{item}
   	</foreach>				
 				GROUP BY hos_no
 				) a
-		WHERE cnt = 3) as info
+		WHERE cnt = (select count(*) from hos_info_code where hos_info_code in 
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
+        #{item}
+  	</foreach>	
+					)) as info
 ON h.hos_no = info.hos_no
+
 </select>
 
 <select id="selectHospitalAllList" resultType="HospitalVo">
@@ -52,24 +56,25 @@ order by hos_no desc
 LIMIT ${startRow} ,${PAGE_SIZE}
 </select>
 
-<select id="selectHospitalList" resultType="HospitalVo" parameterType="java.util.List">
+<select id="selectHospitalList" resultType="HospitalVo" parameterType="com.petcare.web.utills.Proxy">
 SELECT h.* 
 FROM HOSPITAL as h 
 JOIN (SELECT a.hos_no 
 		FROM ( SELECT hos_no , COUNT(*) as cnt 
 				FROM hos_info 
 				WHERE hos_info_code IN 
-  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
         #{item}
   	</foreach>				
 				GROUP BY hos_no
 				) a
 		WHERE cnt = (select count(*) from hos_info_code where hos_info_code in 
-  	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
         #{item}
   	</foreach>	
 					)) as info
 ON h.hos_no = info.hos_no
+LIMIT ${startRow} ,${PAGE_SIZE}
 </select>
 
 

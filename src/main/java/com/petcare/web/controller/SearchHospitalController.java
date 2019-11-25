@@ -1,6 +1,5 @@
 package com.petcare.web.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,33 +32,27 @@ public class SearchHospitalController {
 	@Autowired HospitalSearchMapper hospitalSearchMapper;
 	@Autowired ReviewBrdMapper reviewBrdMapper;
 	@Autowired HospitalCrawlingProxy hospitalCrawlingProxy;
-	@Autowired Proxy pxy;
+	@Autowired Proxy pxy;  // pagenation 및 검색어 VO
 
 	
 	@PostMapping("/hospitalList/{pageNo}")  
-	public @ResponseBody Map<?,?> selectAllHospitalList(@PathVariable String pageNo, @RequestBody List<String> hosinfilist ){
+	public @ResponseBody Map<String,Object> selectAllHospitalList(@PathVariable String pageNo, @RequestBody List<String> hosinfolist ){
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		if (hosinfilist.size() != 0) {
-			System.out.println("hosinfilist.size() != 0");		
-			Function<List<String>,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalList(t);
-			List<HospitalVo> tempList=  c.apply(hosinfilist);
+		Function<Proxy,List<HospitalVo>> c;
+		if (hosinfolist.size() != 0) {
+			pxy.setCheckBoxList(hosinfolist);
 			pxy.setPageNo(Integer.parseInt(pageNo));
-			pxy.paging(tempList.size());
-			System.out.println(pxy.toString());
-			
-			map.put("result", tempList.subList(pxy.getStartRow(), pxy.getEndRow()+1));//
+			Function<Proxy,Integer> n = h -> hospitalSearchMapper.countHospitalByCondition(h);
+			pxy.paging(n.apply(pxy)); 
+			 c = t -> hospitalSearchMapper.selectHospitalList(t);
+
 		}else {
-			System.out.println("hosinfilist.size() == 0");
 			Supplier<Integer> n = () -> hospitalSearchMapper.countAllHospital();
-			pxy.setCheckBoxList(hosinfilist);
 			pxy.setPageNo(Integer.parseInt(pageNo));
 			pxy.paging(n.get());
-			Function<Object,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalAllList(pxy);
-			map.put("result", c.apply(pxy));
+			c = t -> hospitalSearchMapper.selectHospitalAllList(t);
 		}	
-
-
+		map.put("result", c.apply(pxy));
 		map.put("pagination", pxy);
 		map.put("msg","SUCCESS");
 		return map;
@@ -82,7 +75,7 @@ public class SearchHospitalController {
 		pxy.setPageNo(Integer.parseInt(pageNo));
 		pxy.paging(c.apply(hosNo));
 		
-		Function<Object,List<ReviewBrdVo>> r = t -> reviewBrdMapper.selectReview(pxy);
+		Function<Proxy,List<ReviewBrdVo>> r = t -> reviewBrdMapper.selectReview(t);
 		tempMap.put("review", r.apply(pxy));
 		tempMap.put("pagenation", pxy);
 		
@@ -91,8 +84,8 @@ public class SearchHospitalController {
 	}
 	
 	@GetMapping("/crawling")
-	public @ResponseBody Map<String,String> crawlingAllHospitalDB(){
-		Map<String, String> tempMap =new HashMap<String, String>();
+	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
+		Map<String, Object> tempMap =new HashMap<String, Object>();
 		Consumer<HospitalVo> t = s -> hospitalSearchMapper.insetHospitalDumpData(s);
 		
 		try {
@@ -103,7 +96,7 @@ public class SearchHospitalController {
 			e.printStackTrace();
 		}
 
-		tempMap.put("msg", "SUCCESS");
+		tempMap.put("msg", "SUCCESS"); 
 		
 		return tempMap;
 		
