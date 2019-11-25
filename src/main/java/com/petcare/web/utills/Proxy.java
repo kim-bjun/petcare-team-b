@@ -18,7 +18,7 @@ public class Proxy {
 	private String searchWrd;
 	private final int BLOCK_SIZE = 5 , PAGE_SIZE =10; 
 	private List<Integer>blist ;
-	private List<String> proxyList;	
+	private List<String> checkBoxList;	
 	@Autowired HospitalSearchMapper hospitalMapper;
 	
 	public boolean getExistPrev() {
@@ -39,12 +39,12 @@ public class Proxy {
 		totalCount = cnt;
 		pageCount =(totalCount %PAGE_SIZE==0) ?  totalCount/PAGE_SIZE : (totalCount/PAGE_SIZE)+1;
 		startRow = (pageNo-1) * PAGE_SIZE;
-		endRow = (pageNo == pageCount) ?   totalCount -1 : pageNo*PAGE_SIZE-1;
+		endRow = (pageNo >= pageCount) ?   totalCount-1  : pageNo*PAGE_SIZE-1;
 		blockCount = (pageCount %BLOCK_SIZE==0) ?  pageCount/BLOCK_SIZE : (pageCount/BLOCK_SIZE)+1; //블럭의 개수
 		startPage =   ((pageNo-1)/BLOCK_SIZE)*BLOCK_SIZE+1; // 
 		endPage = ((pageCount-startPage)<(BLOCK_SIZE) ) ?   pageCount : (startPage + BLOCK_SIZE -1); // 
 		existPrev = (startPage < (BLOCK_SIZE+1) ) ? false : true;  // start Page가 BLOCK_SIZE+1보다 작으면 없음.
-		existNext =  (pageCount == endPage) ? false : true; // 페이지수가 endPage와 같으면 없음.
+		existNext =  (pageCount <= endPage) ? false : true; // 페이지수가 endPage와 같으면 없음.
 		blist = new ArrayList<>();
 		for (int i = startPage;  i < endPage+1 ; i++) {
 			blist.add(i);

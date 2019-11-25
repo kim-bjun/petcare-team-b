@@ -1,5 +1,6 @@
 package com.petcare.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +37,29 @@ public class SearchHospitalController {
 
 	
 	@PostMapping("/hospitalList/{pageNo}")  
-	public @ResponseBody Map<?,?> selectAllHospitalList(@PathVariable String pageNo, Model model ){
+	public @ResponseBody Map<?,?> selectAllHospitalList(@PathVariable String pageNo, @RequestBody List<String> hosinfilist ){
 		Map<String, Object> map = new HashMap<String, Object>();
-		Supplier<Integer> n = () -> hospitalSearchMapper.countHospital();
-		pxy.setPageNo(Integer.parseInt(pageNo));
-		pxy.paging(n.get());
-		
-		Function<Object,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalList(pxy);
-		map.put("result", c.apply(pxy));
+
+		if (hosinfilist.size() != 0) {
+			System.out.println("hosinfilist.size() != 0");		
+			Function<List<String>,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalList(t);
+			List<HospitalVo> tempList=  c.apply(hosinfilist);
+			pxy.setPageNo(Integer.parseInt(pageNo));
+			pxy.paging(tempList.size());
+			System.out.println(pxy.toString());
+			
+			map.put("result", tempList.subList(pxy.getStartRow(), pxy.getEndRow()+1));//
+		}else {
+			System.out.println("hosinfilist.size() == 0");
+			Supplier<Integer> n = () -> hospitalSearchMapper.countAllHospital();
+			pxy.setCheckBoxList(hosinfilist);
+			pxy.setPageNo(Integer.parseInt(pageNo));
+			pxy.paging(n.get());
+			Function<Object,List<HospitalVo>> c = t -> hospitalSearchMapper.selectHospitalAllList(pxy);
+			map.put("result", c.apply(pxy));
+		}	
+
+
 		map.put("pagination", pxy);
 		map.put("msg","SUCCESS");
 		return map;
