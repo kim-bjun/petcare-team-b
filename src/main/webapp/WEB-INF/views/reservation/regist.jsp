@@ -15,23 +15,31 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+	<!-- datepicker 한국어로 -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 <script>
- $(function() {
-  $("#datepicker").datepicker({
-	  beforeShowDay: $.datepicker.noWeekends,
-	  dayNames: ['일요일','월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-      dayNamesMin: [ '일','월', '화', '수', '목', '금', '토'], 
-      monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-      showButtonPanel: true, 
-      currentText: '오늘 날짜',
-      dateFormat: "yy-mm-dd",
-      closeText: '닫기', 
-     /*  showOn: "both", 
-      buttonImage: , 
-      buttonImageOnly: true  */
-  });
- });
+
+	 $(document).ready(function(){
+		$("#datepicker").datepicker({
+			beforeShowDay: $.datepicker.noWeekends,
+		      showButtonPanel: true, 
+		      dateFormat: "yymmdd",
+		      closeText: '닫기', 
+		      showOn: "both", 
+		      buttonImage: "/resources/img/reservation/calendar20.svg", 
+		      buttonImageOnly: true,
+			
+			
+			
+		}) ;
+		var today = new Date();
+		$("#datepicker").datepicker( "option", "minDate", today );
+
+	 })
+
+      
+ 
+
 
 </script>
 </head>
@@ -40,45 +48,46 @@
 		<header>
 			<%@ include file="../common/header.jsp" %>
 		</header>
+	</div>
 		
 <form role="form" action="/reservation/regist" method="post">
-	<div class="container reservation d-flex justify-content-center" />
+	<div class="container">
 		 <p>
-		  	예약날짜: <input type="text" id="datepicker" /><i class="far fa-calendar-check"></i>
+		  	예약날짜: <input type="text" id="datepicker" name="res_dt"/>
 		 </p>
 		 
 		 <div>
 		     <p>예약시간
-		         <select id="reservation_time" >
-		             <option>9:00</option>
-		             <option>10:00</option>
-		             <option>11:00</option>
-		             <option>12:00</option>
-		             <option>14:00</option>
-		             <option>15:00</option>
-		             <option>16:00</option>
-		             <option>17:00</option>
+		         <select id="res_time" name="res_time">
+		             <option value="09:00">9:00</option>
+		             <option value="10:00">10:00</option>
+		             <option value="11:00">11:00</option>
+		             <option value="12:00">12:00</option>
+		             <option value="14:00">14:00</option>
+		             <option value="15:00">15:00</option>
+		             <option value="16:00">16:00</option>
+		             <option value="17:00">17:00</option>
 		         </select>
 		       </p>
 		 </div>
-		 <div >
+		 	<div >
 			 <p>예약할 반려동물 :
-				 <select>
-				 	<option>초코</option>
-				 	<option>바나나</option>
-				 	<option>또치</option>
+				 <select id="animal" name="ani_no">
+				 	<option value="1">초코</option>
+				 	<option value="2">바나나</option>
+				 	<option value="3">또치</option>
 				 </select>
 			 </p>
-		 <textarea cols="40" rows="3" ></textarea>
-		 <button type="submit" class="btn btn-info">예약하기</button>
-		 </div>
-	 </div>
+			</div>
+			 <textarea cols="40" rows="3" name="res_item" ></textarea>
+			 <button type="submit" class="btn btn-info">예약하기</button>
+	</div>
  </form>
+		 
  
 	<footer>
 		<%@ include file="../common/footer.jsp" %>
 	</footer>
-	</div>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
