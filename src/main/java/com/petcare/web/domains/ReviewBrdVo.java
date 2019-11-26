@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewBrdVo {
 	private String userId, hosNo, rate, comment, writeDate;
-	private int brdSeq;
+	private int brdSeq, treatNo;
 }

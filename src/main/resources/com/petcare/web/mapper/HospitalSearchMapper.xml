@@ -4,34 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.HospitalSearchMapper">
 
-<!-- 	<resultMap type="com.petcare.web.domains.HospitalVo" id="HospitalVo">
-		<id column="hos_no" property="hosNo" />
-		<id column="hos_id" property="hosId" />
-		<id column="hos_pass" property="hosPass" />
-		<id column="hos_name" property="hosName" />
-		<id column="hos_email" property="hosEmail" />
-		<id column="hos_phone" property="hosPhone" />
-		<id column="hos_address" property="hosAddress" />
-		<id column="hos_site" property="hosSite" />
-		<id column="hos_optime" property="hosOptime" />
-		<id column="hos_open" property="hosOpen" />
-		<id column="hos_close" property="hosClose" />
-		<id column="hos_major_treatment_target" property="hosMajorTreatmentTarget" />
-		<id column="hos_course_of_treatment" property="hosCourseOfTreatment" />
-		<id column="hos_feature" property="hosFeature" />
-		<id column="hos_service" property="hosService" />
-		<id column="hos_intro" property="hosIntro" />
-		<id column="hos_photo" property="hosPhoto" />
-		<id column="treat_no" property="treatNo" />
-	</resultMap>
- -->
-
-
-
 <select id="selectHosInfoCode" resultType="HosInfoCodeVo">
 select * from hos_info_code
 </select>
-
 
 
 <select id="countAllHospital" resultType="int">
