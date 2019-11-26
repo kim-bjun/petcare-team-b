@@ -49,7 +49,6 @@ public class SearchHospitalController {
 		ArrayList<HosInfoCodeVo> tempforSubject = new ArrayList<HosInfoCodeVo>();
 		ArrayList<HosInfoCodeVo> tempforEtc = new ArrayList<HosInfoCodeVo>();
 		ArrayList<HosInfoCodeVo> tempforConvenience = new ArrayList<HosInfoCodeVo>();
-		ObjectMapper mapper = new ObjectMapper();		
 		for (HosInfoCodeVo hosInfoCodeVo : code) {
 			if(hosInfoCodeVo.getHosInfoCode() / 100 == 1 ) {
 				tempforAnimal.add(hosInfoCodeVo);
@@ -64,11 +63,11 @@ public class SearchHospitalController {
 			}
 		}
 
-		map.put("animal", mapper.writeValueAsString(tempforAnimal));
-		map.put("time", mapper.writeValueAsString(tempforTime));
-		map.put("subject", mapper.writeValueAsString(tempforSubject));
-		map.put("etc", mapper.writeValueAsString(tempforEtc));
-		map.put("convenience", mapper.writeValueAsString(tempforConvenience));
+		map.put("animal", tempforAnimal);
+		map.put("time", tempforTime);
+		map.put("subject", tempforSubject);
+		map.put("etc", tempforEtc);
+		map.put("convenience", tempforConvenience);
 		
 		return map;
 		

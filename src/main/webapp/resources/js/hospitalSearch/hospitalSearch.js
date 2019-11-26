@@ -108,8 +108,8 @@ class Search {
 			$.each(elem,(e,i) => {
 				const element = `
 				<div class="custom-control custom-checkbox col">
-					<input type="checkbox" id="${e}" class="custom-control-input">
-					<label class="custom-control-label" for=${e}>${i}</label>
+					<input type="checkbox" id="${i.hosInfoCode}" class="custom-control-input">
+					<label class="custom-control-label" for=${i.hosInfoCode}>${i.codeName}</label>
 				</div>`;
 				elements += element;
 			});
@@ -127,50 +127,6 @@ class Search {
 		console.log(checkedState);
 		const selectedCheck = this.selectedCheck;
 		selectedCheck.push(selected);
-/*		switch(category) {
-			case 'checkbox1': {
-				console.log('dfsdf')
-				if(checkedState) {
-					console.log('미나으리ㅏㅁㄴ을')
-					selectedCheck.animal.push(selected);					
-				} else {
-					console.log('s여기')
-					selectedCheck.animal = selectedCheck.animal.filter(e => e !== selected);
-				}
-				break;
-			}
-			case 'checkbox2': {
-				if(checkedState) {
-					selectedCheck.time.push(selected);					
-				} else {
-					selectedCheck.time.filter(e => e !== selected);
-				}
-				break;
-			}
-			case 'checkbox3': {
-				if(checkedState) {
-					selectedCheck.subject.push(selected);					
-				} else {
-					selectedCheck.subject.filter(e => e !== selected);
-				}
-				break;
-			}
-			case 'checkbox4': {
-				if(checkedState) {
-					selectedCheck.etc.push(selected);					
-				} else {
-					selectedCheck.etc.filter(e => e !== selected);
-				}
-				break;
-			}
-			case 'checkbox5': {
-				selectedCheck.convenience.push(selected);
-				break;
-			}
-			default: {
-				console.log('error');
-			}
-		}*/
 	}
 }
 
@@ -262,8 +218,6 @@ function pagination (d){
 	}
 
 }	
-
-
 
 
 function setDetailView(x) {

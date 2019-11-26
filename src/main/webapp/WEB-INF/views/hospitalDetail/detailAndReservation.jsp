@@ -35,7 +35,7 @@
 				        <div class="card-title hospital-info-title">${result.hosName}</div>
 				        <div class="card-text hospital-info-text">${result.hosPhone}</div>
 				        <div class="card-text hospital-info-text">${result.hosAddress}</div>
-				        <div class="card-text hospital-info-text">${result.hosSite}</div>
+				        <div class="card-text hospital-info-text"><a href="${result.hosSite}" target="_blank">${result.hosSite}</a></div>
 				        <div class="card-text hospital-info-text">${result.hosMajorTreatmentTarget}</div>
 				        <div class="card-text hospital-info-text">${result.hosCourseOfTreatment}</div>
 			      	</div>
