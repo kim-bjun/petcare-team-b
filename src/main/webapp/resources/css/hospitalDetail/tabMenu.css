@@ -5,3 +5,8 @@
 	padding: 1rem;
 	background: white;
 }
+.blockquote{
+	margin-left: 20px;
+	margin-top: 20px;
+	font-size: 90%;
+}

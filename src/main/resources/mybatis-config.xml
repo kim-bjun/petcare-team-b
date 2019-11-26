@@ -8,4 +8,13 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
+    <typeAliases>
+		<typeAlias alias="UserVO" type="com.petcare.web.domains.UserVO"/>
+		<typeAlias alias="Proxy" type="com.petcare.web.utills.Proxy"/>
+		<typeAlias alias="HospitalVo" type="com.petcare.web.domains.HospitalVo"/>
+		<typeAlias alias="HosInfoCodeVo" type="com.petcare.web.domains.HosInfoCodeVo"/>
+		<typeAlias alias="FAQVO" type="com.petcare.web.domains.FAQVO"/>
+    </typeAliases>
+
+
 </configuration>
