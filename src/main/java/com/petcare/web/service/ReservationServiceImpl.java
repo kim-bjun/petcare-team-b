@@ -15,8 +15,8 @@ public class ReservationServiceImpl implements ReservationService{
 	ReservationMapper mapper;
 
 	@Override
-	public ReservationVo get(int treat_no) {
-		return mapper.read(treat_no);
+	public ReservationVo get(int res_no) {
+		return mapper.read(res_no);
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 	@Override
-	public boolean remove(int treat_no) {
-		return mapper.delete(treat_no)==1;
+	public boolean remove(int res_no) {
+		return mapper.delete(res_no)==1;
 	}
 
 	@Override
