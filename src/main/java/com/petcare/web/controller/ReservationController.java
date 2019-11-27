@@ -33,7 +33,7 @@ public class ReservationController {
 	@PostMapping("/regist")
 	public String register(ReservationVo Rvo,RedirectAttributes rttr) {
 		
-		//ReservationVo Rvo = new ReservationVo();
+		
 		//String userId= (String)session.getAttribute("userId");
 		//Rvo.setUser_id(userId);
 		Rvo.setTreat_no(8);

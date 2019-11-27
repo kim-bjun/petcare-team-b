@@ -15,6 +15,11 @@
     </properties>
     <dependencies>
 
+	<!-- https://mvnrepository.com/artifact/javax.security.auth.message/javax.security.auth.message-api -->
+		
+	
+	    
+
         <!-- 스프링 -->
         <dependency>
             <groupId>org.springframework</groupId>

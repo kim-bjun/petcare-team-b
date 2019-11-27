@@ -28,18 +28,10 @@
 		      showOn: "both", 
 		      buttonImage: "/resources/img/reservation/calendar20.svg", 
 		      buttonImageOnly: true,
-			
-			
-			
 		}) ;
 		var today = new Date();
 		$("#datepicker").datepicker( "option", "minDate", today );
-
-	 })
-
-      
- 
-
+	 });
 
 </script>
 </head>

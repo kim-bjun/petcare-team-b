@@ -18,6 +18,7 @@ public class ReservationVo {
 	
 	private String hos_name;
 	private String ani_name;
+
 	
 	
 	

@@ -120,11 +120,6 @@
 		  });
 		 });
 		});
-		
-		
-		
-
-
 	</script>
 	
 	<!-- Optional JavaScript -->
