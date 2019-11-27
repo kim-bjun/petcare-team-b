@@ -9,18 +9,19 @@
 		  onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
 		    <option selected>-지역 선택-</option>
 		  </select>
-		</div>
-		<div class="input-group mb-3">
+<!-- 		</div>
+		<div class="input-group mb-3"> -->
 		  <select class="custom-select" id="inputGroupSelect2"
 		  onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
 		    <option selected>-구 선택-</option>
 		  </select>
+ 
 		</div>
-		<div class="input-group mb-3">
+<!-- 		<div class="input-group mb-3">
 		  <select class="custom-select" id="inputGroupSelect3"
 		  onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
 		    <option selected>-동 선택-</option>
 		  </select>
-		</div>
+		</div> -->
 	</div>
 </div>
