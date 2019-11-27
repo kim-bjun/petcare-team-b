@@ -29,10 +29,6 @@
 							</div>
 							<hr />
 							<div class="form-group">
-								<%@ include file="./hospitalSearch/searchWrd.jsp" %>							
-							</div>
-							<hr />								
-							<div class="form-group">
 								<%@ include file="./hospitalSearch/checkBox.jsp" %>
 							</div>
 							<div>

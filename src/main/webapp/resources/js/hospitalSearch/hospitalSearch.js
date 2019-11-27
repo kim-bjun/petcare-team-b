@@ -1,8 +1,10 @@
 "use strict"
 class Search {
 	constructor(d) {
-		this.city = d.city;
-		this.gu = [];
+		this.city = ['서울특별시', '경기도', '인천', '부산', '대구', '광주', '대전', '울산',
+			'강원도', '경상남도', '경상북도', '전라남도', '전라북도', '충청남도', '충청북도', '제주도', '세종시'];
+		this.gu = ['oo구'];
+		this.dong = ['oo동'];
 		this.animal = d.animal;
 		this.time = d.time;
 		this.subject = d.subject;
@@ -10,91 +12,93 @@ class Search {
 		this.convenience = d.convenience;	
 		this.selectedAddress = {
 			city: '',
-			gu: ''
+			gu: '',
+			dong: ''
 		};
 		this.selectedCheck = [];
 		this.limitSelect = 5;
-		this.schCondition ={
-				checkBoxList :[]
-				, searchWrd : '' 
-				, hosAddress : ''
-		};
+		
 		this.init();
 	}
 	init () {
 		this.cityRender();
 		this.checkboxRender();
 		this.eventsTrigger();
-		setHospitalList(this.schCondition);
+		setHospitalList(this.selectedCheck);
 	}
 	eventsTrigger() {
-			const self = this;
-			const selectedCheck = this.selectedCheck;
-			const total = this.countSelect();
-			
-			// 시 클릭
-			$('#inputGroupSelect1').on('change', function() {
-				$('#inputGroupSelect2').empty();
-				const city = $(this).val();
-				if(city !== '') {
-					self.selectedAddress.city =$(this).find("option:selected").text();
-					// 구 렌더
-					$.getJSON('/sch/'+city , d =>{
-						self.gu = [{"cd":'',"gb":'',"gbNm":'',"cdNm":"-구 선택-"}]
-						self.gu = self.gu.concat(d.gu);
-						self.guRender();
-					} )
-				}else{
-					self.gu = [{"cd":'',"gb":'',"gbNm":'',"cdNm":"-구 선택-"}]
-					self.selectedAddress.city = ''
-					self.selectedAddress.gu = ''
-					self.guRender();
-				}
-			});
-			// 구 클릭
-			$('#inputGroupSelect2').on('change', function() {
-				const gu = $(this).val();
-				if(gu != '') {
-					self.selectedAddress.gu = $(this).find("option:selected").text();
-				}else{
-					self.selectedAddress.gu = $(this).val()
-				}
-			});
-			
+		const self = this;
+		const selectedCheck = this.selectedCheck;
+		const total = this.countSelect();
+		
+		// 시 클릭
+		$('#inputGroupSelect1').on('click', function() {
+			const city = $(this).val();
+			if(city !== '-지역 선택-') {
+				self.selectedAddress.city = city;
+				console.log(self.selectedAddress.city);
+				// 구 렌더
+				self.guRender();
+			}
+		});
+		// 구 클릭
+		$('#inputGroupSelect2').on('click', function() {
+			const gu = $(this).val();
+			if(gu !== '-구 선택-') {
+				self.selectedAddress.gu = gu;
+				console.log(self.selectedAddress.gu);
+				// 동 렌더
+				self.dongRender();
+			}
+		});
+		// 동 클릭
+		$('#inputGroupSelect3').on('click', function() {
+			const dong = $(this).val();
+			if(dong !== '-동 선택-') {
+				self.selectedAddress.dong = dong;
+				console.log(self.selectedAddress.dong);
+			}
+		});
 			$('.custom-control-input').on('click', function(e) {
 			const $this = $(this);
 			const checkedState = $this.prop('checked');
 			const category = $this.parent().parent();
 			const selectedCheck = $this.next('label').attr("for");
-			if($('input:checkbox[name="checkbox"]:checked').length <= self.limitSelect) {
+			if(self.countSelect() < self.limitSelect) {
 				self.pushOrRemoveCheck(checkedState, category.attr('id'), selectedCheck);
 			} else {
 				alert('5개 이상 선택하셨습니다.');
 				$this.prop('checked', false);
 			}
 			console.log(self.selectedCheck);
+//			let checked = [];
+//			$.each($("input:checkbox:checked"), function(){
+//				checked.push($(this));
+//			});
+//			console.log(checked.length);
+			
 		});
-		
 		$('.search-button').click(()=>{
-			self.schCondition = {
-					checkBoxList : self.selectedCheck 
-					, searchWrd : $('input[name="hosName"]').val() 
-					, hosAddress : self.selectedAddress.city + self.selectedAddress.gu 
-					}
-			setHospitalList(self.schCondition)
+			setHospitalList(this.selectedCheck)
 		})
+		
 	}
 	
 	
 	
 	cityRender() {
 		this.city.forEach((e, i) => {
-			$('#inputGroupSelect1').append(`<option value=${e.gb}>${e.gbNm}</option>`);
+			$('#inputGroupSelect1').append(`<option value=${e}>${e}</option>`);
 		});
 	}
 	guRender() {
 		this.gu.forEach((e, i) => {
-			$('#inputGroupSelect2').append(`<option value=${e.cd}>${e.cdNm}</option>`);			
+			$('#inputGroupSelect2').append(`<option value=${e}>${e}</option>`);			
+		});
+	}
+	dongRender() {
+		this.dong.forEach((e, i) => {
+			$('#inputGroupSelect3').append(`<option value=${e}>${e}</option>`);
 		});
 	}
 	checkboxRender() {
@@ -104,7 +108,7 @@ class Search {
 			$.each(elem,(e,i) => {
 				const element = `
 				<div class="custom-control custom-checkbox col">
-					<input type="checkbox" id="${i.hosInfoCode}" class="custom-control-input" name="checkbox">
+					<input type="checkbox" id="${i.hosInfoCode}" class="custom-control-input">
 					<label class="custom-control-label" for=${i.hosInfoCode}>${i.codeName}</label>
 				</div>`;
 				elements += element;
@@ -113,24 +117,19 @@ class Search {
 			elements = "";
 		});
 	}
-	
 	countSelect() {
-		//const selectedCheck = this.selectedCheck;
-		const total = $('input:checkbox[name="checkbox"]:checked').length; // 5개 이상 선택 후, 체크박스 일부 체크 해제하였을 때 토탈 개수 반영이 되지 않아 수정.
+		const selectedCheck = this.selectedCheck;
+		const total = selectedCheck.length;
 		return total;
 	}
-	
+	//self.pushOrRemoveCheck(checkedState, category.attr('id'), selectedCheck);
 	pushOrRemoveCheck(checkedState, category, selected) {
 		console.log(checkedState);
-		if(checkedState==true){
-			const selectedCheck = this.selectedCheck;
-			selectedCheck.push(selected);
-		}else{
-			const selectedCheck = this.selectedCheck;
-			selectedCheck.pop(selected);
-		}
+		const selectedCheck = this.selectedCheck;
+		selectedCheck.push(selected);
 	}
 }
+
 
 
 function setHospitalList(x){
@@ -169,7 +168,9 @@ function setHospitalList(x){
 							setDetailView(j)
 						})
 						.appendTo('div.container.hospital-list-wrap')
+						
 						pagination(d.pagination)
+						
 			})
 		},
 		error : e=>{
@@ -185,7 +186,7 @@ function pagination (d){
 	.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
 	.click(e=>{
 		$('input[name="pageNo"]').val(d.blist[0]-5),
-		$('.search-button').click()
+		setHospitalList(Search.constructor.selectedCheck)
 		})
 	}
 	
@@ -196,7 +197,7 @@ function pagination (d){
 			.click(e=>{
 				e.preventDefault()
 				$('input[name="pageNo"]').val(j)
-				$('.search-button').click()				
+				setHospitalList(Search.constructor.selectedCheck)
 			})
 		}else if(j == d.pageNo){
 			$('<li class="page-item"><a class="page-link"  href="#">'+j+'</a></li>')
@@ -212,7 +213,7 @@ function pagination (d){
 		.click(e=>{
 			e.preventDefault()
 			$('input[name="pageNo"]').val(d.blist[0]+5),
-			$('.search-button').click()
+			setHospitalList(Search.constructor.selectedCheck)
 		})		
 	}
 
@@ -227,4 +228,5 @@ function setDetailView(x) {
 	$.getJSON('/sch/', d=>{
 		new Search(d)
 	})
+
 })();

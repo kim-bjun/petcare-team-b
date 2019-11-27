@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewBrdVo {
-	private String userId, rate, comment, writeDate;
-	private int brdSeq, treatNo, hosNo;
+	private String userId, hosNo, rate, comment, writeDate;
+	private int brdSeq, treatNo;
 }
