@@ -36,7 +36,7 @@
 						<a href="">커뮤니티</a>
 					</div>
 					<div class="faq header-nav">
-						<a href="">FAQ</a>
+						<a href="/customer/regist">FAQ</a>
 					</div>
 		    	</div>
 		    </div>
