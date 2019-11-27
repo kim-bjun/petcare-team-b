@@ -4,34 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.HospitalSearchMapper">
 
-
-<!-- 검색 조건  -->
-<select id="selectCityCode" resultType="JusoVo">
-select distinct(gb) , gb_nm from juso
-</select>
-
-<select id="selectGuCode" resultType="JusoVo">
-select cd , gb, cd_nm from juso 
-	where gb like #{gb}
-</select>
-
-
 <select id="selectHosInfoCode" resultType="HosInfoCodeVo">
 select * from hos_info_code
 </select>
 
-<!-- pagenation을 위한 total -->
 
-<select id="countAllHospital" resultType="int" parameterType="Proxy">
-select count(hos_no) from hospital
-<trim prefix="WHERE" prefixOverrides="AND">
-    <if test="hosAddress != null and hosAddress != ''">
-         replace(hos_address,' ' ,'') like '${hosAddress}%' 
-    </if>
-    <if test="searchWrd != null and searchWrd != ''">
-        AND replace(hos_name,' ','') like replace('%${searchWrd}%',' ','')
-    </if>    
- </trim>
+<select id="countAllHospital" resultType="int">
+select MAX(hos_no) from hospital
 </select>
 
 <select id="countHospitalByCondition" resultType="int" parameterType="Proxy">
@@ -52,28 +31,11 @@ JOIN (SELECT a.hos_no
   	</foreach>	
 					)) as info
 ON h.hos_no = info.hos_no
-<trim prefix="WHERE" prefixOverrides="AND">
-    <if test="hosAddress != null and hosAddress != ''">
-         replace(hos_address,' ' ,'') like '${hosAddress}%' 
-    </if>
-    <if test="searchWrd != null and searchWrd != ''">
-        AND replace(hos_name,' ','') like replace('%${searchWrd}%',' ','')
-    </if>    
- </trim>
+
 </select>
 
-
-<!-- 검색 -->
-<select id="selectHospitalAllList" resultType="HospitalVo" parameterType="Proxy">
+<select id="selectHospitalAllList" resultType="HospitalVo">
 select * from hospital
-<trim prefix="WHERE" prefixOverrides="AND">
-    <if test="hosAddress != null and hosAddress != ''">
-         replace(hos_address,' ' ,'') like '${hosAddress}%' 
-    </if>
-    <if test="searchWrd != null and searchWrd != ''">
-        AND replace(hos_name,' ','') like replace('%${searchWrd}%',' ','')
-    </if>    
- </trim>
 order by hos_no desc
 LIMIT ${startRow} ,${PAGE_SIZE}
 </select>
@@ -96,14 +58,6 @@ JOIN (SELECT a.hos_no
   	</foreach>	
 					)) as info
 ON h.hos_no = info.hos_no
-<trim prefix="WHERE" prefixOverrides="AND">
-    <if test="hosAddress != null and hosAddress != ''">
-         replace(hos_address,' ' ,'') like '${hosAddress}%' 
-    </if>
-    <if test="searchWrd != null and searchWrd != ''">
-        AND replace(hos_name,' ','') like replace('%${searchWrd}%',' ','')
-    </if>    
- </trim>
 LIMIT ${startRow} ,${PAGE_SIZE}
 </select>
 

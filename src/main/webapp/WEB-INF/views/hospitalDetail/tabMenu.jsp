@@ -17,7 +17,7 @@
 	        <div id="map" style="width:500px;height:400px;"></div>
 	      </div>
 	      <div class="tab-pane fade" id="review">
-	      <div id="media">	    
+	      <div id="media">
 	      </div>
 	      <div id = "pagination">
 	      <ul class="pagination pagination-sm justify-content-center" style="margin:20px 0"></ul>
@@ -43,7 +43,7 @@
 	// 주소-좌표 변환 객체를 생성
 	const geocoder = new kakao.maps.services.Geocoder();
 	// 주소로 좌표를 검색
-	geocoder.addressSearch('${result.hosAddress}', function(result, status) {
+	geocoder.addressSearch('부산 연제구 연산동 104-82', function(result, status) {
 
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
@@ -56,7 +56,7 @@
 	            position: coords
 	        });
 	    	// 마커 인포
-	    	var infoContent='${result.hosName}';
+	    	var infoContent="설명입니다.";
 	    	var iwContent = '<div style="padding:5px;">'+infoContent+'</div>', // 인포 내용
 	    	    iwRemoveable = true; // x버튼 표시
 	        // 인포윈도우로 장소에 대한 설명을 표시
