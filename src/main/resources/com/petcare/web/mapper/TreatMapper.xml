@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcare.web.mapper.TreatMapper">
+	
+	<resultMap type="com.petcare.web.domains.TreatVo" id="TreatVo">
+		<id column="treat_no" property="treatNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="ani_no" property="aniNo"/>
+		<result column="treat_item" property="treatItem"/>
+		<result column="treat_date" property="treatDate"/>
+		<result column="treat_state" property="treatState"/>
+	</resultMap>
+	
+
+	<select id="getList" resultMap="TreatVo">
+			select * from treat
+	
+	</select>
+	
+
+
+
+
+
+
+
+</mapper>
+  

@@ -19,11 +19,11 @@
 				</form>
 	    	</div>
 	    	<div class="top-right">
-	    		<% 
-    				UserVO obj = (UserVO)request.getSession().getAttribute("login");
-    	         	if( obj != null ) {
-    					String username = obj.getUsername();
-    	        %>
+	    		<%
+	    			UserVO obj = (UserVO)request.getSession().getAttribute("login");
+	    			    		    	         	if( obj != null ) {
+	    			    		    					String username = obj.getUsername();
+	    		%>
     	        	<a href="/user/mypage">
     	        		<button class="auth-button btn btn-primary" type="button"><%= username %> 님</button>
     	        	</a>
