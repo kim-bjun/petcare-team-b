@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
-        <!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
 
@@ -14,8 +14,7 @@
 		<typeAlias alias="HospitalVo" type="com.petcare.web.domains.HospitalVo"/>
 		<typeAlias alias="HosInfoCodeVo" type="com.petcare.web.domains.HosInfoCodeVo"/>
 		<typeAlias alias="FAQVO" type="com.petcare.web.domains.FAQVO"/>
-    <typeAlias alias="customerVO" type="com.petcare.web.domains.CustomerVO"/>
-		<typeAlias alias="animalVO" type="com.petcare.web.domains.AnimalVO"/>
     </typeAliases>
+
 
 </configuration>

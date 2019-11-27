@@ -9,13 +9,13 @@ import com.petcare.web.domains.ReservationVo;
 
 public interface ReservationService {
 	
-	public ReservationVo get(int treat_no);
+	public ReservationVo get(int res_no);
 	
 	public void regist(ReservationVo reser);
 	
 	public boolean modify(ReservationVo reser);
 	
-	public boolean remove(int treat_no);
+	public boolean remove(int res_no);
 	
 	public List<ReservationVo> getList();
 	
