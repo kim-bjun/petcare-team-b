@@ -5,40 +5,48 @@
 <mapper namespace="com.petcare.web.mapper.ReservationMapper">
 
 	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
-		<id column="res_no" property="res_no" />
-		<id column="user_no" property="user_no" />
-		<id column="ani_no" property="ani_no" />
-		<id column="hos_no" property="hos_no" />
-		<id column="res_dt" property="res_dt" />
-		<id column="res_time" property="res_time" />
-		<id column="res_item" property="res_item" />
-		<id column="reg_dt" property="reg_dt" />
+		<id column="treat_no" property="treat_no" />
+		<result column="hos_no" property="hos_no" />
+		<result column="res_dt" property="res_dt" />
+		<result column="res_time" property="res_time" />
+		<result column="user_id" property="userId" />
+		<result column="ani_no" property="aniNo" />
+		<result column="res_item" property="res_item" />
+		<result column="reg_dt" property="reg_dt" />
+		
+		<result column="hos_name" property="hos_name" />
+		<result column="ani_name" property="ani_name" />
 		
 	</resultMap>
 
 	<select id="getList" resultMap="ReservationVo">
-		select * from reservation 
+		SELECT treat_no,res_dt,res_time,h.hos_name,a.ani_name,reg_dt 
+		FROM reservation r 
+			join hospital_basic h on (r.hos_no = h.hos_no )
+			join animal a on (r.ani_no = a.ani_no)
+
+    		<!--where 에user_id넣으면 500에러  -->
 	</select>
 
 	<select id="read" resultMap="ReservationVo">
-		select * from reservation where res_no=#{res_no}
+		select * from reservation where treat_no=#{treat_no}
 	</select>
 	
 	<insert id="insert">
-		insert into reservation (ani_no,res_dt,res_time,res_item)
+		insert into reservation (treat_no,hos_no,user_id,reg_dt,ani_no,res_dt,res_time,res_item)
 		values
-		(#{ani_no},#{res_dt},#{res_time},#{res_item})
+		(#{treat_no},#{hos_no},#{user_id},#{reg_dt},#{ani_no},#{res_dt},#{res_time},#{res_item})
 	</insert>
 
 	<update id="update">
 		update reservation set ani_no = #{ani_no} ,
 		res_dt= #{res_dt}
 		,res_time= #{res_time},res_item=#{res_item} 
-		where res_no = #{res_no}
+		where treat_no = #{treat_no}
 	</update>
 
 	<delete id="delete">
-		delete from reservation where res_no = #{res_no}
+		delete from reservation where treat_no = #{treat_no}
 	</delete>
 
 
