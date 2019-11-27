@@ -7,11 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.petcare.web.domains.FAQVO;
 
-@Mapper
 
 import com.petcare.web.domains.FAQVO;
 
 
+@Mapper
 public interface FAQMapper {
 
 	public List<FAQVO> readAll() throws Exception;
