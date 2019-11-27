@@ -3,27 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.ReviewBrdMapper">
-	<resultMap type="com.petcare.web.domains.ReviewBrdVo" id="ReviewBrdVo">
-		<id column="brd_seq" property="brdSeq" />
-		<id column="user_id" property="userId" />
-		<id column="hos_no" property="hosNo" />
-		<id column="rate" property="rate" />
-		<id column="comment" property="comment" />
-	</resultMap>
+
 
 <select id="cntReview" resultType="int">
 select count(*) from review_brd where hos_no like #{hosNo}
 </select>
-<select id="selectReview" resultType="com.petcare.web.domains.ReviewBrdVo">
+<select id="selectReview" resultType="ReviewBrdVo">
 select * from review_brd
 where hos_no like #{hosNo} 
 order by brd_seq desc
 LIMIT ${startRow} ,${PAGE_SIZE}
 </select>
-<!-- 
-<select id="selectAllReview" resultType="com.petcare.web.domains.HospitalVo">
-select * from hospital
-WHERE hos_no like #{hosNo}
-</select>
- -->
+
+<insert id ="insertReview" parameterType="ReviewBrdVo">
+insert into review_brd (user_id, hos_no, rate, comment, write_date)
+values (#{userId},#{hosNo},#{rate},#{comment},DATE_FORMAT(NOW(),'%Y%m%d'))
+</insert>
+
 </mapper>

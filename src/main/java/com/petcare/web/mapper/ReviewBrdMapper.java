@@ -10,5 +10,5 @@ public interface ReviewBrdMapper {
 	
 	public int cntReview(String hosNo);
 	public List<ReviewBrdVo> selectReview(Proxy pxy);
-	
+	public void insertReview( ReviewBrdVo reviewBrdVo );
 }

@@ -10,10 +10,13 @@
 
     <typeAliases>
 		<typeAlias alias="UserVO" type="com.petcare.web.domains.UserVO"/>
+		<typeAlias alias="FAQVO" type="com.petcare.web.domains.FAQVO"/>
 		<typeAlias alias="Proxy" type="com.petcare.web.utills.Proxy"/>
 		<typeAlias alias="HospitalVo" type="com.petcare.web.domains.HospitalVo"/>
+		<typeAlias alias="JusoVo" type="com.petcare.web.domains.JusoVo"/>
+		<typeAlias alias="HospitalVo" type="com.petcare.web.domains.HospitalVo"/>
+		<typeAlias alias="ReviewBrdVo" type="com.petcare.web.domains.ReviewBrdVo"/>
 		<typeAlias alias="HosInfoCodeVo" type="com.petcare.web.domains.HosInfoCodeVo"/>
-		<typeAlias alias="FAQVO" type="com.petcare.web.domains.FAQVO"/>
     </typeAliases>
 
 

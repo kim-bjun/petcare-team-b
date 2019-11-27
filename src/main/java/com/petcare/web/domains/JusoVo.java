@@ -1,7 +1,5 @@
 package com.petcare.web.domains;
 
-import java.io.Serializable;
-
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -12,10 +10,7 @@ import lombok.NoArgsConstructor;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class HosInfoCodeVo  implements Serializable{
-	private static final long serialVersionUID= 1L;
-	
-	private int hosInfoCode;
-	private String codeName;
+public class JusoVo {
+	private String cd, gb, gbNm, cdNm;
 	
 }
