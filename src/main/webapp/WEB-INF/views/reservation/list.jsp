@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+	<!-- datepicker 한국어로 -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+
+	
 </head>
 <body>
 	<div id="root">
@@ -28,10 +32,14 @@
 
 <div class="container">
   <h2>예약 내역</h2>
-  
+  <p>
+  	기간 조회 <input id="startDate" class="dueDate"> ~ <input id="endDate" class="dueDate">
+  	<button>기간으로 조회하기</button>
+  </p>
   <table class="table table-bordered">
     <thead>
       <tr>
+      	<th>예약 번호</th>
         <th>예약 날짜</th>
         <th>예약 시간</th>
         <th>병원</th>
@@ -43,13 +51,17 @@
     
     <c:forEach items="${list}" var="reservation">
       <tr>
-        <td><fmt formatDate pattern="yyyy-mm-dd" type="date" value="${reservation.res_dt} "/></td>
-        <td><fmt formatDate pattern="hh:mm" type="time" value="${reservation.res_dt} "/></td>
+      	<td><c:out value="${reservation.treat_no }"/></td>
+      	<td><c:out value="${reservation.res_dt }"/></td>
+      	<td><c:out value="${reservation.res_time }"/></td>
         <td><c:out value="${reservation.hos_name} "/></td>
         <td><c:out value="${reservation.ani_name} "/></td>
-        <td><fmt formatDate pattern="yyyy-mm-dd" type="date" value="${reservation.reg_dt}"/> </td>
+        <td><c:out value="${reservation.reg_dt} "/></td>
       </tr>
      </c:forEach>
+<%--         <td><fmt formatDate pattern="yyyy-mm-dd" type="date" value="${reservation.res_dt} "/></td>
+        <td><fmt formatDate pattern="hh:mm" type="time" value="${reservation.res_dt} "/></td>
+        <td><fmt formatDate pattern="yyyy-mm-dd" type="date" value="${reservation.reg_dt}"/> </td> --%>
       
       
     </tbody>
@@ -59,8 +71,8 @@
       
       <div>
 	      <select>
-	      	<option>병원</option>
-	      	<option>반려동물이름</option>
+	      	<option value="hos">병원</option>
+	      	<option value="aniname">반려동물이름</option>
 	      </select>
 	      <form class="search-box form-inline active-purple-4 align-items-center justify-content-center">
 			  <input class="form-control form-control-sm w-75"
@@ -92,7 +104,27 @@
 				self.location="/reservation/regist";
 			});
 		
-		})
+		 $(function() {
+		  $(".dueDate").datepicker({
+			  beforeShowDay: $.datepicker.noWeekends,
+		      showButtonPanel: true, 
+		      currentText: '오늘 날짜',
+		      dateFormat: "yymmdd",
+		      closeText: '닫기', 
+		      showOn: "both", 
+		      buttonImage: "/resources/img/reservation/calendar20.svg", 
+		      buttonImageOnly: true,
+		      
+		      //var today= new Date(),
+		  	  //$("#datepicker").datepicker( "option", "minDate", today );
+		  });
+		 });
+		});
+		
+		
+		
+
+
 	</script>
 	
 	<!-- Optional JavaScript -->
