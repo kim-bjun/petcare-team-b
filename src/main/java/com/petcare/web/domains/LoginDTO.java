@@ -1,20 +1,20 @@
 package com.petcare.web.domains;
 
 public class LoginDTO {
-	private String userid;
-	private String userpass;
+	private String userId;
+	private String userPass;
 	private boolean useCookie;
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getUserpass() {
-		return userpass;
+	public String getUserPass() {
+		return userPass;
 	}
-	public void setUserpass(String userpass) {
-		this.userpass = userpass;
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
 	}
 	public boolean isUseCookie() {
 		return useCookie;
@@ -24,7 +24,7 @@ public class LoginDTO {
 	}
 	@Override
 	public String toString() {
-		return "LoginDTO [userid=" + userid + ", userpass=" + userpass + ", useCookie=" + useCookie + "]";
+		return "LoginDTO [userId=" + userId + ", userPass=" + userPass + ", useCookie=" + useCookie + "]";
 	}
 	
 

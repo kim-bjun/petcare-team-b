@@ -7,11 +7,11 @@
 
 				<div class="form-group">
 					<input type="text" class="form-control" id="user-id"
-						placeholder="아이디" name="userid">
+						placeholder="아이디" name="userId">
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="user-password"
-						placeholder="비밀번호" name="userpass">
+						placeholder="비밀번호" name="userPass">
 				</div>
 				<label> <input type="checkbox" name="useCookie">ID
 					저장
