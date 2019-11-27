@@ -17,7 +17,12 @@
 	        <div id="map" style="width:500px;height:400px;"></div>
 	      </div>
 	      <div class="tab-pane fade" id="review">
-	        <p>리뷰입니다.</p>
+	      <div id="media">
+	      </div>
+	      <div id = "pagination">
+	      <ul class="pagination pagination-sm justify-content-center" style="margin:20px 0"></ul>
+	      </div>
+			<input type="hidden" value ="1" name="pageNo"/>	   
 	      </div>
 	    </div>
 	  </div>

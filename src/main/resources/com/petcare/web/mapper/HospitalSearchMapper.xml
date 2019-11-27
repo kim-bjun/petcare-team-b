@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcare.web.mapper.HospitalSearchMapper">
+
+<select id="selectHosInfoCode" resultType="HosInfoCodeVo">
+select * from hos_info_code
+</select>
+
+
+<select id="countAllHospital" resultType="int">
+select MAX(hos_no) from hospital
+</select>
+
+<select id="countHospitalByCondition" resultType="int" parameterType="Proxy">
+SELECT count(*) 
+FROM HOSPITAL as h 
+JOIN (SELECT a.hos_no 
+		FROM ( SELECT hos_no , COUNT(*) as cnt 
+				FROM hos_info 
+				WHERE hos_info_code IN 
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
+        #{item}
+  	</foreach>				
+				GROUP BY hos_no
+				) a
+		WHERE cnt = (select count(*) from hos_info_code where hos_info_code in 
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
+        #{item}
+  	</foreach>	
+					)) as info
+ON h.hos_no = info.hos_no
+
+</select>
+
+<select id="selectHospitalAllList" resultType="HospitalVo">
+select * from hospital
+order by hos_no desc
+LIMIT ${startRow} ,${PAGE_SIZE}
+</select>
+
+<select id="selectHospitalList" resultType="HospitalVo" parameterType="Proxy">
+SELECT h.* 
+FROM HOSPITAL as h 
+JOIN (SELECT a.hos_no 
+		FROM ( SELECT hos_no , COUNT(*) as cnt 
+				FROM hos_info 
+				WHERE hos_info_code IN 
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
+        #{item}
+  	</foreach>				
+				GROUP BY hos_no
+				) a
+		WHERE cnt = (select count(*) from hos_info_code where hos_info_code in 
+  	<foreach item="item" index="index" collection="checkBoxList" open="(" separator="," close=")">
+        #{item}
+  	</foreach>	
+					)) as info
+ON h.hos_no = info.hos_no
+LIMIT ${startRow} ,${PAGE_SIZE}
+</select>
+
+
+<select id="selectHospitalDetail" resultType="HospitalVo">
+select * from hospital
+WHERE hos_no like #{hosNo}
+</select>
+
+
+<insert id = "insetHospitalDumpData" parameterType="HospitalVo">
+INSERT INTO HOSPITAL (hos_no, hos_id, hos_pass, hos_name, hos_phone, hos_address, hos_site, hos_optime,hos_open,hos_close, hos_major_treatment_target, hos_course_of_treatment, hos_feature, hos_service, hos_intro, hos_photo,treat_no)
+VALUES (#{hosNo},#{hosId},#{hosPass},#{hosName},#{hosPhone},#{hosAddress},#{hosSite},#{hosOptime},"09:00:00","18:00:00",#{hosMajorTreatmentTarget},#{hosCourseOfTreatment},#{hosFeature},#{hosService},#{hosIntro},#{hosPhoto},"0") 
+</insert>
+
+
+</mapper>
