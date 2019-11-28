@@ -5,12 +5,22 @@ hospitalDetail = (()=>{
 	let hosNo;
 	let init =(x)=>{
 		hosNo = x
+		$('.far.fa-calendar-alt.detail-icon-btn')
+		.click(()=>{
+			alert('예약 페이지로 이동합니다.')
+			$.getJSON('/reservation/regist/'+hosNo,d=>{
+			})
+		})
+		
+		
 	}
 	let onCreate =(x)=>{
 		init(x)
 		setReviewList()
 	}
-	
+	let setReservationPage=()=>{
+		
+	}
 	// 리뷰 리스트 생성
 	let setReviewWriteForm =()=>{
 		$('#media').empty()	
