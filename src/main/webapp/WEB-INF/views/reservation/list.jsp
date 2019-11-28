@@ -51,7 +51,7 @@
     
     <c:forEach items="${list}" var="reservation">
       <tr>
-      	<td><a href="/reservation/get?treat_no=<c:out value="${reservation.treatNo}"/>" ><c:out value="${reservation.treatNo}"/></a></td>
+      	<td><a href="/reservation/get?treatNo=<c:out value="${reservation.treatNo}"/>" ><c:out value="${reservation.treatNo}"/></a></td>
       	<td><c:out value="${reservation.resDt}"/></td>
       	<td><c:out value="${reservation.resTime}"/></td>
         <td><c:out value="${reservation.hosName} "/></td>

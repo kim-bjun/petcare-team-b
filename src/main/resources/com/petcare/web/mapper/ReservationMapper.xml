@@ -29,7 +29,7 @@
 	</select>
 
 	<select id="read" resultMap="ReservationVo">
-		select * from reservation where treat_no=#{treat_no}
+		select * from reservation where treat_no=#{treatNo}
 	</select>
 	
 	<insert id="insert">
@@ -39,14 +39,14 @@
 	</insert>
 
 	<update id="update">
-		update reservation set ani_no = #{ani_no} ,
+		update reservation set ani_no = #{aniNo} ,
 		res_dt= #{res_dt}
-		,res_time= #{res_time},res_item=#{res_item} 
-		where treat_no = #{treat_no}
+		,res_time= #{resTime},res_item=#{resItem} 
+		where treat_no = #{treatNo}
 	</update>
 
 	<delete id="delete">
-		delete from reservation where treat_no = #{treat_no}
+		delete from reservation where treat_no = #{treatNo}
 	</delete>
 
 

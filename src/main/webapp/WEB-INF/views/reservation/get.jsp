@@ -29,21 +29,21 @@
 
 	<div class="container">
 		 <p>
-		  	예약날짜: <input type="text" id="datepicker" name="res_dt" value="<c:out value='${vo.res_dt} }'/>"/>
+		  	예약날짜: <input type="text" id="datepicker"  readonly="readonly" name="resDt" value="<c:out value='${vo.resDt }'/>"/>
 		 </p>
 		 
 		 <div>
-		     <p>예약시간 : <input type="text" id="datepicker" name="res_dt" value="<c:out value='${vo.res_time} }'/>"/>
+		     <p>예약시간 : <input type="text" id="datepicker"  readonly="readonly"name="resDt" value="<c:out value='${vo.resTime }'/>"/>
 		         
 		       </p>
 		 </div>
 		 	<div >
 			 <p>예약한 반려동물 :
-				  <input type="text" id="datepicker" name="res_dt" value="<c:out value='${vo.ani_name} }'/>"/>
+				  <input type="text" id="datepicker" readonly="readonly" name="resDt" value="<c:out value='${vo.aniName }'/>"/>
 			 </p>
 			</div>
 			<p> 증상:
-			 <textarea cols="40" rows="3" name="res_item" readonly="readonly"><c:out value='${vo.res_item}'/></textarea>
+			 <textarea cols="40" rows="3" name="resItem" readonly="readonly"><c:out value='${vo.resItem}'/></textarea>
 			 </p>
 			 
 			 <button type="submit" class="btn btn-info">변경하기</button>
