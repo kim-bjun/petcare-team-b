@@ -30,15 +30,20 @@ import com.petcare.web.utills.HospitalCrawlingProxy;
 import com.petcare.web.utills.Proxy;
 
 @Controller
-@RequestMapping("/sch/*")
+@RequestMapping("/sch")
 public class SearchHospitalController {
 	@Autowired HospitalSearchMapper hospitalSearchMapper;
 	@Autowired ReviewBrdMapper reviewBrdMapper;
 	@Autowired HospitalCrawlingProxy hospitalCrawlingProxy;
 	@Autowired Proxy pxy;  // pagenation 및 검색어 VO
 
-	
-	@GetMapping("/")  
+    
+    @GetMapping("/")
+    public String hospitalSearch() { 
+    	return "hospitalSearch";
+    }
+    
+	@GetMapping("/SearchCondition")  
 	public @ResponseBody Map<String,Object> selectHosInfoCode() throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		ArrayList<HosInfoCodeVo> code = hospitalSearchMapper.selectHosInfoCode();
@@ -72,10 +77,9 @@ public class SearchHospitalController {
 	}
 
 	
-	@GetMapping("/{city}")  
+	@GetMapping("/SearchCondition/{city}")  
 	public @ResponseBody Map<String,Object> selectGuCode(@PathVariable String city) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		JusoVo jusoVo = new JusoVo();
 		map.put("gu",hospitalSearchMapper.selectGuCode(city));
 		
 		return map;
@@ -148,6 +152,14 @@ public class SearchHospitalController {
 		
 	}
 	
+	
+	
+	
+	/* 더미데이터 생성 페이지*/
+    @GetMapping("/DDFS")
+    public String dummyDataForSearch() {
+    	return "dummyDataForSearch";
+    }
 	@GetMapping("/crawling")
 	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
 		Map<String, Object> tempMap =new HashMap<String, Object>();
@@ -164,5 +176,7 @@ public class SearchHospitalController {
 		return tempMap;
 	}
 	
+	
+
 	
 }

@@ -44,7 +44,7 @@
 		    <div class="col-md-6 ">
 		    	<div class="row justify-content-around">
 			    	<div class="search-hospital header-nav">
-			    		<a href="/sample/hospitalsearch">병원찾기</a>
+			    		<a href="/sch/">병원찾기</a>
 	    			</div>
 					<div class="reservation-confirm header-nav">
 						<a href="">예약내역</a>
