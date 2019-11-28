@@ -8,29 +8,22 @@ class Dummy {
 	}
 	eventsTrigger() {
 	 	$('<button>',{
-			text : 'SUBMIT' , 
+			text :'Create Table' , 
 			href: '#' ,
-			style:  'float:right;width:100px;margin-right:10%'
+			style:'margin-left:10px; margin-left:10px;'
 		})
-		.addClass('btn btn-primary')
-		.appendTo("#underRow")     
+		.addClass('btn btn-default')
+		.appendTo("#contents")     
 		.click(e=>{
 			e.preventDefault()
-			let json = { 
-					userId :  $('#write_form input[name="userId"]').val() ,
-					comment : $('#write_form textarea[name="comment"]').val(),
-					hosNo : hosNo,
-					rate : $('#write_form select[name="rate"]').val()
-			}
 			$.ajax({
 				url : '/sch/writeReview/',
-				type : 'POST',
+				type : 'GET',
 				dataType : 'json',
 				data: JSON.stringify(json) , 
 				contentType : 'application/json', 
 				success : d =>{
 					alert('게시 성공  ' + d.msg);
-					setReviewList(hosNo)
 				},
 				error : e =>{
 					alert('게시 실패');

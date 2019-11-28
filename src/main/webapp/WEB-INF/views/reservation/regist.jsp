@@ -51,7 +51,7 @@
 	</div>
 		
 <form role="form" action="/reservation/regist" method="post">
-	<div class="container">
+	<div class="container">${result}
 		 <p>
 		  	예약날짜: <input type="text" id="datepicker" name="res_dt"/>
 		 </p>

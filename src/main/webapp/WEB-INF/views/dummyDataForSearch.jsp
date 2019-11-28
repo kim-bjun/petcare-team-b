@@ -22,7 +22,15 @@
 			<div class="hospital-search">
 				<section>
 					<div class="dummycontainer">
-						
+						<div></div>
+						<div> <h4>Table Control</h4></div>
+						<div></div>
+						<div></div>
+						<div id ="contents"></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
 					</div>
 				</section>
 			</div>
