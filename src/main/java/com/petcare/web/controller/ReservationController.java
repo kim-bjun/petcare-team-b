@@ -1,5 +1,8 @@
 package com.petcare.web.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.ReservationVo;
 import com.petcare.web.domains.UserVO;
 import com.petcare.web.service.ReservationService;
@@ -37,13 +42,19 @@ public class ReservationController {
      	
 		UserVO obj = (UserVO)session.getAttribute("login");
 		String userId = obj.getUserid();
+	
 		
-		Rvo.setTreatNo(32);;
+		Date today= new Date();
+		SimpleDateFormat today1 = new SimpleDateFormat("HHmmss");
+		int num= (int)(Math.random() * 10 + 1);
+		int num1= Integer.parseInt(num +today1.format(today));
+
+		Rvo.setTreatNo(num1);;
 		Rvo.setUserId(userId);;
 		//Rvo.setUserId("user1");
 		Rvo.setHosNo(1);
 		//Rvo.setAni_no(1);
-		
+				
 		service.regist(Rvo);
 		
 		return "redirect:/reservation/list";

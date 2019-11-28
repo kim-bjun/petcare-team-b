@@ -38,10 +38,10 @@
 </head>
 <body>
 
-	<% 
+<%-- 	<% 
 		request.setCharacterEncoding("euc-kr"); 
 	    int hos_no = Integer.parseInt(request.getParameter("hosNo"));
-	%>
+	%> --%>
 	   
 
 	
@@ -57,7 +57,7 @@
 		  	예약날짜: <input type="text" id="datepicker" name="resDt"/>
 		 </p>
 		 
-		 <input type="hidden" name ="hosNo" value="<%=hos_no %>"/>
+		 <%-- <input type="hidden" name ="hosNo" value="<%=hos_no %>"/> --%>
 		
 	<%-- 	 <% 
 		 		UserVO log = (UserVO)request.getSession().getAttribute("login");
