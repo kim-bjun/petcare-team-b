@@ -39,7 +39,7 @@ class Search {
 				if(city !== '') {
 					self.selectedAddress.city =$(this).find("option:selected").text();
 					// 구 렌더
-					$.getJSON('/sch/'+city , d =>{
+					$.getJSON('/sch/SearchCondition/'+city , d =>{
 						self.gu = [{"cd":'',"gb":'',"gbNm":'',"cdNm":"-구 선택-"}]
 						self.gu = self.gu.concat(d.gu);
 						self.guRender();
@@ -224,7 +224,7 @@ function setDetailView(x) {
 }
 
 (function() {
-	$.getJSON('/sch/', d=>{
+	$.getJSON('/sch/SearchCondition', d=>{
 		new Search(d)
 	})
 })();
