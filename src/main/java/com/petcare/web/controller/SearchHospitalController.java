@@ -160,6 +160,7 @@ public class SearchHospitalController {
     public String dummyDataForSearch() {
     	return "dummyDataForSearch";
     }
+    
 	@GetMapping("/crawling")
 	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
 		Map<String, Object> tempMap =new HashMap<String, Object>();

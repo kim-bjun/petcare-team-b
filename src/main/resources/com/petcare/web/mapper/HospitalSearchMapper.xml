@@ -3,6 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.HospitalSearchMapper">
+	<resultMap type="com.petcare.web.domains.HospitalVo" id="HospitalVo">
+		<id column="hos_no" property="hosNo" />
+		<result column="hos_no" property="hos_no" />
+		<result column="hos_id" property="hosId" />
+		<result column="hos_pass" property="hosPass" />
+		<result column="hos_name" property="hosName" />
+		<result column="hos_email" property="hosEmail" />
+		<result column="hos_phone" property="hosPhone" />
+		<result column="hos_address" property="hosAddress" />
+		<result column="hos_site" property="hosSite" />
+		<result column="hos_optime" property="hosOptime" />
+		<result column="hos_open" property="hosOpen" />
+		<result column="hos_close" property="hosClose" />
+		<result column="hos_major_treatment_target" property="hosMajorTreatmentTarget" />
+		<result column="hos_course_of_treatment" property="hosCourseOfTreatment" />
+		<result column="hos_feature" property="hosFeature" />
+		<result column="hos_service" property="hosService" />
+		<result column="hos_intro" property="hosIntro" />
+		<result column="hos_photo" property="hosPhoto" />
+		<result column="treat_no" property="treatNo" />
+	</resultMap>
 
 
 <!-- 검색 조건  -->
@@ -114,7 +135,7 @@ WHERE hos_no like #{hosNo}
 </select>
 
 
-<insert id = "insetHospitalDumpData" parameterType="HospitalVo">
+<insert id = "insetHospitalDumpData" parameterType="com.petcare.web.domains.HospitalVo">
 INSERT INTO HOSPITAL (hos_no, hos_id, hos_pass, hos_name, hos_phone, hos_address, hos_site, hos_optime,hos_open,hos_close, hos_major_treatment_target, hos_course_of_treatment, hos_feature, hos_service, hos_intro, hos_photo,treat_no)
 VALUES (#{hosNo},#{hosId},#{hosPass},#{hosName},#{hosPhone},#{hosAddress},#{hosSite},#{hosOptime},"09:00:00","18:00:00",#{hosMajorTreatmentTarget},#{hosCourseOfTreatment},#{hosFeature},#{hosService},#{hosIntro},#{hosPhoto},"0") 
 </insert>

@@ -46,10 +46,12 @@ public class ReservationController {
 		service.regist(Rvo);
 		return "redirect:/reservation/list";
 	}
+	
+	
 	@GetMapping("/regist/{hosNo}")
 	public String regist(@PathVariable String hosNo, Model model) {
 		System.out.println(hosNo+"<<<<<hosNo");
-		model.addAttribute("result", hosNo);
+		model.addAttribute("hosNo", hosNo);
 		return "reservation/regist";
 	}
 	
