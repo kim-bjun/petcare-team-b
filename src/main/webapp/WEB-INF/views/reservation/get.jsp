@@ -26,7 +26,7 @@
 		</header>
 	</div>
 		
-<form role="form">
+
 	<div class="container">
 		 <p>
 		  	예약날짜: <input type="text" id="datepicker" name="res_dt" value="<c:out value='${vo.res_dt} }'/>"/>
@@ -50,7 +50,7 @@
 			 <button type="submit" class="btn btn-info">취소하기</button>
 			 <button type="submit" class="btn btn-info">뒤로가기</button>
 	</div>
- </form>
+
 		 
  
 	<footer>

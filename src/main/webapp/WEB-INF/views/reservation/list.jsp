@@ -51,12 +51,12 @@
     
     <c:forEach items="${list}" var="reservation">
       <tr>
-      	<td><c:out value="${reservation.treat_no }"/></td>
-      	<td><c:out value="${reservation.res_dt }"/></td>
-      	<td><c:out value="${reservation.res_time }"/></td>
-        <td><c:out value="${reservation.hos_name} "/></td>
-        <td><c:out value="${reservation.ani_name} "/></td>
-        <td><c:out value="${reservation.reg_dt} "/></td>
+      	<td><a href="/reservation/get?treat_no=<c:out value="${reservation.treatNo}"/>" ><c:out value="${reservation.treatNo}"/></a></td>
+      	<td><c:out value="${reservation.resDt}"/></td>
+      	<td><c:out value="${reservation.resTime}"/></td>
+        <td><c:out value="${reservation.hosName} "/></td>
+        <td><c:out value="${reservation.aniName} "/></td>
+        <td><c:out value="${reservation.regDt} "/></td>
       </tr>
      </c:forEach>
 <%--         <td><fmt formatDate pattern="yyyy-mm-dd" type="date" value="${reservation.res_dt} "/></td>

@@ -47,7 +47,7 @@
 			    		<a href="/sample/hospitalsearch">병원찾기</a>
 	    			</div>
 					<div class="reservation-confirm header-nav">
-						<a href="">예약내역</a>
+						<a href="/reservation/list">예약내역</a>
 					</div>
 					<div class="community header-nav">
 						<a href="">커뮤니티</a>

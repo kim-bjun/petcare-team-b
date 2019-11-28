@@ -32,6 +32,10 @@
 			    <div class="card">
 			      <div class="card-body card-body-part">
 			      	<div class="container hospital-info">
+			      		
+			      		<form action="/reservation/regist" method="post">
+			      			<input type="hidden" value="${result.hosNo}" name="hosNo"/>
+			      		</form>
 				        <div class="card-title hospital-info-title">${result.hosName}</div>
 				        <div class="card-text hospital-info-text">${result.hosPhone}</div>
 				        <div class="card-text hospital-info-text">${result.hosAddress}</div>

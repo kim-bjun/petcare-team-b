@@ -4,21 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.ReservationMapper">
 
-	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
-		<id column="treat_no" property="treat_no" />
-		<result column="hos_no" property="hos_no" />
-		<result column="res_dt" property="res_dt" />
-		<result column="res_time" property="res_time" />
+ 	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
+		<id column="treat_no" property="treatNo" />
+		<result column="hos_no" property="hosNo" />
+		<result column="res_dt" property="resDt" />
+		<result column="res_time" property="resTime" />
 		<result column="user_id" property="userId" />
 		<result column="ani_no" property="aniNo" />
-		<result column="res_item" property="res_item" />
-		<result column="reg_dt" property="reg_dt" />
+		<result column="res_item" property="resItem" />
+		<result column="reg_dt" property="regDt" />
 		
-		<result column="hos_name" property="hos_name" />
-		<result column="ani_name" property="ani_name" />
+		<result column="hos_name" property="hosName" />
+		<result column="ani_name" property="aniName" />
 		
 	</resultMap>
-
+ 
 	<select id="getList" resultMap="ReservationVo">
 		SELECT treat_no,res_dt,res_time,h.hos_name,a.ani_name,reg_dt 
 		FROM reservation r 
@@ -35,7 +35,7 @@
 	<insert id="insert">
 		insert into reservation (treat_no,hos_no,user_id,reg_dt,ani_no,res_dt,res_time,res_item)
 		values
-		(#{treat_no},#{hos_no},#{user_id},#{reg_dt},#{ani_no},#{res_dt},#{res_time},#{res_item})
+		(#{treatNo},#{hosNo},#{userId},now(),#{aniNo},#{resDt},#{resTime},#{resItem})
 	</insert>
 
 	<update id="update">
