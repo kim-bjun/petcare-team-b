@@ -29,15 +29,14 @@ public class ReservationController {
 	ReservationService service;
 
 	@GetMapping("/list")
-	public String list(@RequestParam(value="userId")String userId ,Model model,HttpSession session) {
+	public String list(@RequestParam(value="userId")String userId,Model model,HttpSession session) {
 		
+		//
 		
-		
-		//UserVO obj = (UserVO)session.getAttribute("login"); 
-		 
-		//String userId = obj.getUserId(); 
-		//model.addAttribute("userId",userId);
-				
+		/*
+		 * UserVO obj = (UserVO)session.getAttribute("login"); userId = obj.getUserid();
+		 */
+		model.addAttribute("userId",userId);			
 			
 		model.addAttribute("list",service.getList(userId));
 			return "reservation/list";
@@ -51,7 +50,7 @@ public class ReservationController {
      	
 		//model.addAttribute("selectList",service.);
 		UserVO obj = (UserVO)session.getAttribute("login");
-		String userId = obj.getUserId();
+		String userId = obj.getUserid();
 	
 		if(userId == null) {
 			rttr.addFlashAttribute("msg","false");
@@ -90,7 +89,7 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/modify")
-	public void modify(@RequestParam(value="treatNo" ,required=false) int treatNo,Model model) {
+	public void modify(@RequestParam(value="treatNo") int treatNo,Model model) {
 		model.addAttribute("board", service.get(treatNo));
 	}
 	

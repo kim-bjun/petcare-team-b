@@ -19,6 +19,6 @@ public interface ReservationService {
 	
 	public List<ReservationVo> getList();
 
-	public Object getList(String userId);
+	public List<ReservationVo> getList(String userId);
 	
 }

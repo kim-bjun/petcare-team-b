@@ -50,10 +50,11 @@
 	    				<%
 	    					UserVO check = (UserVO)request.getSession().getAttribute("login");
 			    		    	         	if( check != null ) {
+			    		    	         		String userId = obj.getUserid();
 	    				%>
 			    		    					
 						<div class="reservation-confirm header-nav">
-							<a href="/reservation/list">예약내역</a>
+							<a href="/reservation/list?userId=<c:out value="<%=userId %>"/>">예약내역</a>
 						</div>
 	    				<% 
 	    					} 

@@ -42,7 +42,7 @@ public class UserController {
 		if(dto.isUseCookie()) {
 			int amount=60*60*24*7;
 			Date sessionLimit=new Date(System.currentTimeMillis()+(1000*amount));
-			service.keepLogin(vo.getUserId(),session.getId(),sessionLimit);
+			service.keepLogin(vo.getUserid(),session.getId(),sessionLimit);
 		}
 	}
 	
@@ -60,7 +60,7 @@ public class UserController {
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
-				service.keepLogin(vo.getUserId(),session.getId(), new Date());
+				service.keepLogin(vo.getUserid(),session.getId(), new Date());
 			}
 		}
 		return "home";

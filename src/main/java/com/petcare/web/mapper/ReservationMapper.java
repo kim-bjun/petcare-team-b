@@ -20,7 +20,7 @@ public interface ReservationMapper {
 	
 	public List<ReservationVo> getList();
 
-	public UserVO getList(String userId);
+	public List<ReservationVo> getList(String userId);
 
 }
 

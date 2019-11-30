@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.petcare.web.mapper.UserMapper">
     <select id="login" resultType="UserVO">
-        select userid, userpass,username from tbl_user where userid=#{userid} and userpass=#{userpass}
+        select user_id, user_pass,user_name from user where user_id=#{userid} and user_pass=#{userpass}
     </select>
     
     <update id="keepLogin">
