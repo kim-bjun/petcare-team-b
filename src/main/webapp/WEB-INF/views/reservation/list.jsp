@@ -103,29 +103,16 @@
 	</div>
 	
 	<script type="text/javascript">
-		$(document).ready(
-		function(){
-			$("#goReser").on("click",function(){
-				self.location="/reservation/regist";
-			});
-		
-		 function() {
-		  $(".dueDate").datepicker({
-			  beforeShowDay: $.datepicker.noWeekends,
-		      showButtonPanel: true, 
-		      currentText: '오늘 날짜',
-		      dateFormat: "yymmdd",
-		      closeText: '닫기', 
-		      showOn: "both", 
-		      buttonImage: "/resources/img/reservation/calendar20.svg", 
-		      buttonImageOnly: true,
-		      
-		      //var today= new Date(),
-		  	  //$("#datepicker").datepicker( "option", "minDate", today );
-		  });
-		
+		$(document).ready(function(){
+			$('#goReser').on('click',function(){
+				self.location = "/reservation/regist";
+			})
 		});
+			
+		
+		
 	</script>
+
 	
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

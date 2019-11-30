@@ -49,9 +49,11 @@
 
 	<update id="update">
 		update reservation set ani_no = #{aniNo} ,
-		res_dt= #{res_dt}
+		res_dt= #{resDt}
 		,res_time= #{resTime},res_item=#{resItem} 
-		where treat_no = #{treatNo}
+		WHERE 1=1 and 
+			treat_no = #{treatNo} and
+			user_id = #{userId}
 	</update>
 
 	<delete id="delete">

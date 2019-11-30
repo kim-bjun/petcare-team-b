@@ -18,23 +18,7 @@
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 	<!-- datepicker 한국어로 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
-<script>
 
-	 $(document).ready(function(){
-		$("#datepicker").datepicker({
-			beforeShowDay: $.datepicker.noWeekends,
-		      showButtonPanel: true, 
-		      dateFormat: "yymmdd",
-		      closeText: '닫기', 
-		      showOn: "both", 
-		      buttonImage: "/resources/img/reservation/calendar20.svg", 
-		      buttonImageOnly: true,
-		}) ;
-		var today = new Date();
-		$("#datepicker").datepicker( "option", "minDate", today );
-	 });
-
-</script>
 </head>
 <body>
 
@@ -42,9 +26,7 @@
 		request.setCharacterEncoding("euc-kr"); 
 	    int hos_no = Integer.parseInt(request.getParameter("hosNo"));
 	%> --%>
-	   
-
-	
+	   	
 	<div id="root">
 		<header>
 			<%@ include file="../common/header.jsp" %>
@@ -56,21 +38,9 @@
 <form role="form" action="/reservation/modify" method="post">
 	<div class="container">
 		 <p>
-		  	예약날짜: <input type="text" id="datepicker" name="resDt"/>
+		  	예약날짜: <input type="text" id="datepicker" name="resDt" value="<c:out value='${board.resDt}'/>"/>
 		 </p>
-		 
-		 <%-- <input type="hidden" name ="hosNo" value="<%=hos_no %>"/> --%>
-		
-	<%-- 	 <% 
-		 		UserVO log = (UserVO)request.getSession().getAttribute("login");
-				String userId = log.getUserid();
-				
-		 <input type="hidden" name ="userId" value="#{userId}">
-		 %> --%>
-		 
-		 
-		 
-			
+		 		
 		 <div>
 		     <p>예약시간
 		         <select id="res_time" name="resTime">
@@ -94,7 +64,7 @@
 				 </select>
 			 </p>
 			</div>
-			 <textarea cols="40" rows="3" name="resItem" ></textarea>
+			 <textarea cols="40" rows="3" name="resItem" ><c:out value='${board.resItem}'/></textarea>
 			 <button data-oper="modify" class="btn btn-info">수정하기</button>
 			 <button data-oper="remove" class="btn btn-info">삭제하기</button>
 	</div>
@@ -121,6 +91,23 @@
 		})
 	
 	</script>
+	<script>
+
+	 $(document).ready(function(){
+		$("#datepicker").datepicker({
+			beforeShowDay: $.datepicker.noWeekends,
+		      showButtonPanel: true, 
+		      dateFormat: "yymmdd",
+		      closeText: '닫기', 
+		      showOn: "both", 
+		      buttonImage: "/resources/img/reservation/calendar20.svg", 
+		      buttonImageOnly: true,
+		}) ;
+		var today = new Date();
+		$("#datepicker").datepicker( "option", "minDate", today );
+	 });
+
+</script>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
