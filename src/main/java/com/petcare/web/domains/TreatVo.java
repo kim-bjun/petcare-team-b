@@ -10,4 +10,6 @@ public class TreatVo {
 	private String treatItem;
 	private String treatDate;
 	private String treatState;
+	
+	private String reserTime;
 }
