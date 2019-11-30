@@ -10,7 +10,7 @@
 	        			<div class="detail-label">병원 정보</div>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
-	        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"></i>
+	        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"  ></i>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
 		        		<i class="far fa-bookmark detail-icon-btn" aria-hidden="true"></i>

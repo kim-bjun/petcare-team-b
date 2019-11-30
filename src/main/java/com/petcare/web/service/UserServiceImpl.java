@@ -1,12 +1,11 @@
 package com.petcare.web.service;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.LoginDTO;
 import com.petcare.web.domains.UserVO;
 import com.petcare.web.mapper.UserMapper;
@@ -18,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	private UserMapper mapper;
 	
 	@Override
-	public UserVO login(LoginDTO dto) throws Exception {
+	public CustomerVO login(LoginDTO dto) throws Exception {
 		return mapper.login(dto);
 	}
 	
@@ -28,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO checkLoginBefore(String value) {
+	public CustomerVO checkLoginBefore(String value) {
 		return mapper.checkUserWithSessionKey(value);
 	}
 }

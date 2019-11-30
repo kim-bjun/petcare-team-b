@@ -38,6 +38,7 @@
 			<p> 로그인을 해주세요 </p>
 		</c:if>
 		
+
 <!-- <div class="row h-100 justify-content-center align-items-center"></div>
 		<div class="col-10 col-md-8 col-lg-6"></div> -->
 		<form role="form" action="/reservation/regist" method="post" autocomplete="off">

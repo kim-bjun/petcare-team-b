@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -72,9 +73,11 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 		
 	}
-	@GetMapping("/regist")
-	public void regist() {
-		
+	@GetMapping("/regist/{hosNo}")
+	public String regist(@PathVariable String hosNo, Model model) {
+		System.out.println(hosNo+"<<<<<hosNo");
+		model.addAttribute("result", hosNo);
+		return "reservation/regist";
 	}
 	
 	

@@ -102,4 +102,15 @@ img{
 	 padding-top: 20px;
 	 padding-bottom: 20px;
 }
-
+/* dummyDataForSearch*/
+.dummycontainer{
+	margin-left: 10%;
+	border : 1px solid black;
+	display: grid;
+	width: 70%;
+	height: 60%;
+	background-color: #F5EFFB;
+    grid-template-columns: 15% 75% 10%;
+    grid-template-rows: 15% 75% 10%;
+}
+.dummycontainer div{border : 1px dotted #BCA9F5}

@@ -1,5 +1,5 @@
-<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.CustomerVO"%>
 <body>
 	<div class="header">
 		<div class="row align-items-center">
@@ -20,11 +20,13 @@
 				</form>
 	    	</div>
 	    	<div class="top-right">
-	    		<%
-	    			UserVO obj = (UserVO)request.getSession().getAttribute("login");
-	    			    		    	         	if( obj != null ) {
-	    			    		    					String username = obj.getUsername();
-	    		%>
+
+	    		<% 
+    				CustomerVO obj = (CustomerVO)request.getSession().getAttribute("login");
+    	         	if( obj != null ) {
+    					String username = obj.getUser_name();
+    	        %>
+
     	        	<a href="/user/mypage">
     	        		<button class="auth-button btn btn-primary" type="button"><%= username %> 님</button>
     	        	</a>
@@ -45,7 +47,7 @@
 		    <div class="col-md-6 ">
 		    	<div class="row justify-content-around">
 			    	<div class="search-hospital header-nav">
-			    		<a href="/sample/hospitalsearch">병원찾기</a>
+			    		<a href="/sch/">병원찾기</a>
 	    			</div>
 	    				<%
 	    					UserVO check = (UserVO)request.getSession().getAttribute("login");

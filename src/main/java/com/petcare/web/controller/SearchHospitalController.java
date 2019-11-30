@@ -20,10 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.petcare.web.domains.HosInfoCodeVo;
 import com.petcare.web.domains.HospitalVo;
+import com.petcare.web.domains.JusoVo;
 import com.petcare.web.domains.ReviewBrdVo;
 import com.petcare.web.mapper.HospitalSearchMapper;
 import com.petcare.web.mapper.ReviewBrdMapper;
@@ -31,16 +30,20 @@ import com.petcare.web.utills.HospitalCrawlingProxy;
 import com.petcare.web.utills.Proxy;
 
 @Controller
-@RequestMapping("/sch/*")
+@RequestMapping("/sch")
 public class SearchHospitalController {
 	@Autowired HospitalSearchMapper hospitalSearchMapper;
 	@Autowired ReviewBrdMapper reviewBrdMapper;
 	@Autowired HospitalCrawlingProxy hospitalCrawlingProxy;
 	@Autowired Proxy pxy;  // pagenation 및 검색어 VO
-	
 
-	
-	@GetMapping("/")  
+    
+    @GetMapping("/")
+    public String hospitalSearch() { 
+    	return "hospitalSearch";
+    }
+    
+	@GetMapping("/SearchCondition")  
 	public @ResponseBody Map<String,Object> selectHosInfoCode() throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		ArrayList<HosInfoCodeVo> code = hospitalSearchMapper.selectHosInfoCode();
@@ -62,7 +65,7 @@ public class SearchHospitalController {
 				tempforConvenience.add(hosInfoCodeVo);
 			}
 		}
-
+		map.put("city",hospitalSearchMapper.selectCityCode());
 		map.put("animal", tempforAnimal);
 		map.put("time", tempforTime);
 		map.put("subject", tempforSubject);
@@ -72,24 +75,39 @@ public class SearchHospitalController {
 		return map;
 		
 	}
+
+	
+	@GetMapping("/SearchCondition/{city}")  
+	public @ResponseBody Map<String,Object> selectGuCode(@PathVariable String city) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("gu",hospitalSearchMapper.selectGuCode(city));
+		
+		return map;
+		
+	}	
 	
 	@PostMapping("/hospitalList/{pageNo}")  
-	public @ResponseBody Map<String,Object> selectAllHospitalList(@PathVariable String pageNo, @RequestBody List<String> hosinfolist ){
+	public @ResponseBody Map<String,Object> selectAllHospitalList(@PathVariable String pageNo, @RequestBody Proxy hosinfoPxy ){
 		Map<String, Object> map = new HashMap<String, Object>();
 		Function<Proxy,List<HospitalVo>> c;
-		if (hosinfolist.size() != 0) {
-			pxy.setCheckBoxList(hosinfolist);
+		pxy.setCheckBoxList(hosinfoPxy.getCheckBoxList());
+		pxy.setHosAddress(hosinfoPxy.getHosAddress());
+		pxy.setSearchWrd(hosinfoPxy.getSearchWrd());
+		
+		if (hosinfoPxy.getCheckBoxList().size() != 0 ) {
 			pxy.setPageNo(Integer.parseInt(pageNo));
 			Function<Proxy,Integer> n = h -> hospitalSearchMapper.countHospitalByCondition(h);
 			pxy.paging(n.apply(pxy)); 
 			 c = t -> hospitalSearchMapper.selectHospitalList(t);
 
-		}else {
-			Supplier<Integer> n = () -> hospitalSearchMapper.countAllHospital();
+		}else{
+			Supplier<Integer> n = () -> hospitalSearchMapper.countAllHospital(pxy);
+
 			pxy.setPageNo(Integer.parseInt(pageNo));
 			pxy.paging(n.get());
 			c = t -> hospitalSearchMapper.selectHospitalAllList(t);
 		}	
+		
 		map.put("result", c.apply(pxy));
 		map.put("pagination", pxy);
 		map.put("msg","SUCCESS");
@@ -121,11 +139,31 @@ public class SearchHospitalController {
 		
 	}
 	
+	@PostMapping("/writeReview")  
+	public @ResponseBody Map<String,Object> writeReview( @RequestBody ReviewBrdVo reviewBrdVo ){
+		Map<String, Object> tempMap =new HashMap<String, Object>();
+		Consumer<ReviewBrdVo> c = t -> reviewBrdMapper.insertReview(t);	
+		System.out.println(reviewBrdVo.toString() + "<<<writeReview");
+		c.accept(reviewBrdVo);
+		
+		tempMap.put("msg", "SUCCESS");
+		
+		return tempMap;
+		
+	}
+	
+	
+	
+	
+	/* 더미데이터 생성 페이지*/
+    @GetMapping("/DDFS")
+    public String dummyDataForSearch() {
+    	return "dummyDataForSearch";
+    }
 	@GetMapping("/crawling")
 	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
 		Map<String, Object> tempMap =new HashMap<String, Object>();
 		Consumer<HospitalVo> t = s -> hospitalSearchMapper.insetHospitalDumpData(s);
-		
 		try {
 			for (HospitalVo tempHosDetailDb : hospitalCrawlingProxy.animal()) {
 				t.accept(tempHosDetailDb);
@@ -133,12 +171,12 @@ public class SearchHospitalController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		tempMap.put("msg", "SUCCESS"); 
 		
 		return tempMap;
-		
 	}
 	
+	
+
 	
 }
