@@ -38,4 +38,9 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<ReservationVo> getList() {
 		return mapper.getList();
 	}
+
+	@Override
+	public Object getList(String userId) {
+		return mapper.getList(userId);
+	}
 }

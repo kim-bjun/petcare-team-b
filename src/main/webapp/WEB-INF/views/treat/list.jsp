@@ -23,5 +23,14 @@
 
 <body>
   <p>treat</p>
+  
+<%--   <c:if test="${!empty selectList}" >
+  </c:if> --%>
+	  <select>
+		  <c:forEach items="${selectList}" var="selec">
+		  	<option><c:out value="${selec.reserTime}"/></option>
+		  </c:forEach>
+	  </select>
+  
 
 </body>

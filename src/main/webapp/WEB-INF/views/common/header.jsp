@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body>
 	<div class="header">
 		<div class="row align-items-center">
@@ -46,9 +47,17 @@
 			    	<div class="search-hospital header-nav">
 			    		<a href="/sample/hospitalsearch">병원찾기</a>
 	    			</div>
-					<div class="reservation-confirm header-nav">
-						<a href="/reservation/list">예약내역</a>
-					</div>
+	    				<%
+	    					UserVO check = (UserVO)request.getSession().getAttribute("login");
+			    		    	         	if( check != null ) {
+	    				%>
+			    		    					
+						<div class="reservation-confirm header-nav">
+							<a href="/reservation/list">예약내역</a>
+						</div>
+	    				<% 
+	    					} 
+	    				%>
 					<div class="community header-nav">
 						<a href="">커뮤니티</a>
 					</div>

@@ -11,14 +11,20 @@
 		<result column="treat_item" property="treatItem"/>
 		<result column="treat_date" property="treatDate"/>
 		<result column="treat_state" property="treatState"/>
+		<result column="resertime" property="reserTime"/>
+	
 	</resultMap>
 	
 
 	<select id="getList" resultMap="TreatVo">
-			select * from treat
+		select * from treat
 	
 	</select>
 	
+	<select id="getTime" resultMap="TreatVo">
+		select * from tbl_time
+	
+	</select>
 
 
 

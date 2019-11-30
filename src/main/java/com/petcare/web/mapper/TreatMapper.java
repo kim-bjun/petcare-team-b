@@ -17,5 +17,6 @@ public interface TreatMapper {
 	
 	public int update(TreatVo treatVo);
 	
+	public List<String> getTime();
 	
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.petcare.web.domains.CustomerVO;
+
 import com.petcare.web.domains.ReservationVo;
 import com.petcare.web.domains.UserVO;
 import com.petcare.web.service.ReservationService;
@@ -29,35 +29,49 @@ public class ReservationController {
 	ReservationService service;
 
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(@RequestParam(value="userId")String userId ,Model model,HttpSession session) {
 		
-		model.addAttribute("list",service.getList());
-		//model.addAttribute("selectList",service.);
 		
-		return "reservation/list";
+		
+		//UserVO obj = (UserVO)session.getAttribute("login"); 
+		 
+		//String userId = obj.getUserId(); 
+		//model.addAttribute("userId",userId);
+				
+			
+		model.addAttribute("list",service.getList(userId));
+			return "reservation/list";
+		  
 	}
+		 
+		 
 	
 	@PostMapping("/regist")
 	public String register(ReservationVo Rvo,RedirectAttributes rttr,HttpSession session) {
      	
+		//model.addAttribute("selectList",service.);
 		UserVO obj = (UserVO)session.getAttribute("login");
-		String userId = obj.getUserid();
+		String userId = obj.getUserId();
 	
-		
-		Date today= new Date();
-		SimpleDateFormat today1 = new SimpleDateFormat("HHmmss");
-		int num= (int)(Math.random() * 10 + 1);
-		int num1= Integer.parseInt(num +today1.format(today));
-
-		Rvo.setTreatNo(num1);;
-		Rvo.setUserId(userId);;
-		//Rvo.setUserId("user1");
-		Rvo.setHosNo(1);
-		//Rvo.setAni_no(1);
-				
-		service.regist(Rvo);
-		
+		if(userId == null) {
+			rttr.addFlashAttribute("msg","false");
+			
+		}else {
+			Date today= new Date();
+			SimpleDateFormat today1 = new SimpleDateFormat("HHmmss");
+			int num= (int)(Math.random() * 10 + 1);
+			int num1= Integer.parseInt(num +today1.format(today));
+			
+			Rvo.setTreatNo(num1);;
+			Rvo.setUserId(userId);;
+			Rvo.setHosNo(1);
+			//Rvo.setAni_no(1);
+			
+			service.regist(Rvo);
+			
+		}
 		return "redirect:/reservation/list";
+		
 	}
 	@GetMapping("/regist")
 	public void regist() {
@@ -67,6 +81,8 @@ public class ReservationController {
 	
 	@PostMapping("/modify")
 	public String modify(ReservationVo vo ,RedirectAttributes rttr) {
+		
+
 		if(service.modify(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}

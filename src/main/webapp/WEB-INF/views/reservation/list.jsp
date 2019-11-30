@@ -31,6 +31,10 @@
  <!-- 시작  -->
 
 <div class="container">
+<c:if test="${userId != null}">
+ <p>${userId}</p>
+ <input type="hidden" name="userId" id="userId"value="${userId}">
+</c:if>
   <h2>예약 내역</h2>
   <p>
   	기간 조회 <input id="startDate" class="dueDate"> ~ <input id="endDate" class="dueDate">
@@ -51,7 +55,8 @@
     
     <c:forEach items="${list}" var="reservation">
       <tr>
-      	<td><a href="/reservation/get?treatNo=<c:out value="${reservation.treatNo}"/>" ><c:out value="${reservation.treatNo}"/></a></td>
+      	<td><a href="/reservation/get?treatNo=<c:out value="${reservation.treatNo}"/>" >
+      	<c:out value="${reservation.treatNo}"/></a></td>
       	<td><c:out value="${reservation.resDt}"/></td>
       	<td><c:out value="${reservation.resTime}"/></td>
         <td><c:out value="${reservation.hosName} "/></td>
@@ -104,7 +109,7 @@
 				self.location="/reservation/regist";
 			});
 		
-		 $(function() {
+		 function() {
 		  $(".dueDate").datepicker({
 			  beforeShowDay: $.datepicker.noWeekends,
 		      showButtonPanel: true, 
@@ -118,7 +123,7 @@
 		      //var today= new Date(),
 		  	  //$("#datepicker").datepicker( "option", "minDate", today );
 		  });
-		 });
+		
 		});
 	</script>
 	

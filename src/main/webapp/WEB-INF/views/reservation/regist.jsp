@@ -50,8 +50,10 @@
 			<%@ include file="../common/header.jsp" %>
 		</header>
 	</div>
-		
-<form role="form" action="/reservation/regist" method="post">
+		<c:if test="${msg == false}">
+			<p> 로그인을 해주세요 </p>
+		</c:if>
+<form role="form" action="/reservation/regist" method="post" autocomplete="off">
 	<div class="container">
 		 <p>
 		  	예약날짜: <input type="text" id="datepicker" name="resDt"/>

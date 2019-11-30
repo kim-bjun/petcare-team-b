@@ -19,6 +19,7 @@ public class TreatController {
 	public String list(Model model) {
 		
 		model.addAttribute("treatList", service.getList());
+		model.addAttribute("selectList",service.getTime());
 		return "treat/list";
 	}
 }

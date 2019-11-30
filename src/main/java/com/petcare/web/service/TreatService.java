@@ -12,4 +12,6 @@ public interface TreatService {
 	public void regist(TreatVo treatVo);
 	
 	public boolean modify(TreatVo treatVo);
+		
+	public List<String> getTime();
 }

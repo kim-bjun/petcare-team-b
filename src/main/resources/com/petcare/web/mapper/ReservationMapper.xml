@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.ReservationMapper">
 
- 	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
+<!--  	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
 		<id column="treat_no" property="treatNo" />
 		<result column="hos_no" property="hosNo" />
 		<result column="res_dt" property="resDt" />
@@ -17,18 +17,27 @@
 		<result column="hos_name" property="hosName" />
 		<result column="ani_name" property="aniName" />
 		
-	</resultMap>
+	</resultMap> -->
  
-	<select id="getList" resultMap="ReservationVo">
-		SELECT treat_no,res_dt,res_time,h.hos_name,a.ani_name,reg_dt 
+	<select id="getList" resultType="ReservationVo">
+		SELECT treat_no,res_dt,res_time,h.hos_name,a.ani_name,reg_dt ,u.user_id
 		FROM reservation r 
 			join hospital_basic h on (r.hos_no = h.hos_no )
 			join animal a on (r.ani_no = a.ani_no)
-
+			join user u on (u.user_id = r.user_id)
+		    WHERE u.user_id = #{userId}
+		<!-- <if test="#{userId} != null">
+		</if> -->
+		<!-- CASE
+			WHEN #{userId}!=null
+			THEN WHERE r.user_id = #{userId}
+			ELSE 
+		END -->
+			
     		<!--where 에user_id넣으면 500에러  -->
 	</select>
 
-	<select id="read" resultMap="ReservationVo">
+	<select id="read" resultType="ReservationVo">
 		select * from reservation where treat_no=#{treatNo}
 	</select>
 	

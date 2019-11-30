@@ -14,7 +14,7 @@ public class TreatServiceImple implements TreatService{
 	
 	@Override
 	public List<TreatVo> getList() {
-		return null;
+		return mapper.getList();
 	}
 
 	@Override
@@ -30,6 +30,11 @@ public class TreatServiceImple implements TreatService{
 	@Override
 	public boolean modify(TreatVo treatVo) {
 		return false;
+	}
+
+	@Override
+	public List<String> getTime() {
+		return mapper.getTime();
 	}
 
 }

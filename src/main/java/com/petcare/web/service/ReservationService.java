@@ -18,5 +18,7 @@ public interface ReservationService {
 	public boolean remove(int treatNo);
 	
 	public List<ReservationVo> getList();
+
+	public Object getList(String userId);
 	
 }
