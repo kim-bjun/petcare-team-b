@@ -17,10 +17,8 @@ class Dummy {
 		.click(e=>{
 			e.preventDefault()
 			$.ajax({
-				url : '/sch/writeReview/',
+				url : '/sch/crawling',
 				type : 'GET',
-				dataType : 'json',
-				data: JSON.stringify(json) , 
 				contentType : 'application/json', 
 				success : d =>{
 					alert('게시 성공  ' + d.msg);
