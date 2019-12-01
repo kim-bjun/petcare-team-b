@@ -53,6 +53,7 @@ public class SearchHospitalController {
 		ArrayList<HosInfoCodeVo> tempforEtc = new ArrayList<HosInfoCodeVo>();
 		ArrayList<HosInfoCodeVo> tempforConvenience = new ArrayList<HosInfoCodeVo>();
 		for (HosInfoCodeVo hosInfoCodeVo : code) {
+			System.out.println(hosInfoCodeVo);
 			if(hosInfoCodeVo.getHosInfoCode() / 100 == 1 ) {
 				tempforAnimal.add(hosInfoCodeVo);
 			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 2 ) {
