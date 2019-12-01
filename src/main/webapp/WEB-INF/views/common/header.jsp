@@ -50,9 +50,9 @@
 			    		<a href="/sch/">병원찾기</a>
 	    			</div>
 	    				<%
-	    					UserVO check = (UserVO)request.getSession().getAttribute("login");
+	    					CustomerVO check = (CustomerVO)request.getSession().getAttribute("login");
 			    		    	         	if( check != null ) {
-			    		    	         		String userId = obj.getUserid();
+			    		    	         		String userId = obj.getUser_id();
 	    				%>
 			    		    					
 						<div class="reservation-confirm header-nav">

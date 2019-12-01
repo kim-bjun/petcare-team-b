@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.ReservationMapper">
-
-<!--  	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
+<!-- 
+ 	<resultMap type="com.petcare.web.domains.ReservationVo" id="ReservationVo">
 		<id column="treat_no" property="treatNo" />
 		<result column="hos_no" property="hosNo" />
 		<result column="res_dt" property="resDt" />
@@ -17,8 +17,8 @@
 		<result column="hos_name" property="hosName" />
 		<result column="ani_name" property="aniName" />
 		
-	</resultMap> -->
- 
+	</resultMap>
+  -->
 	<select id="getList" resultType="ReservationVo">
 		SELECT treat_no,res_dt,res_time,h.hos_name,a.ani_name,reg_dt ,u.user_id
 		FROM reservation r 
