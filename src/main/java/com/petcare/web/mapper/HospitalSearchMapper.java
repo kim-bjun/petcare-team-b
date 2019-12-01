@@ -1,11 +1,12 @@
 package com.petcare.web.mapper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.petcare.web.domains.DummyHospitalVo;
 import com.petcare.web.domains.HosInfoCodeVo;
+import com.petcare.web.domains.HosInfoVo;
 import com.petcare.web.domains.HospitalVo;
 import com.petcare.web.domains.JusoVo;
 import com.petcare.web.utills.Proxy;
@@ -27,5 +28,6 @@ public interface HospitalSearchMapper {
 	public HospitalVo selectHospitalDetail(String hosNo);
 
 	//더미데이터 크롤링 insert
-	public void insetHospitalDumpData(HospitalVo hosDatailDB);
+	public void insetHospitalDumpData(DummyHospitalVo hosDatailDB);
+	public void insetHospitalInfoDumpData(HosInfoVo hosDatailDB);
 }
