@@ -31,6 +31,10 @@
  <!-- 시작  -->
 
 <div class="container">
+<c:if test="${userId != null}">
+ <p>${userId}</p>
+ <input type="hidden" name="userId" id="userId"value="${userId}">
+</c:if>
   <h2>예약 내역</h2>
   <p>
   	기간 조회 <input id="startDate" class="dueDate"> ~ <input id="endDate" class="dueDate">
@@ -51,12 +55,13 @@
     
     <c:forEach items="${list}" var="reservation">
       <tr>
-      	<td><c:out value="${reservation.treat_no }"/></td>
-      	<td><c:out value="${reservation.res_dt }"/></td>
-      	<td><c:out value="${reservation.res_time }"/></td>
-        <td><c:out value="${reservation.hos_name} "/></td>
-        <td><c:out value="${reservation.ani_name} "/></td>
-        <td><c:out value="${reservation.reg_dt} "/></td>
+      	<td><a href="/reservation/get?treatNo=<c:out value="${reservation.treatNo}"/>" >
+      	<c:out value="${reservation.treatNo}"/></a></td>
+      	<td><c:out value="${reservation.resDt}"/></td>
+      	<td><c:out value="${reservation.resTime}"/></td>
+        <td><c:out value="${reservation.hosName} "/></td>
+        <td><c:out value="${reservation.aniName} "/></td>
+        <td><c:out value="${reservation.regDt} "/></td>
       </tr>
      </c:forEach>
 <%--         <td><fmt formatDate pattern="yyyy-mm-dd" type="date" value="${reservation.res_dt} "/></td>
@@ -98,34 +103,16 @@
 	</div>
 	
 	<script type="text/javascript">
-		$(document).ready(
-		function(){
-			$("#goReser").on("click",function(){
-				self.location="/reservation/regist";
-			});
-		
-		 $(function() {
-		  $(".dueDate").datepicker({
-			  beforeShowDay: $.datepicker.noWeekends,
-		      showButtonPanel: true, 
-		      currentText: '오늘 날짜',
-		      dateFormat: "yymmdd",
-		      closeText: '닫기', 
-		      showOn: "both", 
-		      buttonImage: "/resources/img/reservation/calendar20.svg", 
-		      buttonImageOnly: true,
-		      
-		      //var today= new Date(),
-		  	  //$("#datepicker").datepicker( "option", "minDate", today );
-		  });
-		 });
+		$(document).ready(function(){
+			$('#goReser').on('click',function(){
+				self.location = "/reservation/regist";
+			})
 		});
+			
 		
 		
-		
-
-
 	</script>
+
 	
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

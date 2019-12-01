@@ -19,6 +19,7 @@
 		<typeAlias alias="HosInfoCodeVo" type="com.petcare.web.domains.HosInfoCodeVo"/>
     <typeAlias alias="customerVO" type="com.petcare.web.domains.CustomerVO"/>
 		<typeAlias alias="animalVO" type="com.petcare.web.domains.AnimalVO"/>
+		<typeAlias alias="ReservationVo" type="com.petcare.web.domains.ReservationVo"/>
     </typeAliases>
 
 </configuration>
