@@ -106,10 +106,29 @@ public class HospitalCrawlingProxy {
 		}//for
 		
 		
-		int cnt =0;
+		 if(tempdump.contains("진료시간")) { 
+			 int endcnt=0; 
+			 if (!tempdump.contains("기타")) {
+				 endcnt = tempdump.size(); 
+			 }else if(tempdump.contains("기타")) { 
+				 endcnt = tempdump.indexOf("기타"); 
+			 }
+		  
+			 for (int i = tempdump.indexOf("진료시간")+1 ; i < endcnt; i++) {
+			 if(tempdump.get(i).toString().contains("주간진료")) { 
+				 tempHosOptime +=tempdump.get(i).toString()+"  "; 
+			 }else if(tempdump.get(i).toString().contains("야간응급진료")) { 
+				 tempHosOptime +=tempdump.get(i).toString()+"  "; 
+			 }else { 
+				 tempHosOptime +=tempdump.get(i).toString()+"/"; 
+			 }	
+			tempHosVo.setHosOptime(tempHosOptime); 
+			}
+		 }
+		
 		
 		if(tempdump.contains("편의시설")) {
-			int endcnt=0;
+			 int endcnt=0; 
 			if ( !tempdump.contains("진료시간") && tempdump.contains("기타")) {
 				endcnt = tempdump.indexOf("기타");
 			}else if(!tempdump.contains("진료시간") && !tempdump.contains("기타")) {
@@ -141,15 +160,13 @@ public class HospitalCrawlingProxy {
 		
 		
 		HosInfoVo tempHosInfo; 
-		String tempHOspitalInfo = table_11.get(9).text() + table_11.get(11).text() +tempHosService + tempHosFeature;
+		String tempHOspitalInfo = table_11.get(9).text() + table_11.get(11).text() +tempHosService + tempHosFeature +tempHosOptime;
 		
 		for (HosInfoCodeVo tempCode : code) {
 			tempHosInfo  = new HosInfoVo(); 
 			if(tempHOspitalInfo.contains(tempCode.getCodeName())) {
-				System.out.println("tempCode.getHosInfoCode()>>"+tempCode.getHosInfoCode()+"tempCode>>>>>"+tempCode+"tempHOspitalInfo>>>>" +tempHOspitalInfo );
 				tempHosInfo.setHosInfoCode(tempCode.getHosInfoCode());
 				tempHosInfo.setHosNo(Integer.parseInt(hosNo));
-				System.out.println(tempHosInfo+"<<<<<<tempHosInfo");
 				tempHosInfoVoList.add(tempHosInfo);				
 			}
 

@@ -175,7 +175,6 @@ public class SearchHospitalController {
 				t.accept(tempHosDetailDb);
 				for (HosInfoVo tempHosInfoVo : tempHosDetailDb.getHosInfoList()) {
 					hospitalSearchMapper.insetHospitalInfoDumpData(tempHosInfoVo);
-					System.out.println(tempHosInfoVo + "<<<<<tempHosInfoVo 입력 중 ");
 				}
 			}
 		} catch (Exception e) {
