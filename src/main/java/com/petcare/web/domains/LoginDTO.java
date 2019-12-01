@@ -1,31 +1,18 @@
 package com.petcare.web.domains;
 
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginDTO {
-	private String userid;
-	private String userpass;
+	private String userid,userpass;
 	private boolean useCookie;
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public String getUserpass() {
-		return userpass;
-	}
-	public void setUserpass(String userpass) {
-		this.userpass = userpass;
-	}
-	public boolean isUseCookie() {
-		return useCookie;
-	}
-	public void setUseCookie(boolean useCookie) {
-		this.useCookie = useCookie;
-	}
-	@Override
-	public String toString() {
-		return "LoginDTO [userid=" + userid + ", userpass=" + userpass + ", useCookie=" + useCookie + "]";
-	}
-	
+
 
 }
