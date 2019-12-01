@@ -48,7 +48,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
-	public String logout(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
+	public void logout(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
 		Object obj=session.getAttribute("login");
 		
 		if(obj!=null) {
@@ -64,7 +64,7 @@ public class UserController {
 				service.keepLogin(vo.getUser_id(),session.getId(), new Date());
 			}
 		}
-		return "home";
+//		return "home";
 	}
 	
 	@RequestMapping(value="/mypage",method=RequestMethod.GET)
