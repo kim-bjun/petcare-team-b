@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.petcare.web.mapper.UserMapper">
     <select id="login" resultType="customerVO">
-        select user_id, user_pass,user_name from user where user_id=#{userid} and user_pass=#{userpass}
+        select user_id, user_pass,user_name from user where user_id=#{user_id} and user_pass=#{user_pass}
     </select>
     
     <update id="keepLogin">
-    update user set sessionKey=#{sessionId}, sessionLimit=#{next} where user_id = #{userid}
+    update user set sessionKey=#{sessionId}, sessionLimit=#{next} where user_id = #{user_id}
     </update>
     
     <select id="checkUserWithSessionKey" resultType="customerVO">
