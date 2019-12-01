@@ -20,7 +20,7 @@
 					class="form-btn btn btn-primary btn-customized">로그인</button>
 
 				<div class="form-group">
-					새로운 계정이 필요하신 경우 <a href="/sample/user/register">회원가입</a>.
+					새로운 계정이 필요하신 경우 <a href="/customer/regist">회원가입</a>.
 				</div>
 			</form>
 		</div>

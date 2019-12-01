@@ -31,23 +31,11 @@ public class SampleController {
     public String sampleView() {
         return "home";
     }
-    
-    @GetMapping("/hospitaldetail")
-    public String hospitalDetail() {
-    	return "hospitalDetail";
-    }
-    
-    @GetMapping("/hospitalsearch")
-    public String hospitalSearch() {
-    	
-    	return "hospitalSearch";
-    }
-    
+
     @GetMapping("/user/login")
     public String login() {
     	return "login";
     }
-    
        
     @GetMapping("/user/register")
     public String register() {

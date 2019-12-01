@@ -21,13 +21,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			Object handler, ModelAndView modelAndView) throws Exception{
 		HttpSession session=request.getSession();
 		ModelMap modelMap=modelAndView.getModelMap();
-		Object userVO=modelMap.get("userVO");
+		Object customerVO=modelMap.get("customerVO");
 		
 //		System.out.println(userVO);
 		
-		if(userVO!=null) {
+		if(customerVO!=null) {
 			logger.info("new login sucess");
-			session.setAttribute(LOGIN, userVO);
+			session.setAttribute(LOGIN, customerVO);
 			
 			if(request.getParameter("useCookie")!=null) {
 				logger.info("remember me......");

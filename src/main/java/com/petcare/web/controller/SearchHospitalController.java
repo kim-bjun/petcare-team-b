@@ -30,15 +30,20 @@ import com.petcare.web.utills.HospitalCrawlingProxy;
 import com.petcare.web.utills.Proxy;
 
 @Controller
-@RequestMapping("/sch/*")
+@RequestMapping("/sch")
 public class SearchHospitalController {
 	@Autowired HospitalSearchMapper hospitalSearchMapper;
 	@Autowired ReviewBrdMapper reviewBrdMapper;
 	@Autowired HospitalCrawlingProxy hospitalCrawlingProxy;
 	@Autowired Proxy pxy;  // pagenation 및 검색어 VO
 
-	
-	@GetMapping("/")  
+    
+    @GetMapping("/")
+    public String hospitalSearch() { 
+    	return "hospitalSearch";
+    }
+    
+	@GetMapping("/SearchCondition")  
 	public @ResponseBody Map<String,Object> selectHosInfoCode() throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		ArrayList<HosInfoCodeVo> code = hospitalSearchMapper.selectHosInfoCode();
@@ -48,6 +53,7 @@ public class SearchHospitalController {
 		ArrayList<HosInfoCodeVo> tempforEtc = new ArrayList<HosInfoCodeVo>();
 		ArrayList<HosInfoCodeVo> tempforConvenience = new ArrayList<HosInfoCodeVo>();
 		for (HosInfoCodeVo hosInfoCodeVo : code) {
+			System.out.println(hosInfoCodeVo);
 			if(hosInfoCodeVo.getHosInfoCode() / 100 == 1 ) {
 				tempforAnimal.add(hosInfoCodeVo);
 			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 2 ) {
@@ -72,10 +78,9 @@ public class SearchHospitalController {
 	}
 
 	
-	@GetMapping("/{city}")  
+	@GetMapping("/SearchCondition/{city}")  
 	public @ResponseBody Map<String,Object> selectGuCode(@PathVariable String city) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		JusoVo jusoVo = new JusoVo();
 		map.put("gu",hospitalSearchMapper.selectGuCode(city));
 		
 		return map;
@@ -85,28 +90,30 @@ public class SearchHospitalController {
 	@PostMapping("/hospitalList/{pageNo}")  
 	public @ResponseBody Map<String,Object> selectAllHospitalList(@PathVariable String pageNo, @RequestBody Proxy hosinfoPxy ){
 		Map<String, Object> map = new HashMap<String, Object>();
+		int totalResultRow = 0;
 		Function<Proxy,List<HospitalVo>> c;
+		pxy.setPageNo(Integer.parseInt(pageNo));		
 		pxy.setCheckBoxList(hosinfoPxy.getCheckBoxList());
 		pxy.setHosAddress(hosinfoPxy.getHosAddress());
 		pxy.setSearchWrd(hosinfoPxy.getSearchWrd());
 		
 		if (hosinfoPxy.getCheckBoxList().size() != 0 ) {
-			pxy.setPageNo(Integer.parseInt(pageNo));
 			Function<Proxy,Integer> n = h -> hospitalSearchMapper.countHospitalByCondition(h);
-			pxy.paging(n.apply(pxy)); 
+			totalResultRow = n.apply(pxy);
+			pxy.paging(totalResultRow); 
 			 c = t -> hospitalSearchMapper.selectHospitalList(t);
 
 		}else{
 			Supplier<Integer> n = () -> hospitalSearchMapper.countAllHospital(pxy);
-
-			pxy.setPageNo(Integer.parseInt(pageNo));
-			pxy.paging(n.get());
+			totalResultRow = n.get();
+			pxy.paging(totalResultRow);
 			c = t -> hospitalSearchMapper.selectHospitalAllList(t);
 		}	
 		
+		map.put("msg",(totalResultRow != 0) ? "SUCCESS": "NODATA"); // 검색 결과가 있을 경우 SUCCESS , 없을 경우 NODATA
 		map.put("result", c.apply(pxy));
 		map.put("pagination", pxy);
-		map.put("msg","SUCCESS");
+		
 		return map;
 	}
 	
@@ -148,6 +155,15 @@ public class SearchHospitalController {
 		
 	}
 	
+	
+	
+	
+	/* 더미데이터 생성 페이지*/
+    @GetMapping("/DDFS")
+    public String dummyDataForSearch() {
+    	return "dummyDataForSearch";
+    }
+    
 	@GetMapping("/crawling")
 	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
 		Map<String, Object> tempMap =new HashMap<String, Object>();
@@ -164,5 +180,7 @@ public class SearchHospitalController {
 		return tempMap;
 	}
 	
+	
+
 	
 }

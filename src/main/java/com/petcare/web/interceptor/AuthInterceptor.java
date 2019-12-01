@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
-import com.petcare.web.domains.UserVO;
+import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.service.UserService;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
@@ -29,10 +29,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			saveDest(request);
 			Cookie loginCookie=WebUtils.getCookie(request, "loginCookie");
 			if(loginCookie!=null) {
-				UserVO userVO=service.checkLoginBefore(loginCookie.getValue());
-				logger.info("USERVO"+userVO);
-				if(userVO!=null) {
-					session.setAttribute("login", userVO);
+				CustomerVO customerVO=service.checkLoginBefore(loginCookie.getValue());
+				logger.info("CustomerVO"+customerVO);
+				if(customerVO!=null) {
+					session.setAttribute("login", customerVO);
 					return true;
 				}
 			}
