@@ -3,9 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.petcare.web.mapper.CustomerMapper">
+	<resultMap type="com.petcare.web.domains.CustomerVO" id="customerVO">
+		<id column="USER_ID" property="user_id" />
+		<result column="USER_PASS" property="user_pass" />
+		<result column="USER_NAME" property="user_name" />
+		<result column="USER_PHONE" property="user_phone" />
+		<result column="USER_EMAIL" property="user_email" />
+		<result column="USER_ADDRESS" property="user_address" />
+		<result column="USER_REGDATE" property="user_regdate" />
+		<result column="USER_AUTH" property="user_auth" />
+	</resultMap>
+
+
+
 
 	<insert id="registCustomer" parameterType="customerVO">
-		INSERT	INTO	newzalbazo.USER
+		INSERT	INTO 	USER
 					(
 							USER_ID
 						,	USER_PASS
@@ -32,7 +45,7 @@
 			,		user_phone	
 			,		user_email
 			,		user_address
-		  FROM		newzalbazo.USER
+		  FROM		USER
 		 WHERE		1=1
 		   AND		USER_ID = #{user_id}
 	</select>
@@ -40,7 +53,7 @@
 	<select	id="userIdCheck" parameterType="customerVO" resultType="int">
 		SELECT
 					COUNT(*)
-		  FROM		newzalbazo.USER
+		  FROM		USER
 		 WHERE		1=1
 		   AND		USER_ID = #{user_id}
 	</select>

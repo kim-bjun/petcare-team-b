@@ -135,7 +135,7 @@ class Search {
 
 function setHospitalList(x){
 	console.log(x);
-	$('div.container.hospital-list-wrap').empty()
+	ClearSerachList()	
 	var pageNo= ($('input[name="pageNo"]').val() == null ) ? 1 : $('input[name="pageNo"]').val() ;
 	let arr = x
 	$.ajax({
@@ -145,6 +145,7 @@ function setHospitalList(x){
 		data:JSON.stringify(arr),
 		contentType:'application/json',
 		success: d=>{
+			ClearSerachList()
 			$.each(d.result ,(i,j)=>{
 				let divClass;
 				if (i==0) {
@@ -170,7 +171,22 @@ function setHospitalList(x){
 						})
 						.appendTo('div.container.hospital-list-wrap')
 						pagination(d.pagination)
-			})
+			})//each
+			
+			//검색 결과가 없을 경우."검색 결과가 없습니다." 
+			if(d.msg === "NODATA"){
+				$('	<div class="row hospital-list shadow-sm rounded">'+
+						'		<div class="col-sm-4">'+
+						'		</div>'+
+						'		<div class="col-sm-8 hospital-detail-wrap">'+	
+						'		<h4 style="margin-top : 20px"> 검색 결과가 없습니다. </h4>'+
+						'		</div>'+							
+						'		</div>'
+				)
+				.appendTo('div.container.hospital-list-wrap')	
+				
+				
+			}
 		},
 		error : e=>{
 		}
@@ -178,9 +194,13 @@ function setHospitalList(x){
 	
 }
 
+function ClearSerachList(){
+	$('div.container.hospital-list-wrap').empty()  // List container
+	$('ul[class="pagination pagination-sm justify-content-center"]').empty()  // pagination container
+}
+
 function pagination (d){
 	var cnt = 0;
-	$('ul[class="pagination pagination-sm justify-content-center"]').empty()
 	if(d.existPrev) {$(' <li class="page-item"><a class="page-link" href="#">Previous</a></li>')
 	.appendTo('ul[class="pagination pagination-sm justify-content-center"]')
 	.click(e=>{

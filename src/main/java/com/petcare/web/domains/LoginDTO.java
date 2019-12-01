@@ -1,6 +1,17 @@
 package com.petcare.web.domains;
 
+import org.springframework.stereotype.Component;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginDTO {
+
 	private String user_id;
 	private String user_pass;
 	private boolean useCookie;
@@ -27,5 +38,6 @@ public class LoginDTO {
 		return "LoginDTO [user_id=" + user_id + ", user_pass=" + user_pass + ", useCookie=" + useCookie + "]";
 	}
 	
+
 
 }
