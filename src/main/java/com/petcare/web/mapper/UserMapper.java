@@ -12,7 +12,7 @@ public interface UserMapper {
 
 	public CustomerVO login(LoginDTO dto) throws Exception;
 	
-	public void keepLogin(@Param("userid") String userid,@Param("sessionId") String sessionId,@Param("next") Date next);
+	public void keepLogin(@Param("user_id") String userid,@Param("sessionId") String sessionId,@Param("next") Date next);
 	
 	public CustomerVO checkUserWithSessionKey(String value);
 }
