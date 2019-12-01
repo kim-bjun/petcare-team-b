@@ -114,9 +114,14 @@ WHERE hos_no like #{hosNo}
 </select>
 
 
-<insert id = "insetHospitalDumpData" parameterType="com.petcare.web.domains.HospitalVo">
+<insert id = "insetHospitalDumpData" parameterType="DummyHospitalVo">
 INSERT INTO HOSPITAL (hos_no, hos_id, hos_pass, hos_name, hos_phone, hos_address, hos_site, hos_optime,hos_open,hos_close, hos_major_treatment_target, hos_course_of_treatment, hos_feature, hos_service, hos_intro, hos_photo,treat_no)
 VALUES (#{hosNo},#{hosId},#{hosPass},#{hosName},#{hosPhone},#{hosAddress},#{hosSite},#{hosOptime},"09:00:00","18:00:00",#{hosMajorTreatmentTarget},#{hosCourseOfTreatment},#{hosFeature},#{hosService},#{hosIntro},#{hosPhoto},"0") 
+</insert>
+
+<insert id = "insetHospitalInfoDumpData" parameterType="HosInfoVo">
+INSERT INTO HOS_INFO (hos_no, hos_info_code)
+VALUES (#{hosNo},#{hosInfoCode}) 
 </insert>
 
 

@@ -170,8 +170,8 @@ function setHospitalList(x){
 							setDetailView(j)
 						})
 						.appendTo('div.container.hospital-list-wrap')
-						pagination(d.pagination)
 			})//each
+			pagination(d.pagination)
 			
 			//검색 결과가 없을 경우."검색 결과가 없습니다." 
 			if(d.msg === "NODATA"){
