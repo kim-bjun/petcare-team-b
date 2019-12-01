@@ -17,7 +17,8 @@ function logout() {
 		type: 'GET',
 		url: '/user/logout',
 		success: function(result) {
-			window.location.reload();
+			window.location.href='http://localhost:8080/';
+			console.log('Logout Success');
 		},
 		error: function(error) {
 			console.log('Logout Error');
