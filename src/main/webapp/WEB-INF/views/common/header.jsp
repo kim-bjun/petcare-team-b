@@ -1,4 +1,5 @@
-<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.CustomerVO"%>
 <body>
 	<div class="header">
 		<div class="row align-items-center">
@@ -19,11 +20,13 @@
 				</form>
 	    	</div>
 	    	<div class="top-right">
+
 	    		<% 
-    				UserVO obj = (UserVO)request.getSession().getAttribute("login");
+    				CustomerVO obj = (CustomerVO)request.getSession().getAttribute("login");
     	         	if( obj != null ) {
-    					String username = obj.getUsername();
+    					String username = obj.getUser_name();
     	        %>
+
     	        	<a href="/user/mypage">
     	        		<button class="auth-button btn btn-primary" type="button"><%= username %> 님</button>
     	        	</a>
@@ -44,11 +47,20 @@
 		    <div class="col-md-6 ">
 		    	<div class="row justify-content-around">
 			    	<div class="search-hospital header-nav">
-			    		<a href="/sample/hospitalsearch">병원찾기</a>
+			    		<a href="/sch/">병원찾기</a>
 	    			</div>
-					<div class="reservation-confirm header-nav">
-						<a href="">예약내역</a>
-					</div>
+	    				<%
+	    					UserVO check = (UserVO)request.getSession().getAttribute("login");
+			    		    	         	if( check != null ) {
+			    		    	         		String userId = obj.getUserid();
+	    				%>
+			    		    					
+						<div class="reservation-confirm header-nav">
+							<a href="/reservation/list?userId=<c:out value="<%=userId %>"/>">예약내역</a>
+						</div>
+	    				<% 
+	    					} 
+	    				%>
 					<div class="community header-nav">
 						<a href="">커뮤니티</a>
 					</div>

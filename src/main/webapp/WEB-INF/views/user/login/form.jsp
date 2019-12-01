@@ -7,11 +7,11 @@
 
 				<div class="form-group">
 					<input type="text" class="form-control" id="user-id"
-						placeholder="아이디" name="userid">
+						placeholder="아이디" name="user_id">
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="user-password"
-						placeholder="비밀번호" name="userpass">
+						placeholder="비밀번호" name="user_pass">
 				</div>
 				<label> <input type="checkbox" name="useCookie">ID
 					저장
@@ -20,7 +20,7 @@
 					class="form-btn btn btn-primary btn-customized">로그인</button>
 
 				<div class="form-group">
-					새로운 계정이 필요하신 경우 <a href="/sample/user/register">회원가입</a>.
+					새로운 계정이 필요하신 경우 <a href="/customer/regist">회원가입</a>.
 				</div>
 			</form>
 		</div>

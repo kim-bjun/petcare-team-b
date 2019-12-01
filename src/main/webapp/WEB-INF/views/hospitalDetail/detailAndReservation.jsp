@@ -10,7 +10,7 @@
 	        			<div class="detail-label">병원 정보</div>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
-	        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"></i>
+	        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"  ></i>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
 		        		<i class="far fa-bookmark detail-icon-btn" aria-hidden="true"></i>
@@ -32,6 +32,10 @@
 			    <div class="card">
 			      <div class="card-body card-body-part">
 			      	<div class="container hospital-info">
+			      		
+			      		<form action="/reservation/regist" method="post">
+			      			<input type="hidden" value="${result.hosNo}" name="hosNo"/>
+			      		</form>
 				        <div class="card-title hospital-info-title">${result.hosName}</div>
 				        <div class="card-text hospital-info-text">${result.hosPhone}</div>
 				        <div class="card-text hospital-info-text">${result.hosAddress}</div>

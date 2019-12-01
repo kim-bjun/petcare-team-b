@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
 <html>
 <head>
     <title>Zalbazo</title>
@@ -17,7 +18,78 @@
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 	<!-- datepicker 한국어로 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
-<script>
+
+</head>
+<body>
+
+<%-- 	<% 
+		request.setCharacterEncoding("euc-kr"); 
+	    int hos_no = Integer.parseInt(request.getParameter("hosNo"));
+	%> --%>
+	   
+
+	
+	<div id="root">
+		<header>
+			<%@ include file="../common/header.jsp" %>
+		</header>
+	</div>
+		<c:if test="${msg == false}">
+			<p> 로그인을 해주세요 </p>
+		</c:if>
+		
+
+<!-- <div class="row h-100 justify-content-center align-items-center"></div>
+		<div class="col-10 col-md-8 col-lg-6"></div> -->
+		<form role="form" action="/reservation/regist" method="post" autocomplete="off">
+			<div class="container">
+				 <p>
+				  	예약날짜: <input type="text" id="datepicker" name="resDt"/>
+				 </p>
+				 
+				 <%-- <input type="hidden" name ="hosNo" value="<%=hos_no %>"/> --%>
+			<%-- 	 <% 
+				 		UserVO log = (UserVO)request.getSession().getAttribute("login");
+						String userId = log.getUserid();
+				 <input type="hidden" name ="userId" value="#{userId}">
+				 %> --%>
+				
+						
+				 					
+				 <div>
+				     <p>예약시간
+				         <select id="res_time" name="resTime">
+				             <option value="09:00">9:00</option>
+				             <option value="10:00">10:00</option>
+				             <option value="11:00">11:00</option>
+				             <option value="12:00">12:00</option>
+				             <option value="14:00">14:00</option>
+				             <option value="15:00">15:00</option>
+				             <option value="16:00">16:00</option>
+				             <option value="17:00">17:00</option>
+				         </select>
+				       </p>
+				 </div>
+				 <div>
+					 <p>예약할 반려동물 :
+						 <select id="animal" name="aniNo">
+						 	<option value="1">초코</option>
+						 	<option value="2">바나나</option>
+						 	<option value="3">또치</option>
+						 </select>
+					 </p>
+				 </div>
+					 <textarea cols="40" rows="3" id="comment" name="resItem" ></textarea>
+					 <button type="submit" class="btn btn-info">예약하기</button>
+			</div>
+		 </form>
+		 
+ 
+	<footer>
+		<%@ include file="../common/footer.jsp" %>
+	</footer>
+	
+	<script>
 
 	 $(document).ready(function(){
 		$("#datepicker").datepicker({
@@ -28,66 +100,12 @@
 		      showOn: "both", 
 		      buttonImage: "/resources/img/reservation/calendar20.svg", 
 		      buttonImageOnly: true,
-			
-			
-			
 		}) ;
 		var today = new Date();
 		$("#datepicker").datepicker( "option", "minDate", today );
+	 });
 
-	 })
-
-      
- 
-
-
-</script>
-</head>
-<body>
-	<div id="root">
-		<header>
-			<%@ include file="../common/header.jsp" %>
-		</header>
-	</div>
-		
-<form role="form" action="/reservation/regist" method="post">
-	<div class="container">
-		 <p>
-		  	예약날짜: <input type="text" id="datepicker" name="res_dt"/>
-		 </p>
-		 
-		 <div>
-		     <p>예약시간
-		         <select id="res_time" name="res_time">
-		             <option value="09:00">9:00</option>
-		             <option value="10:00">10:00</option>
-		             <option value="11:00">11:00</option>
-		             <option value="12:00">12:00</option>
-		             <option value="14:00">14:00</option>
-		             <option value="15:00">15:00</option>
-		             <option value="16:00">16:00</option>
-		             <option value="17:00">17:00</option>
-		         </select>
-		       </p>
-		 </div>
-		 	<div >
-			 <p>예약할 반려동물 :
-				 <select id="animal" name="ani_no">
-				 	<option value="1">초코</option>
-				 	<option value="2">바나나</option>
-				 	<option value="3">또치</option>
-				 </select>
-			 </p>
-			</div>
-			 <textarea cols="40" rows="3" name="res_item" ></textarea>
-			 <button type="submit" class="btn btn-info">예약하기</button>
-	</div>
- </form>
-		 
- 
-	<footer>
-		<%@ include file="../common/footer.jsp" %>
-	</footer>
+	</script>	
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
