@@ -9,7 +9,6 @@
     </settings>
 
     <typeAliases>
-		<typeAlias alias="UserVO" type="com.petcare.web.domains.UserVO"/>
 		<typeAlias alias="FAQVO" type="com.petcare.web.domains.FAQVO"/>
 		<typeAlias alias="Proxy" type="com.petcare.web.utills.Proxy"/>
 		<typeAlias alias="JusoVo" type="com.petcare.web.domains.JusoVo"/>

@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
-<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
+<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.CustomerVO"%>
 <html>
 <head>
     <title>Zalbazo</title>

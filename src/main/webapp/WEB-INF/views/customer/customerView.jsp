@@ -21,51 +21,51 @@
 		
 		$("#customerRegist").validate({
 			rules : {
-				user_id : {
+				userId : {
 					required : true,
 					minlength : 4
 				},
-				user_pass : {
+				userPass : {
 					required : true,
 					passwordCk : true,
 					minlength : 8,
 					maxlength : 16
 				},
-				user_pass_conf : {
+				userPassConf : {
 					required : true,
-					equalTo : '#user_pass'
+					equalTo : '#userPass'
 				},
-				user_name : {
+				userName : {
 					required : true
 				},
-				user_phone : {
+				userPhone : {
 					required : true,
 					isPhone : true
 					
 				},
-				user_email : {
+				userEmail : {
 					email:true
 				}
 			},	messages : {
-					user_id : {
+					userId : {
 						required : "아이디를 입력해주세요.",
 						minlength : "최소 4자리 이상 입력해주세요."
 					},
-					user_pass : {
+					userPass : {
 						required : "패스워드를 입력해주세요.",
 						passwordCk : "비밀번호는 영문자, 숫자, 특수문자 조합을 입력해야 합니다."
 					},
-					user_pass_conf : {
+					userPassConf : {
 						required : "패스워드를 확인해주세요",
 						equalTo : "패스워드가 다릅니다."
 					},
-					user_name : {
+					userName : {
 						required : "이름을 입력해주세요."
 					},
-					user_phone : {
+					userPhone : {
 						required : "전화번호를 입력해주세요"
 					},
-					user_email : {
+					userEmail : {
 						email : "올바른 이메일을 입력해주세요."
 					}
 				} // messages
@@ -118,26 +118,26 @@
 							<tbody>
 								<tr>
 									<th>아이디</th>
-									<td>${customerVO.user_id}</td>
+									<td>${customerVO.userId}</td>
 								</tr>
 								<tr>
 									<th>이름</th>
-									<td>${customerVO.user_name }</td>
+									<td>${customerVO.userName }</td>
 								</tr>
 								
 								<tr>
 									<th>전화번호</th>
-									<td>${customerVO.user_phone }</td>
+									<td>${customerVO.userPhone }</td>
 								</tr>
 								
 								<tr>
 									<th>이메일</th>
-									<td>${customerVO.user_email}</td>
+									<td>${customerVO.userEmail}</td>
 								</tr>
 								
 								<tr>
 									<th>주소</th>
-									<td>${customerVO.user_address}</td>
+									<td>${customerVO.userAddress}</td>
 								</tr>
 							</tbody>
 						

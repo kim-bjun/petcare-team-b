@@ -65,7 +65,7 @@ public class CustomerController {
 	{
 		
 		
-		CustomerVO customerVO = customerService.getCustomerInfo(((CustomerVO)request.getSession().getAttribute("login")).getUser_id());
+		CustomerVO customerVO = customerService.getCustomerInfo(((CustomerVO)request.getSession().getAttribute("login")).getUserId());
 		
 		model.addAttribute("customerVO", customerVO);
 		
