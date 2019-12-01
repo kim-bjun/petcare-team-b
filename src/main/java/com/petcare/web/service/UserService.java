@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.LoginDTO;
-import com.petcare.web.domains.UserVO;
 
 public interface UserService {
 
