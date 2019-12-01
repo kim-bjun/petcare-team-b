@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.petcare.web.domains.DummyHospitalVo;
 import com.petcare.web.domains.HosInfoCodeVo;
+import com.petcare.web.domains.HosInfoVo;
 import com.petcare.web.domains.HospitalVo;
 import com.petcare.web.domains.JusoVo;
 import com.petcare.web.domains.ReviewBrdVo;
@@ -167,10 +169,14 @@ public class SearchHospitalController {
 	@GetMapping("/crawling")
 	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
 		Map<String, Object> tempMap =new HashMap<String, Object>();
-		Consumer<HospitalVo> t = s -> hospitalSearchMapper.insetHospitalDumpData(s);
+		Consumer<DummyHospitalVo> t = s -> hospitalSearchMapper.insetHospitalDumpData(s);
 		try {
-			for (HospitalVo tempHosDetailDb : hospitalCrawlingProxy.animal()) {
+			for (DummyHospitalVo tempHosDetailDb : hospitalCrawlingProxy.animal()) {
 				t.accept(tempHosDetailDb);
+				for (HosInfoVo tempHosInfoVo : tempHosDetailDb.getHosInfoList()) {
+					hospitalSearchMapper.insetHospitalInfoDumpData(tempHosInfoVo);
+					System.out.println(tempHosInfoVo + "<<<<<tempHosInfoVo 입력 중 ");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

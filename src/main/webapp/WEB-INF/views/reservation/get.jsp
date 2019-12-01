@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
-<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
 <html>
 <head>
     <title>Zalbazo</title>
@@ -21,93 +20,62 @@
 
 </head>
 <body>
-
-<%-- 	<% 
-		request.setCharacterEncoding("euc-kr"); 
-	    int hos_no = Integer.parseInt(request.getParameter("hosNo"));
-	%> --%>
-	   	
 	<div id="root">
 		<header>
 			<%@ include file="../common/header.jsp" %>
 		</header>
 	</div>
-		<%-- <c:if test="${msg == false}">
-			<p> 로그인을 해주세요 </p>
-		</c:if> --%>
-<form role="form" action="/reservation/modify" method="post">
+		
+
 	<div class="container">
 		 <p>
-		  	예약날짜: <input type="text" id="datepicker" name="resDt" value="<c:out value='${board.resDt}'/>"/>
+		  	예약날짜: <input type="text" id="datepicker"  readonly="readonly" name="resDt" value="<c:out value='${vo.resDt }'/>"/>
 		 </p>
-		 		
+		 
 		 <div>
-		     <p>예약시간
-		         <select id="res_time" name="resTime">
-		             <option value="09:00">9:00</option>
-		             <option value="10:00">10:00</option>
-		             <option value="11:00">11:00</option>
-		             <option value="12:00">12:00</option>
-		             <option value="14:00">14:00</option>
-		             <option value="15:00">15:00</option>
-		             <option value="16:00">16:00</option>
-		             <option value="17:00">17:00</option>
-		         </select>
+		     <p>예약시간 : <input type="text" id="datepicker"  readonly="readonly"name="resDt" value="<c:out value='${vo.resTime }'/>"/>
+		         
 		       </p>
 		 </div>
 		 	<div >
-			 <p>예약할 반려동물 :
-				 <select id="animal" name="aniNo">
-				 	<option value="1">초코</option>
-				 	<option value="2">바나나</option>
-				 	<option value="3">또치</option>
-				 </select>
+			 <p>예약한 반려동물 :
+				  <input type="text" id="datepicker" readonly="readonly" name="resDt" value="<c:out value='${vo.aniName }'/>"/>
 			 </p>
 			</div>
-			 <textarea cols="40" rows="3" name="resItem" ><c:out value='${board.resItem}'/></textarea>
-			 <button data-oper="modify" class="btn btn-info">수정하기</button>
-			 <button data-oper="remove" class="btn btn-info">삭제하기</button>
+			<p> 증상:
+			 <textarea cols="40" rows="3" name="resItem" readonly="readonly"><c:out value='${vo.resItem}'/></textarea>
+			 </p>
+			 
+			 <button data-oper="modify" type="submit" class="btn btn-info">변경하기</button>
+			 <button data-oper="list" type="submit" class="btn btn-info">뒤로가기</button>
 	</div>
- </form>
-		 <form id="operForm" method="post">
-		 	<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${treatNo}'/>">
-		 </form>
+		<form id="operForm" action="/reservation/modify" method="get">
+			<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${vo.treatNo}'/>">
+		</form>
+
+		 
  
 	<footer>
 		<%@ include file="../common/footer.jsp" %>
 	</footer>
 	
 	<script>
-		$(documemt).ready(function(){
+		$(document).ready(function(){
 			var operForm= $('#operForm');
-			$('button[date-oper="modify"]').on('click',function(){
-				operForm.attr('action','/reservation/modify');
-			});
-			$('button[data-oper="remove"]')/on('click',function(){
-				operForm.attr('action','/reservation/remove');
+			$('button[data-oper="modify"]').on('click', function(e){
+					operForm.attr("action","/reservation/modify").submit();
 			})
-			
-			
-		})
+				
+			$('button[data-oper="list"]').on('click',function(e){
+				
+					operForm.find("#treatNo").remove();
+					operForm.attr("action","/reservation/list");
+					operForm.submit();
+		
+			});
+		});
 	
 	</script>
-	<script>
-
-	 $(document).ready(function(){
-		$("#datepicker").datepicker({
-			beforeShowDay: $.datepicker.noWeekends,
-		      showButtonPanel: true, 
-		      dateFormat: "yymmdd",
-		      closeText: '닫기', 
-		      showOn: "both", 
-		      buttonImage: "/resources/img/reservation/calendar20.svg", 
-		      buttonImageOnly: true,
-		}) ;
-		var today = new Date();
-		$("#datepicker").datepicker( "option", "minDate", today );
-	 });
-
-</script>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
