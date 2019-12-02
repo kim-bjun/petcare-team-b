@@ -25,7 +25,7 @@
 			join hospital_basic h on (r.hos_no = h.hos_no )
 			join animal a on (r.ani_no = a.ani_no)
 			join user u on (u.user_id = r.user_id)
-		    WHERE u.user_id = #{userId}
+		WHERE u.user_id = #{userId}
 		<!-- <if test="#{userId} != null">
 		</if> -->
 		<!-- CASE
@@ -48,16 +48,18 @@
 	</insert>
 
 	<update id="update">
-		update reservation set ani_no = #{aniNo} ,
-		res_dt= #{resDt}
-		,res_time= #{resTime},res_item=#{resItem} 
-		WHERE 1=1 and 
-			treat_no = #{treatNo} and
-			user_id = #{userId}
+		update reservation 
+		set ani_no = #{aniNo} ,
+			res_dt= #{resDt}
+			,res_time= #{resTime},res_item=#{resItem} 
+		WHERE  
+			treat_no = #{treatNo} 
+			
 	</update>
 
 	<delete id="delete">
-		delete from reservation where treat_no = #{treatNo}
+		delete from reservation 
+		where treat_no = #{treatNo}
 	</delete>
 
 

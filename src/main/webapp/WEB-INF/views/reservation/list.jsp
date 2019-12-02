@@ -32,9 +32,10 @@
 
 <div class="container">
 <c:if test="${userId != null}">
- <p>${userId}</p>
+ 
  <input type="hidden" name="userId" id="userId"value="${userId}">
 </c:if>
+
   <h2>예약 내역</h2>
   <p>
   	기간 조회 <input id="startDate" class="dueDate"> ~ <input id="endDate" class="dueDate">

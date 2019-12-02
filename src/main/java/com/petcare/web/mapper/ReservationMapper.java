@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.petcare.web.domains.ReservationVo;
-import com.petcare.web.domains.UserVO;
 
 @Mapper
 public interface ReservationMapper {

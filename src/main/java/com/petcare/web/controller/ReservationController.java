@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.ReservationVo;
-import com.petcare.web.domains.UserVO;
 import com.petcare.web.service.ReservationService;
 
 @Controller
@@ -50,8 +49,8 @@ public class ReservationController {
 	public String register(ReservationVo Rvo,RedirectAttributes rttr,HttpSession session) {
      	
 		//model.addAttribute("selectList",service.);
-		UserVO obj = (UserVO)session.getAttribute("login");
-		String userId = obj.getUserid();
+		CustomerVO obj = (CustomerVO)session.getAttribute("login");
+		String userId = obj.getUser_id();
 	
 		if(userId == null) {
 			rttr.addFlashAttribute("msg","false");
