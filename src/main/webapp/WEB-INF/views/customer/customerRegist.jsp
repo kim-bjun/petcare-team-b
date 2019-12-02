@@ -21,7 +21,7 @@
 		
 		$("#customerRegist").validate({
 			rules : {
-				user_id : {
+				userId : {
 					required : true,
 					minlength : 4,
 					remote : {
@@ -29,48 +29,48 @@
 						url : "/customer/userIdCheck"
 					}
 				},
-				user_pass : {
+				userPass : {
 					required : true,
 					passwordCk : true,
 					minlength : 8,
 					maxlength : 16
 				},
-				user_pass_conf : {
+				userPassConf : {
 					required : true,
-					equalTo : '#user_pass'
+					equalTo : '#userPass'
 				},
-				user_name : {
+				userName : {
 					required : true
 				},
-				user_phone : {
+				userPhone : {
 					required : true,
 					isPhone : true
 					
 				},
-				user_email : {
+				userEmail : {
 					email:true
 				}
 			},	messages : {
-					user_id : {
+					userId : {
 						required : "아이디를 입력해주세요.",
 						minlength : "최소 4자리 이상 입력해주세요.",
 						remote : $.validator.format("{0} 은 등록되어 있는 아이디입니다.")
 					},
-					user_pass : {
+					userPass : {
 						required : "패스워드를 입력해주세요.",
 						passwordCk : "비밀번호는 영문자, 숫자, 특수문자 조합을 입력해야 합니다."
 					},
-					user_pass_conf : {
+					userPassConf : {
 						required : "패스워드를 확인해주세요",
 						equalTo : "패스워드가 다릅니다."
 					},
-					user_name : {
+					userName : {
 						required : "이름을 입력해주세요."
 					},
-					user_phone : {
+					userPhone : {
 						required : "전화번호를 입력해주세요"
 					},
-					user_email : {
+					userEmail : {
 						email : "올바른 이메일을 입력해주세요."
 					}
 				} // messages
@@ -127,8 +127,8 @@
 							<tbody>
 								<tr>
 									<th>아이디</th>
-									<td><input type="text" name="user_id"
-											value="${customerVO.user_id}" id="user_id" name="user_id"
+									<td><input type="text" 
+											value="${customerVO.userId}" id="userId" name="userId"
 											class="col-sm-3 form-control" placeholder="아이디" maxlength="16" />
 										
 									</td>
@@ -136,8 +136,8 @@
 								
 								<tr>
 									<th>패스워드</th>
-									<td><input type="password" name="user_pass"
-											value="${customerVO.user_pass}" id="user_pass"
+									<td><input type="password" name="userPass"
+											value="${customerVO.userPass}" id="userPass"
 											class="col-sm-3 form-control" placeholder="패스워드" maxlength="16" />
 										
 									</td>
@@ -145,40 +145,40 @@
 								
 								<tr>
 									<th>패스워드 확인</th>
-									<td><input type="password" name="user_pass_conf"
-											id="user_pass_conf"
+									<td><input type="password" name="userPassConf"
+											id="userPassConf"
 											class="col-sm-3 form-control" placeholder="패스워드 확인" maxlength="16" />
 									</td>
 								</tr>
 								
 								<tr>
 									<th>이름</th>
-									<td><input type="text" name="user_name"
-											value="${customerVO.user_name}" id="user_name"
+									<td><input type="text" name="userName"
+											value="${customerVO.userName}" id="userName"
 											class="col-sm-3 form-control" placeholder="이름" maxlength="30" />
 									</td>
 								</tr>
 								
 								<tr>
 									<th>전화번호</th>
-									<td><input type="text" name="user_phone"
-											value="${customerVO.user_phone}" id="user_phone"
+									<td><input type="text" name="userPhone"
+											value="${customerVO.userPhone}" id="userPhone"
 											class="col-sm-3 form-control" placeholder="전화번호" maxlength="30" />
 									</td>
 								</tr>
 								
 								<tr>
 									<th>이메일</th>
-									<td><input type="text" name="user_email"
-											value="${customerVO.user_email}" id="user_email"
+									<td><input type="text" name="userEmail"
+											value="${customerVO.userEmail}" id="userEmail"
 											class="col-sm-3 form-control" placeholder="e-mail" maxlength="50" />
 									</td>
 								</tr>
 								
 								<tr>
 									<th>주소</th>
-									<td><input type="text" name="user_address"
-											value="${customerVO.user_address}" id="user_address"
+									<td><input type="text" name="userAddress"
+											value="${customerVO.userAddress}" id="userAddress"
 											class="col-sm-3 form-control" placeholder="주소" maxlength="16" />
 									</td>
 								</tr>

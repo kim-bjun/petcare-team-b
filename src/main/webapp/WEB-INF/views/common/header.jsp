@@ -24,7 +24,7 @@
 	    		<% 
     				CustomerVO obj = (CustomerVO)request.getSession().getAttribute("login");
     	         	if( obj != null ) {
-    					String username = obj.getUser_name();
+    					String username = obj.getUserName();
     	        %>
 
     	        	<a href="/user/mypage">
@@ -52,7 +52,8 @@
 	    				<%
 	    					CustomerVO check = (CustomerVO)request.getSession().getAttribute("login");
 			    		    	         	if( check != null ) {
-			    		    	         		String userId = obj.getUser_id();
+
+			    		    	         		String userId = obj.getUserId();
 	    				%>
 			    		    					
 						<div class="reservation-confirm header-nav">

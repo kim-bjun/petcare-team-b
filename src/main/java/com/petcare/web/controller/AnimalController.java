@@ -102,7 +102,7 @@ public class AnimalController {
 			return "animal/aniRegist";
 		}
 		
-		animalVO.setUser_id(imsi);
+		animalVO.setUserId(imsi);
 		
 		animalService.insertAnimal(animalVO);
 		
@@ -161,8 +161,8 @@ public class AnimalController {
 		HashMap<String, Object> animalInfo = RequestMethodUtil.bbsNoneMethod(page, condition, words);
 		
 		AnimalVO animalVO = new AnimalVO();
-		animalVO.setUser_id(imsi);
-		animalVO.setAni_no(indx);
+		animalVO.setUserId(imsi);
+		animalVO.setAniNo(indx);
 		
 		animalService.delteAnimal(animalVO);
 		

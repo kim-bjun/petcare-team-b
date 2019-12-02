@@ -15,5 +15,8 @@ import com.petcare.web.domains.FAQVO;
 public interface FAQMapper {
 
 	public List<FAQVO> readAll() throws Exception;
+	public void create(FAQVO vo) throws Exception;
+	public void update(FAQVO vo) throws Exception;
+	public void delete(Integer faqNo) throws Exception;
 	
 }

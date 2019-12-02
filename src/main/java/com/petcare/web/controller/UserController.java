@@ -17,7 +17,6 @@ import org.springframework.web.util.WebUtils;
 
 import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.LoginDTO;
-import com.petcare.web.domains.UserVO;
 import com.petcare.web.service.UserService;
 
 @Controller
@@ -35,6 +34,7 @@ public class UserController {
 	@RequestMapping(value="/loginPost",method=RequestMethod.POST)
 	public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception{
 		CustomerVO vo=service.login(dto);
+		System.out.println(vo);
 		if(vo==null) {
 			return;
 		}
@@ -43,12 +43,12 @@ public class UserController {
 		if(dto.isUseCookie()) {
 			int amount=60*60*24*7;
 			Date sessionLimit=new Date(System.currentTimeMillis()+(1000*amount));
-			service.keepLogin(vo.getUser_id(),session.getId(),sessionLimit);
+			service.keepLogin(vo.getUserId(),session.getId(),sessionLimit);
 		}
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
-	public String logout(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
+	public void logout(HttpServletRequest request,HttpServletResponse response, HttpSession session) throws Exception{
 		Object obj=session.getAttribute("login");
 		
 		if(obj!=null) {
@@ -61,10 +61,10 @@ public class UserController {
 				loginCookie.setPath("/");
 				loginCookie.setMaxAge(0);
 				response.addCookie(loginCookie);
-				service.keepLogin(vo.getUser_id(),session.getId(), new Date());
+				service.keepLogin(vo.getUserId(),session.getId(), new Date());
 			}
 		}
-		return "home";
+//		return "home";
 	}
 	
 	@RequestMapping(value="/mypage",method=RequestMethod.GET)

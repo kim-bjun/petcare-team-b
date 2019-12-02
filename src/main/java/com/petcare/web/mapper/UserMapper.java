@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.LoginDTO;
-import com.petcare.web.domains.UserVO;
 
 @Mapper
 
@@ -16,7 +15,7 @@ public interface UserMapper {
 
 	public CustomerVO login(LoginDTO dto) throws Exception;
 	
-	public void keepLogin(@Param("userid") String userid,@Param("sessionId") String sessionId,@Param("next") Date next);
+	public void keepLogin(@Param("userId") String userid,@Param("sessionId") String sessionId,@Param("next") Date next);
 	
 	public CustomerVO checkUserWithSessionKey(String value);
 }
