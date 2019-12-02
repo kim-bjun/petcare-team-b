@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.petcare.web.domains.DummyHospitalVo;
 import com.petcare.web.domains.HosInfoCodeVo;
+import com.petcare.web.domains.HosInfoVo;
 import com.petcare.web.domains.HospitalVo;
 import com.petcare.web.domains.JusoVo;
 import com.petcare.web.domains.ReviewBrdVo;
@@ -53,6 +55,7 @@ public class SearchHospitalController {
 		ArrayList<HosInfoCodeVo> tempforEtc = new ArrayList<HosInfoCodeVo>();
 		ArrayList<HosInfoCodeVo> tempforConvenience = new ArrayList<HosInfoCodeVo>();
 		for (HosInfoCodeVo hosInfoCodeVo : code) {
+			System.out.println(hosInfoCodeVo);
 			if(hosInfoCodeVo.getHosInfoCode() / 100 == 1 ) {
 				tempforAnimal.add(hosInfoCodeVo);
 			}else if(hosInfoCodeVo.getHosInfoCode() / 100 == 2 ) {
@@ -89,28 +92,30 @@ public class SearchHospitalController {
 	@PostMapping("/hospitalList/{pageNo}")  
 	public @ResponseBody Map<String,Object> selectAllHospitalList(@PathVariable String pageNo, @RequestBody Proxy hosinfoPxy ){
 		Map<String, Object> map = new HashMap<String, Object>();
+		int totalResultRow = 0;
 		Function<Proxy,List<HospitalVo>> c;
+		pxy.setPageNo(Integer.parseInt(pageNo));		
 		pxy.setCheckBoxList(hosinfoPxy.getCheckBoxList());
 		pxy.setHosAddress(hosinfoPxy.getHosAddress());
 		pxy.setSearchWrd(hosinfoPxy.getSearchWrd());
 		
 		if (hosinfoPxy.getCheckBoxList().size() != 0 ) {
-			pxy.setPageNo(Integer.parseInt(pageNo));
 			Function<Proxy,Integer> n = h -> hospitalSearchMapper.countHospitalByCondition(h);
-			pxy.paging(n.apply(pxy)); 
+			totalResultRow = n.apply(pxy);
+			pxy.paging(totalResultRow); 
 			 c = t -> hospitalSearchMapper.selectHospitalList(t);
 
 		}else{
 			Supplier<Integer> n = () -> hospitalSearchMapper.countAllHospital(pxy);
-
-			pxy.setPageNo(Integer.parseInt(pageNo));
-			pxy.paging(n.get());
+			totalResultRow = n.get();
+			pxy.paging(totalResultRow);
 			c = t -> hospitalSearchMapper.selectHospitalAllList(t);
 		}	
 		
+		map.put("msg",(totalResultRow != 0) ? "SUCCESS": "NODATA"); // 검색 결과가 있을 경우 SUCCESS , 없을 경우 NODATA
 		map.put("result", c.apply(pxy));
 		map.put("pagination", pxy);
-		map.put("msg","SUCCESS");
+		
 		return map;
 	}
 	
@@ -160,13 +165,17 @@ public class SearchHospitalController {
     public String dummyDataForSearch() {
     	return "dummyDataForSearch";
     }
+    
 	@GetMapping("/crawling")
 	public @ResponseBody Map<String,Object> crawlingAllHospitalDB(){
 		Map<String, Object> tempMap =new HashMap<String, Object>();
-		Consumer<HospitalVo> t = s -> hospitalSearchMapper.insetHospitalDumpData(s);
+		Consumer<DummyHospitalVo> t = s -> hospitalSearchMapper.insetHospitalDumpData(s);
 		try {
-			for (HospitalVo tempHosDetailDb : hospitalCrawlingProxy.animal()) {
+			for (DummyHospitalVo tempHosDetailDb : hospitalCrawlingProxy.animal()) {
 				t.accept(tempHosDetailDb);
+				for (HosInfoVo tempHosInfoVo : tempHosDetailDb.getHosInfoList()) {
+					hospitalSearchMapper.insetHospitalInfoDumpData(tempHosInfoVo);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -20,5 +20,21 @@ public class FAQServiceImpl implements FAQService {
 		
 		return mapper.readAll();
 	}
+	
+	
 
+	@Override
+	public void regist(FAQVO faqVO) throws Exception {
+		mapper.create(faqVO);
+	}
+
+	@Override
+	public void modify(FAQVO faqVO) throws Exception {
+		mapper.update(faqVO);
+	}
+
+	@Override
+	public void remove(Integer faqNo) throws Exception {
+		mapper.delete(faqNo);
+	}
 }

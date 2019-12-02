@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.petcare.web.domains.CustomerVO;
+import com.petcare.web.domains.LoginDTO;
 import com.petcare.web.service.CustomerService;
+import com.petcare.web.service.UserService;
 
 @Controller
 @RequestMapping("/customer")
@@ -19,6 +21,8 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private UserService userService;
 	
 	@ModelAttribute("customerVO")
 	protected Object registBack() throws Exception {
@@ -34,10 +38,11 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(@Valid CustomerVO customerVO, HttpServletRequest request)
+	public String regist(@Valid CustomerVO customerVO, HttpServletRequest request,LoginDTO dto)
 		throws Exception
 	{
 		customerService.registCustomer(customerVO);
+		request.getSession().setAttribute("login", userService.login(dto));
 		
 		return "redirect:/customer/view";
 	}
@@ -55,12 +60,12 @@ public class CustomerController {
 	
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view(Model model) 
+	public String view(Model model,HttpServletRequest request) 
 		throws Exception
 	{
-		String imsi = "jongwook88";
 		
-		CustomerVO customerVO = customerService.getCustomerInfo(imsi);
+		
+		CustomerVO customerVO = customerService.getCustomerInfo(((CustomerVO)request.getSession().getAttribute("login")).getUserId());
 		
 		model.addAttribute("customerVO", customerVO);
 		

@@ -2,17 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.petcare.web.mapper.UserMapper">
 
-    <select id="login" resultType="customerVO">
-        select user_id, user_pass,user_name from user where user_id=#{userid} and user_pass=#{userpass}
-    </select>
-    
-    <update id="keepLogin">
-    update user set sessionKey=#{sessionId}, sessionLimit=#{next} where user_id = #{userid}
-    </update>
-    
-    <select id="checkUserWithSessionKey" resultType="customerVO">
-    select * from user where sessionKey=#{value} and sessionLimit > now()
-    </select>
+
+	<select id="login" resultType="customerVO">
+		select user_id, user_pass,user_name from user where user_id=#{userId} and
+		user_pass=#{userPass}
+	</select>
+
+	<update id="keepLogin">
+		update user set sessionKey=#{sessionId}, sessionLimit=#{next} where user_id
+		= #{userId}
+	</update>
+
+	<select id="checkUserWithSessionKey" resultType="customerVO">
+		select * from user where sessionKey=#{value} and sessionLimit > now()
+	</select>
 
 </mapper>
 
