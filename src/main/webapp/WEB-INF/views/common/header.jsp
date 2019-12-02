@@ -52,6 +52,7 @@
 	    				<%
 	    					CustomerVO check = (CustomerVO)request.getSession().getAttribute("login");
 			    		    	         	if( check != null ) {
+
 			    		    	         		String userId = obj.getUserId();
 	    				%>
 			    		    					
