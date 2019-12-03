@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,14 +28,14 @@ public class ReservationController {
 	ReservationService service;
 
 	@GetMapping("/list")
-	public String list(@RequestParam(value="userId")String userId,Model model,HttpSession session) {
+	public String list(Model model,HttpSession session) {
+		//@RequestParam(value="userId")String userId,
 		
-		//
-		
-		/*
-		 * UserVO obj = (UserVO)session.getAttribute("login"); userId = obj.getUserid();
-		 */
-		model.addAttribute("userId",userId);			
+		  CustomerVO logna =(CustomerVO)session.getAttribute("login"); 
+		  String userId = logna.getUserId();
+		  
+		  //model.addAttribute("userId",userId);
+		 			
 			
 		model.addAttribute("list",service.getList(userId));
 			return "reservation/list";
@@ -48,8 +49,7 @@ public class ReservationController {
      	
 		//model.addAttribute("selectList",service.);
 		CustomerVO obj = (CustomerVO)session.getAttribute("login");
-		String userId = obj.getUser_id();
-	
+		String userId = obj.getUserId();
 		if(userId == null) {
 			rttr.addFlashAttribute("msg","false");
 			
@@ -61,8 +61,6 @@ public class ReservationController {
 			
 			Rvo.setTreatNo(num1);;
 			Rvo.setUserId(userId);;
-			Rvo.setHosNo(1);
-			//Rvo.setAni_no(1);
 			
 			service.regist(Rvo);
 			
@@ -73,17 +71,24 @@ public class ReservationController {
 	
 	
 	@GetMapping("/regist/{hosNo}")
-	public String regist(@PathVariable String hosNo, Model model) {
-		System.out.println(hosNo+"<<<<<hosNo");
-		model.addAttribute("hosNo", hosNo);
+	public String regist(@PathVariable String hosNo, Model model,HttpSession session) {
+		//System.out.println(hosNo+"<<<<<hosNo");
+		CustomerVO logna =(CustomerVO)session.getAttribute("login"); 
+		String userId = logna.getUserId();
+		model.addAttribute("aninoList" , service.getAniNo(userId));
+		  
+		
+		//model.addAttribute("selectTime",service.getSelectTime());
 		return "reservation/regist";
 	}
 	
 	
 	@PostMapping("/modify")
-	public String modify(ReservationVo vo ,RedirectAttributes rttr) {
-		
-
+	public String modify(ReservationVo vo ,RedirectAttributes rttr,Model model,HttpSession session) {
+		CustomerVO user= (CustomerVO)session.getAttribute("login");
+		String userId =user.getUserId();
+		model.addAttribute("userId",userId);
+				
 		if(service.modify(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}
@@ -91,13 +96,18 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/modify")
-	public void modify(@RequestParam(value="treatNo") int treatNo,Model model) {
+	public void modify(@RequestParam(value="treatNo") int treatNo,Model model,HttpSession session) {
+		CustomerVO logna =(CustomerVO)session.getAttribute("login"); 
+		String userId = logna.getUserId();
+		model.addAttribute("treatNo",treatNo);
+		model.addAttribute("aninoList" , service.getAniNo(userId));
 		model.addAttribute("board", service.get(treatNo));
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("treatNo") int treatNo,RedirectAttributes rttr) {
+	public String remove(@RequestParam("treatNo") int treatNo,RedirectAttributes rttr,HttpSession session) {
 		if(service.remove(treatNo)) {
+			
 			rttr.addFlashAttribute("result","success");
 		}
 		return "redirect:/reservation/list";
