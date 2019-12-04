@@ -25,6 +25,7 @@ public class ReservationVo {
 	
 	private String hosName;
 	private String aniName;
+	private String reserTime;
 	
 
 	

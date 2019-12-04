@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.CustomerVO"%>
 <html>
@@ -46,18 +47,11 @@
 				 <p>
 				  	예약날짜: <input type="text" id="datepicker" name="resDt"/>
 				 </p>
-				 
-				 <%-- <input type="hidden" name ="hosNo" value="<%=hos_no %>"/> --%>
-			<%-- 	 <% 
-				 		UserVO log = (UserVO)request.getSession().getAttribute("login");
-						String userId = log.getUserid();
-				 <input type="hidden" name ="userId" value="#{userId}">
-				 %> --%>
 				
-						
-				 					
+				<input type="hidden"  id="hosNo" value="${hosNo}" name="hosNo">
+				
 				 <div>
-				     <p>예약시간
+				     <p>예약시간 :
 				         <select id="res_time" name="resTime">
 				             <option value="09:00">9:00</option>
 				             <option value="10:00">10:00</option>
@@ -69,16 +63,19 @@
 				             <option value="17:00">17:00</option>
 				         </select>
 				       </p>
+				  
 				 </div>
+				 
 				 <div>
 					 <p>예약할 반려동물 :
-						 <select id="animal" name="aniNo">
-						 	<option value="1">초코</option>
-						 	<option value="2">바나나</option>
-						 	<option value="3">또치</option>
+						 <select  name="aniNo">
+							 <c:forEach items="${aninoList}" var="Nolist">
+				       			<option value="<c:out value="${Nolist.aniNo}"/>"><c:out value="${Nolist.aniName}"/></option>
+				       		</c:forEach>
 						 </select>
 					 </p>
 				 </div>
+						
 					 <textarea cols="40" rows="3" id="comment" name="resItem" ></textarea>
 					 <button type="submit" class="btn btn-info">예약하기</button>
 			</div>
@@ -90,16 +87,20 @@
 	</footer>
 	
 	<script>
-
+	$(document).ready(function(){
+		var oo = $('#hosNo').val().substr(6)*1;
+		$('#hosNo').val(oo);
+	}) 
+	
 	 $(document).ready(function(){
 		$("#datepicker").datepicker({
 			beforeShowDay: $.datepicker.noWeekends,
-		      showButtonPanel: true, 
-		      dateFormat: "yymmdd",
-		      closeText: '닫기', 
-		      showOn: "both", 
-		      buttonImage: "/resources/img/reservation/calendar20.svg", 
-		      buttonImageOnly: true,
+		    showButtonPanel: true, 
+		    dateFormat: "yymmdd",
+		    closeText: '닫기', 
+		    showOn: "both", 
+		    buttonImage: "/resources/img/reservation/calendar20.svg", 
+		    buttonImageOnly: true,
 		}) ;
 		var today = new Date();
 		$("#datepicker").datepicker( "option", "minDate", today );

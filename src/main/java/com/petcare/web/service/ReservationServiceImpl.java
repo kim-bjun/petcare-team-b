@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.petcare.web.domains.AnimalVO;
 import com.petcare.web.domains.ReservationVo;
 import com.petcare.web.mapper.ReservationMapper;
 @Service
@@ -42,5 +43,16 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public List<ReservationVo> getList(String userId) {
 		return mapper.getList(userId);
+	}
+
+	@Override
+	public List<String> getSelectTime() {
+		
+		return mapper.getSelectTime();
+	}
+
+	@Override
+	public List<AnimalVO> getAniNo(String userId) {
+		return mapper.getAniNo(userId);
 	}
 }

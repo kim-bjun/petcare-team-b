@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.petcare.web.domains.AnimalVO;
 import com.petcare.web.domains.ReservationVo;
 
 
@@ -21,4 +22,7 @@ public interface ReservationService {
 
 	public List<ReservationVo> getList(String userId);
 	
+	public List<String> getSelectTime();
+	
+	public List<AnimalVO> getAniNo(String userId);
 }
