@@ -27,13 +27,13 @@
 			join user u on (u.user_id = r.user_id)
 		WHERE r.user_id = #{userId}
 		order by r.reg_dt desc
-		<!-- <if test="#{userId} != null">
+		<!--  <if test="userId != null">
 		</if> -->
-		<!-- CASE
+			<!-- CASE
 			WHEN #{userId}!=null
 			THEN WHERE r.user_id = #{userId}
 			ELSE 
-		END -->
+		END -->	
 			
 	</select>
 
