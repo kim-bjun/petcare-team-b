@@ -24,7 +24,7 @@
 	    		<% 
     				CustomerVO obj = (CustomerVO)request.getSession().getAttribute("login");
     	         	if( obj != null ) {
-    					String username = obj.getUser_name();
+    					String username = obj.getUserName();
     	        %>
 
     	        	<a href="/user/mypage">
@@ -50,13 +50,15 @@
 			    		<a href="/sch/">병원찾기</a>
 	    			</div>
 	    				<%
-	    					UserVO check = (UserVO)request.getSession().getAttribute("login");
+	    					CustomerVO check = (CustomerVO)request.getSession().getAttribute("login");
 			    		    	         	if( check != null ) {
-			    		    	         		String userId = obj.getUserid();
+
+			    		    	         		String userId = obj.getUserId();
 	    				%>
 			    		    					
 						<div class="reservation-confirm header-nav">
-							<a href="/reservation/list?userId=<c:out value="<%=userId %>"/>">예약내역</a>
+							<a href="/reservation/list">예약내역</a>
+							<!-- ?userId=<c:out value="<%=userId %>"/> -->
 						</div>
 	    				<% 
 	    					} 

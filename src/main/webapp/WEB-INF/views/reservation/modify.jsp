@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
-<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.UserVO"%>
+<%@ page language="java" pageEncoding="utf-8" import="com.petcare.web.domains.CustomerVO"%>
 <html>
 <head>
     <title>Zalbazo</title>
@@ -35,7 +35,7 @@
 		<%-- <c:if test="${msg == false}">
 			<p> 로그인을 해주세요 </p>
 		</c:if> --%>
-<form role="form" action="/reservation/modify" method="post">
+<form id="operForm" method="post">
 	<div class="container">
 		 <p>
 		  	예약날짜: <input type="text" id="datepicker" name="resDt" value="<c:out value='${board.resDt}'/>"/>
@@ -56,22 +56,29 @@
 		       </p>
 		 </div>
 		 	<div >
-			 <p>예약할 반려동물 :
-				 <select id="animal" name="aniNo">
-				 	<option value="1">초코</option>
-				 	<option value="2">바나나</option>
-				 	<option value="3">또치</option>
-				 </select>
-			 </p>
+			 
+				 <p>예약할 반려동물 :
+					 <select  name="aniNo">
+						 <c:forEach items="${aninoList}" var="Nolist">
+			       			<option  value="<c:out value="${Nolist.aniNo}"/>">
+			       			<c:out value="${Nolist.aniName}"/></option>
+			       		</c:forEach>
+					 </select>
+				 </p>
+			 
 			</div>
 			 <textarea cols="40" rows="3" name="resItem" ><c:out value='${board.resItem}'/></textarea>
 			 <button data-oper="modify" class="btn btn-info">수정하기</button>
 			 <button data-oper="remove" class="btn btn-info">삭제하기</button>
 	</div>
- </form>
-		 <form id="operForm" method="post">
 		 	<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${treatNo}'/>">
-		 </form>
+		 	<input type="hidden" id="userId" name="userId" value="<c:out value='${userId}'/>">
+
+</form>
+					
+			    		    					
+						
+		
  
 	<footer>
 		<%@ include file="../common/footer.jsp" %>
@@ -79,16 +86,20 @@
 	
 	<script>
 		$(documemt).ready(function(){
+			
+			
 			var operForm= $('#operForm');
-			$('button[date-oper="modify"]').on('click',function(){
-				operForm.attr('action','/reservation/modify');
+			$('button[date-oper="modify"]').on('click',function(e){
+				e.preventDefault();
+				operForm.attr('action','/reservation/modify').submit();
 			});
-			$('button[data-oper="remove"]')/on('click',function(){
-				operForm.attr('action','/reservation/remove');
+			$('button[data-oper="remove"]').on('click',function(e){
+				e.preventDefault();
+				operForm.attr('action','/reservation/remove').submit();
 			})
-			
-			
 		})
+			
+			
 	
 	</script>
 	<script>

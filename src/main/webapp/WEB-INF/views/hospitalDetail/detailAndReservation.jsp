@@ -10,7 +10,9 @@
 	        			<div class="detail-label">병원 정보</div>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
-	        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"  ></i>
+		        		<a href="/reservation/regist/hosNo=${result.hosNo }">
+		        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"  ></i>
+		        		</a>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
 		        		<i class="far fa-bookmark detail-icon-btn" aria-hidden="true"></i>
@@ -39,6 +41,7 @@
 				        <div class="card-title hospital-info-title">${result.hosName}</div>
 				        <div class="card-text hospital-info-text">${result.hosPhone}</div>
 				        <div class="card-text hospital-info-text">${result.hosAddress}</div>
+				        <div class="card-text hospital-info-text">${result.hosOptime}</div>
 				        <div class="card-text hospital-info-text"><a href="${result.hosSite}" target="_blank">${result.hosSite}</a></div>
 				        <div class="card-text hospital-info-text">${result.hosMajorTreatmentTarget}</div>
 				        <div class="card-text hospital-info-text">${result.hosCourseOfTreatment}</div>

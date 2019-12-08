@@ -15,24 +15,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import com.petcare.web.domains.HospitalVo;
+import com.petcare.web.domains.DummyHospitalVo;
+import com.petcare.web.domains.HosInfoCodeVo;
+import com.petcare.web.domains.HosInfoVo;
+import com.petcare.web.mapper.HospitalSearchMapper;
 
 @Lazy
 @Component
 public class HospitalCrawlingProxy {
-
+	@Autowired HospitalSearchMapper hospitalSearchMapper;
 	
-	public ArrayList<HospitalVo> animal() {
+	public ArrayList<DummyHospitalVo> animal() {
 		ArrayList<String> tempArrayforOnePageHosCodeList = new ArrayList<String>();
-		HospitalVo tempBean = new HospitalVo();
-		ArrayList<HospitalVo> proxyList = new ArrayList<HospitalVo>();
+		DummyHospitalVo tempBean = new DummyHospitalVo();
+		ArrayList<DummyHospitalVo> proxyList = new ArrayList<DummyHospitalVo>();
 		String[] list = {"0","15","30","45","60","75","105"};
-		
+		ArrayList<HosInfoCodeVo> code = hospitalSearchMapper.selectHosInfoCode();
 		try {
 			for (String pageStrNum : list) {
 				tempArrayforOnePageHosCodeList = getCategoty(pageStrNum);
 				for (String tempHosCode : tempArrayforOnePageHosCodeList) {
-					tempBean = getHospitalDetail(tempHosCode);
+					tempBean = getHospitalDetail(tempHosCode ,code);
 					proxyList.add(tempBean);
 				}
 			}
@@ -69,9 +72,10 @@ public class HospitalCrawlingProxy {
 	}
 	
 	
-	public HospitalVo getHospitalDetail(String hosNo) throws IOException{
-		HospitalVo tempHosVo = new HospitalVo(); // 병원 별 상세 정보
+	public DummyHospitalVo getHospitalDetail(String hosNo ,ArrayList<HosInfoCodeVo> code) throws IOException{
+		DummyHospitalVo tempHosVo = new DummyHospitalVo(); // 병원 별 상세 정보
 		ArrayList<String> tempdump = new ArrayList<String>();  // 병원 상세 > 진료정보
+		ArrayList<HosInfoVo> tempHosInfoVoList = new ArrayList<HosInfoVo>();  // LIST for HOS_INFO TABLE
 		String tempHosService="",tempHosFeature="",tempHosOptime="";
 		
 		
@@ -102,51 +106,29 @@ public class HospitalCrawlingProxy {
 		}//for
 		
 		
-		int cnt =0;
-/*
-		if(tempdump.contains("진료과목")) {
-			int endcnt=0;
-			if (!tempdump.contains("진료동물") && !tempdump.contains("편의시설") && !tempdump.contains("진료시간") && tempdump.contains("기타")) {
-				endcnt = tempdump.indexOf("기타");
-			}else if(!tempdump.contains("진료동물") && !tempdump.contains("편의시설") && !tempdump.contains("진료시간") && !tempdump.contains("기타")) {
-				endcnt = tempdump.size();
-			}else if(!tempdump.contains("진료동물") && !tempdump.contains("편의시설") && tempdump.contains("진료시간")) {
-				endcnt = tempdump.indexOf("진료시간");
-			}else if(!tempdump.contains("진료동물") && tempdump.contains("편의시설")) {
-				endcnt = tempdump.indexOf("편의시설");
-			}else if(tempdump.contains("진료동물")) {
-				endcnt = tempdump.indexOf("진료동물");
+		 if(tempdump.contains("진료시간")) { 
+			 int endcnt=0; 
+			 if (!tempdump.contains("기타")) {
+				 endcnt = tempdump.size(); 
+			 }else if(tempdump.contains("기타")) { 
+				 endcnt = tempdump.indexOf("기타"); 
+			 }
+		  
+			 for (int i = tempdump.indexOf("진료시간")+1 ; i < endcnt; i++) {
+			 if(tempdump.get(i).toString().contains("주간진료")) { 
+				 tempHosOptime +=tempdump.get(i).toString()+"  "; 
+			 }else if(tempdump.get(i).toString().contains("야간응급진료")) { 
+				 tempHosOptime +=tempdump.get(i).toString()+"  "; 
+			 }else { 
+				 tempHosOptime +=tempdump.get(i).toString()+"/"; 
+			 }	
+			tempHosVo.setHosOptime(tempHosOptime); 
 			}
-			
-			for (int i = tempdump.indexOf("진료과목")+1 ; i < endcnt; i++) {
-				tempHosCourseOfTreatment +=tempdump.get(i).toString()+"|"; // 진료과목
-			}
-			tempMap.put("HosCourseOfTreatment", tempHosCourseOfTreatment);
-			
-		}*/
+		 }
 		
-/*		
-		if(tempdump.contains("진료동물")) {
-			int endcnt=0;
-			if ( !tempdump.contains("편의시설") && !tempdump.contains("진료시간") && tempdump.contains("기타")) {
-				endcnt = tempdump.indexOf("기타");
-			}else if(!tempdump.contains("편의시설") && !tempdump.contains("진료시간") && !tempdump.contains("기타")) {
-				endcnt = tempdump.size();
-			}else if( !tempdump.contains("편의시설") && tempdump.contains("진료시간")) {
-				endcnt = tempdump.indexOf("진료시간");
-			}else if( tempdump.contains("편의시설")) {
-				endcnt = tempdump.indexOf("편의시설");
-			}
-			
-			for (int i = tempdump.indexOf("진료동물")+1 ; i < endcnt; i++) {
-				tempHosMajorTreatmentTarget +=tempdump.get(i).toString()+"|"; // 진료동물
-			}
-			tempMap.put("tempHosMajorTreatmentTarget", tempHosMajorTreatmentTarget);
-		}
-		*/
 		
 		if(tempdump.contains("편의시설")) {
-			int endcnt=0;
+			 int endcnt=0; 
 			if ( !tempdump.contains("진료시간") && tempdump.contains("기타")) {
 				endcnt = tempdump.indexOf("기타");
 			}else if(!tempdump.contains("진료시간") && !tempdump.contains("기타")) {
@@ -165,21 +147,6 @@ public class HospitalCrawlingProxy {
 			tempHosVo.setHosService(tempHosService);
 		}
 		
-		/*
-		 * if(tempdump.contains("진료시간")) { int endcnt=0; if (!tempdump.contains("기타")) {
-		 * endcnt = tempdump.size(); }else if( !tempdump.contains("기타")) { endcnt =
-		 * tempdump.indexOf("기타"); }
-		 * 
-		 * for (int i = tempdump.indexOf("진료시간")+1 ; i < endcnt; i++) {
-		 * if(tempdump.get(i).toString().contains("주간진료")) { tempHosOptime
-		 * +=tempdump.get(i).toString()+" : "; }else
-		 * if(tempdump.get(i).toString().contains("야간응급진료")) { tempHosOptime
-		 * +=tempdump.get(i).toString()+" : "; }else { tempHosOptime
-		 * +=tempdump.get(i).toString()+"|"; // 편의시설 }
-		 * tempHosVo.setHosOptime(tempHosOptime); }
-		 * 
-		 * }
-		 */
 		if(tempdump.contains("기타")) {
 			for (int i = tempdump.indexOf("기타")+1 ; i < tempdump.size(); i++) {
 				if(i == tempdump.indexOf("기타")+1 ) {
@@ -191,9 +158,23 @@ public class HospitalCrawlingProxy {
 			tempHosVo.setHosFeature(tempHosFeature.replace(" .", ""));
 		}
 		
+		
+		HosInfoVo tempHosInfo; 
+		String tempHOspitalInfo = table_11.get(9).text() + table_11.get(11).text() +tempHosService + tempHosFeature +tempHosOptime;
+		
+		for (HosInfoCodeVo tempCode : code) {
+			tempHosInfo  = new HosInfoVo(); 
+			if(tempHOspitalInfo.contains(tempCode.getCodeName())) {
+				tempHosInfo.setHosInfoCode(tempCode.getHosInfoCode());
+				tempHosInfo.setHosNo(Integer.parseInt(hosNo));
+				tempHosInfoVoList.add(tempHosInfo);				
+			}
+
+		}
+		
+		
 		tempHosVo.setHosNo(Integer.parseInt(hosNo));
 		tempHosVo.setHosId("hosNo"+hosNo);
-		tempHosVo.setHosPass("hosNo"+hosNo);		
 		tempHosVo.setHosName(table_11.get(1).text());
 		tempHosVo.setHosAddress(table_11.get(3).text());
 		tempHosVo.setHosPhone(table_11.get(5).text());
@@ -201,6 +182,8 @@ public class HospitalCrawlingProxy {
 		tempHosVo.setHosMajorTreatmentTarget(table_11.get(9).text());
 		tempHosVo.setHosCourseOfTreatment(table_11.get(11).text());
 		tempHosVo.setHosIntro("안녕하세요    " +table_11.get(1).text()+ "입니다");
+		tempHosVo.setHosInfoList(tempHosInfoVoList);
+		
 		
 		System.out.println(tempHosVo.toString() + "<< hosNo");
 		

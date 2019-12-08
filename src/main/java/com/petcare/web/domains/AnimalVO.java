@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnimalVO {
 	
-	private String	user_id, ani_no, ani_kind, ani_name, ani_breed;
+	private String	userId, aniNo, aniKind, aniName, aniBreed;
 
 
 }

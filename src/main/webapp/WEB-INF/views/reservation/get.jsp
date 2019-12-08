@@ -39,7 +39,8 @@
 		 </div>
 		 	<div >
 			 <p>예약한 반려동물 :
-				  <input type="text" id="datepicker" readonly="readonly" name="resDt" value="<c:out value='${vo.aniName }'/>"/>
+				  <input type="text"  readonly="readonly" name="aniName" value="<c:out value='${vo.aniName}'/>"/>
+				
 			 </p>
 			</div>
 			<p> 증상:
@@ -49,7 +50,7 @@
 			 <button data-oper="modify" type="submit" class="btn btn-info">변경하기</button>
 			 <button data-oper="list" type="submit" class="btn btn-info">뒤로가기</button>
 	</div>
-		<form id="operForm" action="/reservation/modify" method="get">
+		<form id="operForm"  method="get">
 			<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${vo.treatNo}'/>">
 		</form>
 

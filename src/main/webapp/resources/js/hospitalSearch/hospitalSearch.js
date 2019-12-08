@@ -159,7 +159,7 @@ function setHospitalList(x){
 						'		</div>'+
 						'		<div class="col-sm-8 hospital-detail-wrap">'+
 						'			<div class="hospital-detail title">'+j.hosName+'</div>'+
-						'			<div class="hospital-detail">&nbsp;	 </div>'+
+						'			<div class="hospital-detail title">&nbsp;</div>'+
 						'			<div class="hospital-detail">'+j.hosPhone+'</div>'+
 						'			<div class="hospital-detail">'+j.hosAddress+'</div>'+
 						'			<div class="hospital-detail">'+j.hosMajorTreatmentTarget+'</div>'+
@@ -170,8 +170,8 @@ function setHospitalList(x){
 							setDetailView(j)
 						})
 						.appendTo('div.container.hospital-list-wrap')
-						pagination(d.pagination)
 			})//each
+			pagination(d.pagination)
 			
 			//검색 결과가 없을 경우."검색 결과가 없습니다." 
 			if(d.msg === "NODATA"){

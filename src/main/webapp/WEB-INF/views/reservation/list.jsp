@@ -31,15 +31,17 @@
  <!-- 시작  -->
 
 <div class="container">
-<c:if test="${userId != null}">
- <p>${userId}</p>
- <input type="hidden" name="userId" id="userId"value="${userId}">
-</c:if>
+
+ 
+
   <h2>예약 내역</h2>
-  <p>
-  	기간 조회 <input id="startDate" class="dueDate"> ~ <input id="endDate" class="dueDate">
-  	<button>기간으로 조회하기</button>
-  </p>
+  <form  autocomplete="off">
+	  <p>
+	  	기간 조회 <input id="startDate" class="dueDate"> ~ 
+	  	<input id="endDate" class="dueDate">
+	  	<button>기간으로 조회하기</button>
+	  </p>
+  </form>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -55,7 +57,7 @@
     
     <c:forEach items="${list}" var="reservation">
       <tr>
-      	<td><a href="/reservation/get?treatNo=<c:out value="${reservation.treatNo}"/>" >
+      	<td><a href="/reservation/get?treatNo=<c:out value="${reservation.treatNo}"/>" ><%--  &userId=<c:out value="${userId}"/> --%>
       	<c:out value="${reservation.treatNo}"/></a></td>
       	<td><c:out value="${reservation.resDt}"/></td>
       	<td><c:out value="${reservation.resTime}"/></td>
@@ -88,7 +90,7 @@
 			</form>
 		</div>
       <button id="goReser" type="button" class="btn btn-info">
-     	 예약하러가기
+     	 병원찾기
       </button>
 </div>
 
@@ -105,18 +107,38 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#goReser').on('click',function(){
-				self.location = "/reservation/regist";
-			})
+				self.location = "/sch/";
+			});
+			/* .dueDate */
 		});
+	
+		$(document).ready(function(){
+			$(".dueDate").datepicker({
+				beforeShowDay: $.datepicker.noWeekends,
+			    showButtonPanel: true, 
+			    dateFormat: "yymmdd",
+			    closeText: '닫기', 
+			    showOn: "both", 
+			    buttonImage: "/resources/img/reservation/calendar20.svg", 
+			    buttonImageOnly: true,
+			}) ;
+			
+			var today = new Date();
+			var endDate = $.datepicker.formatDate("yymmdd",today)
+			$("#endDate").datepicker( "option", "maxDate", today );
+			$("#endDate").val(endDate);
+		 });	
+			
 			
 		
 		
 	</script>
 
 	
+				
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>     -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

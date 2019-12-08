@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.domains.CustomerVO;
 import com.petcare.web.domains.LoginDTO;
-import com.petcare.web.domains.UserVO;
 import com.petcare.web.mapper.UserMapper;
 
 @Service
