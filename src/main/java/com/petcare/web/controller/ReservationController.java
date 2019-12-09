@@ -90,7 +90,7 @@ public class ReservationController {
 		model.addAttribute("userId",userId);
 				
 		if(service.modify(vo)) {
-			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("modify","success");
 		}
 		return "redirect:/reservation/list";
 	}
@@ -105,10 +105,10 @@ public class ReservationController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("treatNo") int treatNo,RedirectAttributes rttr,HttpSession session) {
+	public String remove(@RequestParam("treatNo") int treatNo,RedirectAttributes rttr) {
 		if(service.remove(treatNo)) {
 			
-			rttr.addFlashAttribute("result","success");
+			rttr.addFlashAttribute("remove","success");
 		}
 		return "redirect:/reservation/list";
 	}

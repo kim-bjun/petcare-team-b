@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resources/css/home/home.css" />
     <!-- datapick -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 	<!-- datepicker 한국어로 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
@@ -35,14 +35,18 @@
 			<%@ include file="../common/header.jsp" %>
 		</header>
 	</div>
-		<c:if test="${msg == false}">
+		<%-- <c:if test="${msg == false}">
 			<p> 로그인을 해주세요 </p>
-		</c:if>
+		</c:if> --%>
 		
 
 <!-- <div class="row h-100 justify-content-center align-items-center"></div>
 		<div class="col-10 col-md-8 col-lg-6"></div> -->
-		<form role="form" action="/reservation/regist" method="post" autocomplete="off">
+		<div class="row justify-content-center align-items-center">
+		 <div class="col-10 col-md-8 col-lg-6">
+	<main class="main">
+		<h6 class="section-title">예약 하기</h6>
+		<form role="form"  class="form shadow-sm rounded" action="/reservation/regist" method="post" autocomplete="off" class="shadow-sm rounded hospital-search-form">
 			<div class="container">
 				 <p>
 				  	예약날짜: <input type="text" id="datepicker" name="resDt"/>
@@ -75,11 +79,16 @@
 						 </select>
 					 </p>
 				 </div>
-						
+					<p>증상</p>
 					 <textarea cols="40" rows="3" id="comment" name="resItem" ></textarea>
-					 <button type="submit" class="btn btn-info">예약하기</button>
+					 <div>
+						 <button type="submit" class="search-button btn btn-primary d-flex justify-content-center">예약하기</button>
+					 </div>
 			</div>
 		 </form>
+	</main>
+		 </div>
+		</div>
 		 
  
 	<footer>

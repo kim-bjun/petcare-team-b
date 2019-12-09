@@ -10,7 +10,7 @@
 	        			<div class="detail-label">병원 정보</div>
 	        		</div>
 	        		<div class="col-sm-1 detail-icon-btn-wrap">
-		        		<a href="/reservation/regist/hosNo=${result.hosNo }">
+		        		<a href="/reservation/regist/hosNo=${result.hosNo }" data-toggle="tooltip" data-placement="left" title="reservation">
 		        			<i class="far fa-calendar-alt detail-icon-btn" aria-hidden="true"  ></i>
 		        		</a>
 	        		</div>
@@ -53,3 +53,8 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+	  $('a[data-toggle="tooltip"]').tooltip();   
+	});
+</script>
