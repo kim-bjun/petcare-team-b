@@ -25,6 +25,9 @@ public class Criteria {
 	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 	}
+	public int getPageStart() {
+		return (this.pageNo-1)*perPage;
+	}
 	
 	
 	

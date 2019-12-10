@@ -5,7 +5,7 @@
 	select faq_no, faq_cat, faq_name, faq_cont from faq
 	</select>
 	<select id="listcri" resultType="FAQVO">
-	select faq_no, faq_cat, faq_name, faq_cont from faq limit #{pageNo},#{perPage}
+	select faq_no, faq_cat, faq_name, faq_cont from faq limit #{pageStart},#{perPage}
 	</select>
 	
 	
