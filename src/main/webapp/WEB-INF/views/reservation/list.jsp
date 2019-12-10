@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/resources/css/home/home.css" />
     <!-- datapick -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 	<!-- datepicker 한국어로 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
@@ -33,16 +33,17 @@
 <div class="container">
 
  
-
-  <h2>예약 내역</h2>
-  <form  autocomplete="off">
+<main class="main">
+  <h3 class="section-title">예약 내역</h3>
+  <form autocomplete="off">
 	  <p>
-	  	기간 조회 <input id="startDate" class="dueDate"> ~ 
+	  	기간 조회 :<input id="startDate" class="dueDate"> ~ 
 	  	<input id="endDate" class="dueDate">
 	  	<button>기간으로 조회하기</button>
 	  </p>
   </form>
-  <table class="table table-bordered">
+
+  <table class="table table-bordered col-10">
     <thead>
       <tr>
       	<th>예약 번호</th>
@@ -74,14 +75,15 @@
     </tbody>
   </table>
   
-      
+
+   
       
       <div>
-	      <select>
-	      	<option value="hos">병원</option>
-	      	<option value="aniname">반려동물이름</option>
-	      </select>
-	      <form class="search-box form-inline active-purple-4 align-items-center justify-content-center">
+	      <form class="search-box form-inline active-purple-4 align-items-center justify-content-center col-10">
+		      <select>
+		      	<option value="hos">병원</option>
+		      	<option value="aniname">반려동물이름</option>
+		      </select>
 			  <input class="form-control form-control-sm w-75"
 			  	type="text"
 			  	placeholder="search."
@@ -90,12 +92,12 @@
 			</form>
 		</div>
       <button id="goReser" type="button" class="btn btn-info">
-     	 병원찾기
+     	 병원/동물 찾기
       </button>
 </div>
 
 
-
+ </main>  
  
  
  <!-- 끝 -->
@@ -104,6 +106,7 @@
 		</footer>
 	</div>
 	
+	<!-- 데이터피커 스크립트  -->
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#goReser').on('click',function(){
@@ -121,12 +124,33 @@
 			    showOn: "both", 
 			    buttonImage: "/resources/img/reservation/calendar20.svg", 
 			    buttonImageOnly: true,
+			    /* onClose : function ( selectedDate ) {
+			    	var eleId = $(this).attr("id");
+                    var optionName = "";
+
+                    if(eleId.indexOf("startDate") > 0) {
+                        eleId = eleId.replace("startDate", "endDate");
+                        optionName = "minDate";
+                        //endDate mindate
+                    } else {
+                        eleId = eleId.replace("endDate", "startDate");
+                        optionName = "minDate";
+                        //startdate maxdate
+                    }
+
+                    $("#"+eleId).datepicker( "option", optionName, selectedDate );        
+                    //$(".searchDate").find(".chkbox2").removeClass("on"); 
+                } */
+
+
 			}) ;
 			
 			var today = new Date();
-			var endDate = $.datepicker.formatDate("yymmdd",today)
-			$("#endDate").datepicker( "option", "maxDate", today );
+			var endDate = $.datepicker.formatDate("yymmdd",today);
+			var startDate =$('#startDate').val();
 			$("#endDate").val(endDate);
+			$("#endDate").datepicker( "option", "maxDate", today);
+			$("#startDate").datepicker( "option", "maxDate", endDate);
 		 });	
 			
 			

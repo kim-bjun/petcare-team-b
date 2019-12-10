@@ -19,6 +19,6 @@ public class CustomerVO {
 	private String	userPhone;		//고객 전화
 	private String	userEmail;		//고객 이메일
 	private String	userAddress;	//고객 주소
-	
+	private String  userAuth ;
 
 }

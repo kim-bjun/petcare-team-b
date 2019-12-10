@@ -14,69 +14,74 @@
     <link rel="stylesheet" href="/resources/css/home/home.css" />
     <!-- datapick -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 	<!-- datepicker 한국어로 -->
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
 
 </head>
-<body>
-
-<%-- 	<% 
-		request.setCharacterEncoding("euc-kr"); 
-	    int hos_no = Integer.parseInt(request.getParameter("hosNo"));
-	%> --%>
-	   	
+<body>	   	
 	<div id="root">
 		<header>
 			<%@ include file="../common/header.jsp" %>
 		</header>
 	</div>
-		<%-- <c:if test="${msg == false}">
-			<p> 로그인을 해주세요 </p>
-		</c:if> --%>
-<form id="operForm" method="post">
-	<div class="container">
-		 <p>
-		  	예약날짜: <input type="text" id="datepicker" name="resDt" value="<c:out value='${board.resDt}'/>"/>
-		 </p>
-		 		
-		 <div>
-		     <p>예약시간
-		         <select id="res_time" name="resTime">
-		             <option value="09:00">9:00</option>
-		             <option value="10:00">10:00</option>
-		             <option value="11:00">11:00</option>
-		             <option value="12:00">12:00</option>
-		             <option value="14:00">14:00</option>
-		             <option value="15:00">15:00</option>
-		             <option value="16:00">16:00</option>
-		             <option value="17:00">17:00</option>
-		         </select>
-		       </p>
-		 </div>
-		 	<div >
-			 
-				 <p>예약할 반려동물 :
-					 <select  name="aniNo">
-						 <c:forEach items="${aninoList}" var="Nolist">
-			       			<option  value="<c:out value="${Nolist.aniNo}"/>">
-			       			<c:out value="${Nolist.aniName}"/></option>
-			       		</c:forEach>
-					 </select>
-				 </p>
-			 
-			</div>
-			 <textarea cols="40" rows="3" name="resItem" ><c:out value='${board.resItem}'/></textarea>
-			 <button data-oper="modify" class="btn btn-info">수정하기</button>
-			 <button data-oper="remove" class="btn btn-info">삭제하기</button>
+	
+	
+<div class="row justify-content-center align-items-center">
+	<div class="col-10 col-md-8 col-lg-6">
+		<main class="main">
+		<h3 class="section-title">수정페이지 </h3>
+			<form  role="form"  method="post">
+				<div class="container">
+					 <p>
+					  	예약날짜: <input type="text" id="datepicker" name="resDt" value="<c:out value='${board.resDt}'/>"/>
+					 </p>
+					 		
+					 <div>
+					     <p>예약시간
+					         <select id="res_time" name="resTime">
+					             <option value="09:00">9:00</option>
+					             <option value="10:00">10:00</option>
+					             <option value="11:00">11:00</option>
+					             <option value="12:00">12:00</option>
+					             <option value="14:00">14:00</option>
+					             <option value="15:00">15:00</option>
+					             <option value="16:00">16:00</option>
+					             <option value="17:00">17:00</option>
+					         </select>
+					       </p>
+					 </div>
+					 	<div >
+						 
+							 <p>예약할 반려동물 :
+								 <select  name="aniNo">
+									 <c:forEach items="${aninoList}" var="Nolist">
+						       			<option  value="<c:out value="${Nolist.aniNo}"/>">
+						       			<c:out value="${Nolist.aniName}"/></option>
+						       		</c:forEach>
+								 </select>
+							 </p>
+						 
+						</div>
+						<p>증상</p>
+						 <textarea cols="40" rows="3" name="resItem" ><c:out value='${board.resItem}'/></textarea>
+						 <div>
+							 <button data-oper="modify" class="btn btn-info">수정완료</button>
+							 <button data-oper="list" class="btn btn-info">리스트가기</button>
+						 </div>
+				</div>
+					 	<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${treatNo}'/>">
+					 	<%-- <input type="hidden" id="userId" name="userId" value="<c:out value='${userId}'/>"> --%>
+			
+			</form>
+								
+		</main>
 	</div>
-		 	<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${treatNo}'/>">
-		 	<input type="hidden" id="userId" name="userId" value="<c:out value='${userId}'/>">
+</div>
+				    		    					
+		
 
-</form>
-					
-			    		    					
 						
 		
  
@@ -87,16 +92,27 @@
 	<script>
 		$(documemt).ready(function(){
 			
-			
-			var operForm= $('#operForm');
-			$('button[date-oper="modify"]').on('click',function(e){
+			var operForm = $('form');
+			$('button').on('click',function(e){
 				e.preventDefault();
-				operForm.attr('action','/reservation/modify').submit();
+				
+				var operation = $(this).data("oper");
+				console.log(operation);
+				if(operation == "list"){
+					operForm.attr("action","/reservation/list");
+				}else{
+					operForm.attr("action","/reservation/modify")
+				}
+				operForm.submit();
 			});
+			
+			
+			/* var operForm= $('#operForm');
 			$('button[data-oper="remove"]').on('click',function(e){
 				e.preventDefault();
-				operForm.attr('action','/reservation/remove').submit();
-			})
+				operForm.attr('action','/reservation/remove').attr('method','post').submit();
+			});
+			operForm.submit(); */
 		})
 			
 			
