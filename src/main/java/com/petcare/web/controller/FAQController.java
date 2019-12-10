@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.petcare.web.domains.FAQVO;
 import com.petcare.web.service.FAQService;
+import com.petcare.web.utills.Criteria;
 
 @Controller
 @RequestMapping("/faq")
@@ -19,9 +20,10 @@ public class FAQController {
 	FAQService service;
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list(Model model) throws Exception {
-		List<FAQVO> volist=service.readAll();
+	public String list(Model model,Criteria cri) throws Exception {
+		List<FAQVO> volist=service.listcri(cri);
 		model.addAttribute("list",volist);
+		
 		return "/faq/faqlist";
 	}
 }

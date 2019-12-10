@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="/resources/css/home/home.css" />
     <!-- datapick -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-	<!-- datepicker 한국어로 -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
+
 
 </head>
 <body>
@@ -26,30 +25,40 @@
 		</header>
 	</div>
 		
-
-	<div class="container">
-		 <p>
-		  	예약날짜: <input type="text" id="datepicker"  readonly="readonly" name="resDt" value="<c:out value='${vo.resDt }'/>"/>
-		 </p>
-		 
-		 <div>
-		     <p>예약시간 : <input type="text" id="datepicker"  readonly="readonly"name="resDt" value="<c:out value='${vo.resTime }'/>"/>
-		         
-		       </p>
+		
+<div class="row justify-content-center align-items-center">
+		 <div class="col-10 col-md-8 col-lg-6">
+			<main class="main">
+			
+				<div class="container">
+					 <p>
+					  	예약날짜: <input type="text" id="datepicker"  readonly="readonly" name="resDt" value="<c:out value='${vo.resDt }'/>"/>
+					 </p>
+					 
+					 <div>
+					     <p>예약시간 : <input type="text" id="datepicker"  readonly="readonly" name="resDt" value="<c:out value='${vo.resTime }'/>"/>
+					         
+					       </p>
+					 </div>
+					 	<div >
+						 <p>예약한 반려동물 :
+							  <input type="text"  readonly="readonly" name="aniName" value="<c:out value='${vo.aniName}'/>"/>
+							
+						 </p>
+						</div>
+						<p> 증상:
+						 </p>
+						 <textarea cols="40" rows="3" name="resItem" readonly="readonly"><c:out value='${vo.resItem}'/></textarea>
+						 <div>
+							 <button data-oper="modify" type="submit" class="btn btn-info">변경하기</button>
+							 <button data-oper="remove" type="submit" class="btn btn-info">삭제하기</button>
+							 <button data-oper="list" type="submit" class="btn btn-info">뒤로가기</button>
+						 </div>
+				</div>
+			</main>
 		 </div>
-		 	<div >
-			 <p>예약한 반려동물 :
-				  <input type="text"  readonly="readonly" name="aniName" value="<c:out value='${vo.aniName}'/>"/>
-				
-			 </p>
-			</div>
-			<p> 증상:
-			 <textarea cols="40" rows="3" name="resItem" readonly="readonly"><c:out value='${vo.resItem}'/></textarea>
-			 </p>
-			 
-			 <button data-oper="modify" type="submit" class="btn btn-info">변경하기</button>
-			 <button data-oper="list" type="submit" class="btn btn-info">뒤로가기</button>
-	</div>
+</div>
+
 		<form id="operForm"  method="get">
 			<input type="hidden" id="treatNo" name="treatNo" value="<c:out value='${vo.treatNo}'/>">
 		</form>
@@ -65,7 +74,10 @@
 			var operForm= $('#operForm');
 			$('button[data-oper="modify"]').on('click', function(e){
 					operForm.attr("action","/reservation/modify").submit();
-			})
+			});
+			$('button[data-oper="remove"]').on('click', function(e){
+				operForm.attr("action","/reservation/remove").attr("method","post").submit();
+			});
 				
 			$('button[data-oper="list"]').on('click',function(e){
 				
