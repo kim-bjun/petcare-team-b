@@ -26,8 +26,7 @@
 		</header>
 		<section>
 			<c:forEach var="faq" items="${list}">
-			${faq.faqName}<br>
-			${faq.faqCont}<br>
+			${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont}<br>
 			</c:forEach>
 		</section>
 		<footer>

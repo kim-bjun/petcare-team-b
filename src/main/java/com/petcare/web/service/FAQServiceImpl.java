@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.domains.FAQVO;
 import com.petcare.web.mapper.FAQMapper;
+import com.petcare.web.utills.Criteria;
 
 @Service
 public class FAQServiceImpl implements FAQService {
@@ -21,8 +22,6 @@ public class FAQServiceImpl implements FAQService {
 		return mapper.readAll();
 	}
 	
-	
-
 	@Override
 	public void regist(FAQVO faqVO) throws Exception {
 		mapper.create(faqVO);
@@ -36,5 +35,11 @@ public class FAQServiceImpl implements FAQService {
 	@Override
 	public void remove(Integer faqNo) throws Exception {
 		mapper.delete(faqNo);
+	}
+	
+	@Override
+	public List<FAQVO> listcri(Criteria cri) throws Exception {
+		
+		return mapper.listcri(cri);
 	}
 }
