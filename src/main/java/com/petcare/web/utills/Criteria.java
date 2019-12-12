@@ -28,6 +28,11 @@ public class Criteria {
 	public int getPageStart() {
 		return (this.pageNo-1)*perPage;
 	}
+
+	@Override
+	public String toString() {
+		return "Criteria [pageNo=" + pageNo + ", perPage=" + perPage + "]";
+	}
 	
 	
 	
