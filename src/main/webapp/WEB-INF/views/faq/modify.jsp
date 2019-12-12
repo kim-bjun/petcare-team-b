@@ -25,30 +25,27 @@
 			<%@ include file="../common/header.jsp"%>
 		</header>
 		<section>
-			<div>
-				<a href="/faq/regist"
-					style="font-size: 20px; border: 1px solid; float: right">등록</a>
-			</div>
+			<form role="form" method="post">
+				<div class="form-group">
+					<label>카테고리</label> <select name="faqCat">
+						<option value="register">회원가입</option>
+						<option value="reservation">예약</option>
+						<option value="review">리뷰</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>제목</label> <input type="text" name="faqName"
+						value="${faq.faqName}" />
+				</div>
+				<div class="form-group">
+					<label>내용</label>
+					<textarea name="faqCont" placeholder="Enter...">${faq.faqCont}</textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit">등록</button>
+				</div>
 
-			<c:forEach var="faq" items="${list}">
-			${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont} &nbsp&nbsp  <a
-					href="/faq/modify?faqCat=${faq.faqCat}&faqName=${faq.faqName}&faqCont=${faq.faqCont}&faqNo=${faq.faqNo}">수정</a>
-				<a href="/faq/delete?faqNo=${faq.faqNo}">삭제</a>
-				<br>
-			</c:forEach>
-			<div>
-
-				<c:if test="${paging.prev}">
-					<a href="/faq/list?pageNo=${paging.startPage-1}">prev</a>
-				</c:if>
-				<c:forEach var="i" begin="${paging.startPage}"
-					end="${paging.endPage }" step="1">
-					<a href="/faq/list?pageNo=${i}">${i}</a>
-				</c:forEach>
-				<c:if test="${paging.next}">
-					<a href="/faq/list?pageNo=${paging.endPage+1}">next</a>
-				</c:if>
-			</div>
+			</form>
 		</section>
 		<footer>
 			<%@ include file="../common/footer.jsp"%>
@@ -70,10 +67,5 @@
 		crossorigin="anonymous"></script>
 	<script src="/resources/js/common/template.js?ver=1"></script>
 </body>
-<script>
-	var result = '${msg}';
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
-	}
-</script>
+
 </html>

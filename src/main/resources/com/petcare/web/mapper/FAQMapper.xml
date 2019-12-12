@@ -8,6 +8,23 @@
 	select faq_no, faq_cat, faq_name, faq_cont from faq limit #{pageStart},#{perPage}
 	</select>
 	
+	<insert id="create">
+	INSERT INTO FAQ(faq_cat,faq_name,faq_cont) VALUES(#{faqCat},#{faqName},#{faqCont})
+	</insert>
+	
+	<select id="delete">
+	DELETE FROM FAQ WHERE FAQ_NO=#{faqNo}
+	</select>
+	
+	<update id="update">
+	UPDATE FAQ SET faq_cat=#{faqCat}, faq_name=#{faqName}, faq_cont=#{faqCont} WHERE FAQ_NO=#{faqNo}
+	</update>
+	
+	<select id="count" resultType="int">
+	SELECT COUNT(*) FROM FAQ
+	</select>
+	
+	
 	
 
 

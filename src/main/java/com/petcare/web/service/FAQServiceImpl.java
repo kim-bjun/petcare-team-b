@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.petcare.web.domains.FAQVO;
 import com.petcare.web.mapper.FAQMapper;
 import com.petcare.web.utills.Criteria;
+import com.petcare.web.utills.Paging;
 
 @Service
 public class FAQServiceImpl implements FAQService {
@@ -42,4 +43,16 @@ public class FAQServiceImpl implements FAQService {
 		
 		return mapper.listcri(cri);
 	}
+	
+	@Override
+	public Paging makePage(Criteria cri) throws Exception{
+		
+		int pageNo=cri.getPageNo();
+		int perPage=cri.getPerPage();
+		int totalCount=mapper.count();
+		
+		Paging paging=new Paging(pageNo, totalCount,perPage);
+		return paging;
+	}
+	
 }
