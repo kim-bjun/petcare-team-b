@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.petcare.web.domains.FAQVO;
 import com.petcare.web.service.FAQService;
 import com.petcare.web.utills.Criteria;
+import com.petcare.web.utills.Paging;
 
 @Controller
 @RequestMapping("/faq")
@@ -23,9 +24,10 @@ public class FAQController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model,Criteria cri) throws Exception {
 		List<FAQVO> volist=service.listcri(cri);
-		System.out.println(service.makePage(cri));
+		Paging pageList=service.makePage(cri);
 		System.out.println(volist);
 		model.addAttribute("list",volist);
+		model.addAttribute(pageList);
 		
 		return "/faq/faqlist";
 	}
