@@ -25,10 +25,22 @@
 			<%@ include file="../common/header.jsp"%>
 		</header>
 		<section>
+		<div>
+		<form>
+		<select>
+		<option value="n">---</option>
+		<option></option>
+		<option></option>
+		<option></option>
+		<option></option>
+		</select>
+		<input type="text" name="searchCont"/>
+		</form>
+		</div>
 		<div><a href="/faq/regist" style="font-size:20px ; border:1px solid ;float:right" >등록</a></div>
 			
 			<c:forEach var="faq" items="${list}">
-			${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont} &nbsp&nbsp  <a href="/faq/modify?faqCat=${faq.faqCat}&faqName=${faq.faqName}&faqCont=${faq.faqCont}&faqNo=${faq.faqNo}">수정</a> <a href="/faq/delete?faqNo=${faq.faqNo}">삭제</a><br>
+			${faq.faqCat=='register'? 1:2 }${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont} &nbsp&nbsp  <a href="/faq/modify?faqCat=${faq.faqCat}&faqName=${faq.faqName}&faqCont=${faq.faqCont}&faqNo=${faq.faqNo}">수정</a> <a href="/faq/delete?faqNo=${faq.faqNo}">삭제</a><br>
 			</c:forEach>
 		</section>
 		<footer>
@@ -46,7 +58,7 @@
 <script>
 var result='${msg}';
 if(result=='SUCCESS'){
-	alert("처리가 완료되었습니다.");
+	alert("처리가 완료되었습니다");
 }
 </script>
 </html>

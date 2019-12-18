@@ -11,7 +11,7 @@ public class Paging {
 	
 	public Paging(int pageNo, int totalCount, int perPage){
 		
-		System.out.println(Math.ceil(totalCount/perPage));
+//		System.out.println(Math.ceil(totalCount/perPage));
 		totalEnd=(int)Math.ceil(totalCount/perPage);
 		startPage=(pageNo/pageCount)*10+1;
 		endPage=Math.min(totalEnd,startPage+9);
