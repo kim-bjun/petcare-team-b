@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.domains.FAQVO;
 import com.petcare.web.mapper.FAQMapper;
-import com.petcare.web.utills.Criteria;
 import com.petcare.web.utills.Paging;
+import com.petcare.web.utills.SearchCriteria;
 
 @Service
 public class FAQServiceImpl implements FAQService {
@@ -39,19 +39,29 @@ public class FAQServiceImpl implements FAQService {
 	}
 	
 	@Override
-	public List<FAQVO> listcri(Criteria cri) throws Exception {
+	public List<FAQVO> listcri(SearchCriteria cri) throws Exception {
 		
 		return mapper.listcri(cri);
 	}
 	
 	@Override
-	public Paging makePage(Criteria cri) throws Exception{
+	public List<FAQVO> searchlist(SearchCriteria cri) throws Exception {
+		
+		return mapper.searchlist(cri);
+	}
+	
+	@Override
+	public Paging makePage(SearchCriteria cri) throws Exception{
 		
 		int pageNo=cri.getPageNo();
 		int perPage=cri.getPerPage();
+		
 		int totalCount=mapper.count();
 		
 		Paging paging=new Paging(pageNo, totalCount,perPage);
+		paging.setSearchType(cri.getSearchType());
+		paging.setSearchContent(cri.getSearchContent());
+		
 		return paging;
 	}
 	

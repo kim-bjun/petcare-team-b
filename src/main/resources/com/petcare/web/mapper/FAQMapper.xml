@@ -24,6 +24,16 @@
 	SELECT COUNT(*) FROM FAQ
 	</select>
 	
+	<select id="searchlist" resultType="FAQVO">
+	SELECT FAQ_NO, FAQ_CAT, FAQ_NAME, FAQ_CONT FROM FAQ 
+		<where>
+			<if test="searchType == 'c'.toString()">
+			faq_cont like #{searchContent}
+			</if>
+		</where>
+	LIMIT #{pageStart}, #{perPage}
+	</select>
+	
 	
 	
 
