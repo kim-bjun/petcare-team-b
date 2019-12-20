@@ -25,28 +25,34 @@
 			<%@ include file="../common/header.jsp"%>
 		</header>
 		<section>
-			<div>
-				<a href="/faq/regist"
-					style="font-size: 20px; border: 1px solid; float: right">등록</a>
-			</div>
-
+		<div>
+		<form action="/faq/list">
+		<select name="searchType">
+		<option value="n" <c:out value="${cri.searchType==null?'selected':'' }" /> >---</option>
+		<option value="t" <c:out value="${cri.searchType eq 't'?'selected':'' }" /> >Title</option>
+		<option value="c" <c:out value="${cri.searchType eq 'c'?'selected':'' }" /> >Content</option>
+		</select>
+		
+		<input type="text" name="searchContent"/>
+		<button type="submit" >검색</button>
+		</form>
+		</div>
+		<div><a href="/faq/regist" style="font-size:20px ; border:1px solid ;float:right" >등록</a></div>
+			
 			<c:forEach var="faq" items="${list}">
-			${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont} &nbsp&nbsp  <a
-					href="/faq/modify?faqCat=${faq.faqCat}&faqName=${faq.faqName}&faqCont=${faq.faqCont}&faqNo=${faq.faqNo}">수정</a>
-				<a href="/faq/delete?faqNo=${faq.faqNo}">삭제</a>
-				<br>
+			${faq.faqCat} &nbsp&nbsp ${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont} &nbsp&nbsp  <a href="/faq/modify?faqCat=${faq.faqCat}&faqName=${faq.faqName}&faqCont=${faq.faqCont}&faqNo=${faq.faqNo}">수정</a> <a href="/faq/delete?faqNo=${faq.faqNo}">삭제</a><br>
 			</c:forEach>
 			<div>
 
 				<c:if test="${paging.prev}">
-					<a href="/faq/list?pageNo=${paging.startPage-1}">prev</a>
+					<a href="/faq/list?pageNo=${paging.startPage-1}&searchType=${paging.searchType}&searchContent=${paging.searchContent}">prev</a>
 				</c:if>
 				<c:forEach var="i" begin="${paging.startPage}"
 					end="${paging.endPage }" step="1">
-					<a href="/faq/list?pageNo=${i}">${i}</a>
+					<a href="/faq/list${paging.makeQuery(i)}">${i}</a>
 				</c:forEach>
 				<c:if test="${paging.next}">
-					<a href="/faq/list?pageNo=${paging.endPage+1}">next</a>
+					<a href="/faq/list?pageNo=${paging.endPage+1}&searchType=${paging.searchType}&searchContent=${paging.searchContent}">next</a>
 				</c:if>
 			</div>
 		</section>
@@ -75,5 +81,6 @@
 	if (result == 'SUCCESS') {
 		alert("처리가 완료되었습니다.");
 	}
+
 </script>
 </html>

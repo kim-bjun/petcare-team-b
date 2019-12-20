@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.petcare.web.domains.FAQVO;
 import com.petcare.web.utills.Criteria;
+import com.petcare.web.utills.SearchCriteria;
 
 
 @Mapper
@@ -16,5 +17,6 @@ public interface FAQMapper {
 	public void update(FAQVO vo) throws Exception;
 	public void delete(Integer faqNo) throws Exception;
 	public List<FAQVO> listcri(Criteria cri) throws Exception;
+	public List<FAQVO> searchlist(SearchCriteria cri) throws Exception;
 	public int count() throws Exception;
 }

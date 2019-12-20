@@ -1,5 +1,8 @@
 package com.petcare.web.utills;
 
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class Paging {
 
 	int startPage;
@@ -8,15 +11,31 @@ public class Paging {
 	int totalEnd;
 	boolean next;
 	boolean prev;
+	String searchType;
+	String searchContent;
 	
 	public Paging(int pageNo, int totalCount, int perPage){
 		
+
+//		System.out.println(Math.ceil(totalCount/perPage));
 		totalEnd=(int)Math.ceil(totalCount/(float)perPage);
 		startPage=(int)(Math.ceil((float)pageNo/(float)pageCount)-1)*10+1;
+
 		endPage=Math.min(totalEnd,startPage+9);
 		prev=startPage==1? false:true;
 		next=totalEnd>endPage? true:false;
 		
+	}
+	
+	public String makeQuery(int pageNo) {
+		
+		UriComponents uriComponents=UriComponentsBuilder.newInstance()
+				.queryParam("pageNo",pageNo)
+				.queryParam("searchType",searchType)
+				.queryParam("searchContent", searchContent)
+				.build();
+		
+		return uriComponents.toString();
 	}
 
 	@Override
@@ -39,6 +58,22 @@ public class Paging {
 
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getSearchContent() {
+		return searchContent;
+	}
+
+	public void setSearchContent(String searchContent) {
+		this.searchContent = searchContent;
 	}
 
 	public boolean isNext() {
