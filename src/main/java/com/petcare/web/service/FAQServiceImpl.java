@@ -56,7 +56,7 @@ public class FAQServiceImpl implements FAQService {
 		int pageNo=cri.getPageNo();
 		int perPage=cri.getPerPage();
 		
-		int totalCount=mapper.count();
+		int totalCount=mapper.count(cri);
 		
 		Paging paging=new Paging(pageNo, totalCount,perPage);
 		paging.setSearchType(cri.getSearchType());

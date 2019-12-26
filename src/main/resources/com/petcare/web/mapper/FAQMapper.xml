@@ -22,13 +22,24 @@
 	
 	<select id="count" resultType="int">
 	SELECT COUNT(*) FROM FAQ
+	<where>
+			<if test="searchType == 'c'.toString()">
+			faq_cont like concat('%', #{searchContent},'%')
+			</if>
+			<if test="searchType == 't'.toString()">
+			faq_name like concat('%', #{searchContent},'%')
+			</if>
+		</where>
 	</select>
 	
 	<select id="searchlist" resultType="FAQVO">
 	SELECT FAQ_NO, FAQ_CAT, FAQ_NAME, FAQ_CONT FROM FAQ 
 		<where>
 			<if test="searchType == 'c'.toString()">
-			faq_cont like #{searchContent}
+			faq_cont like concat('%', #{searchContent},'%')
+			</if>
+			<if test="searchType == 't'.toString()">
+			faq_name like concat('%', #{searchContent},'%')
 			</if>
 		</where>
 	LIMIT #{pageStart}, #{perPage}

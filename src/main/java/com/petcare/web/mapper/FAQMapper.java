@@ -18,5 +18,5 @@ public interface FAQMapper {
 	public void delete(Integer faqNo) throws Exception;
 	public List<FAQVO> listcri(Criteria cri) throws Exception;
 	public List<FAQVO> searchlist(SearchCriteria cri) throws Exception;
-	public int count() throws Exception;
+	public int count(SearchCriteria cri) throws Exception;
 }
