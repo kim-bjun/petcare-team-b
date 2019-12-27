@@ -29,6 +29,9 @@
 			<if test="searchType == 't'.toString()">
 			faq_name like concat('%', #{searchContent},'%')
 			</if>
+			<if test="searchType == 'ct'.toString()">
+			faq_cat like concat('%', #{searchContent},'%')
+			</if>
 		</where>
 	</select>
 	
@@ -40,6 +43,9 @@
 			</if>
 			<if test="searchType == 't'.toString()">
 			faq_name like concat('%', #{searchContent},'%')
+			</if>
+			<if test="searchType == 'ct'.toString()">
+			faq_cat like concat('%', #{searchContent},'%')
 			</if>
 		</where>
 	LIMIT #{pageStart}, #{perPage}

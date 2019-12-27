@@ -31,6 +31,7 @@
 		<option value="n" <c:out value="${cri.searchType==null?'selected':'' }" /> >---</option>
 		<option value="t" <c:out value="${cri.searchType eq 't'?'selected':'' }" /> >Title</option>
 		<option value="c" <c:out value="${cri.searchType eq 'c'?'selected':'' }" /> >Content</option>
+		<option value="ct" <c:out value="${cri.searchType eq 'ct'?'selected':'' }" /> >Category</option>
 		</select>
 		
 		<input type="text" name="searchContent"/>
@@ -38,7 +39,10 @@
 		</form>
 		</div>
 		<div><a href="/faq/regist" style="font-size:20px ; border:1px solid ;float:right" >등록</a></div>
-			
+		<div>
+		<a href="/faq/category?searchType=ct&searchContent=예약">예약</a>
+		<a href="">가입</a>
+		</div>	
 			<c:forEach var="faq" items="${list}">
 			${faq.faqCat} &nbsp&nbsp ${faq.faqNo} &nbsp&nbsp ${faq.faqName} &nbsp&nbsp ${faq.faqCont} &nbsp&nbsp  <a href="/faq/modify?faqCat=${faq.faqCat}&faqName=${faq.faqName}&faqCont=${faq.faqCont}&faqNo=${faq.faqNo}">수정</a> <a href="/faq/delete?faqNo=${faq.faqNo}">삭제</a><br>
 			</c:forEach>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.petcare.web.domains.FAQVO;
@@ -65,5 +66,13 @@ public class FAQController {
 		service.modify(vo);
 		rttr.addFlashAttribute("msg","SUCCESS" );
 		return "redirect:/faq/list";
+	}
+	
+	@RequestMapping(value="/category", method=RequestMethod.GET)
+	public @ResponseBody List<FAQVO> category(SearchCriteria cri) throws Exception{
+		List<FAQVO> result=service.searchlist(cri);
+		
+		return result;
+		
 	}
 }
