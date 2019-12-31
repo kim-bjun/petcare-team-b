@@ -27,7 +27,6 @@ public class FAQController {
 	public String list(Model model,@ModelAttribute("cri") SearchCriteria cri) throws Exception {
 		List<FAQVO> volist=service.searchlist(cri);
 		Paging pageList=service.makePage(cri);
-//		System.out.println(volist);
 		model.addAttribute("list",volist);
 		model.addAttribute(pageList);
 		
@@ -71,6 +70,7 @@ public class FAQController {
 	@RequestMapping(value="/category", method=RequestMethod.GET)
 	public @ResponseBody List<FAQVO> category(SearchCriteria cri) throws Exception{
 		List<FAQVO> result=service.searchlist(cri);
+		Paging pageList=service.makePage(cri);
 		
 		return result;
 		

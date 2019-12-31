@@ -45,7 +45,7 @@
 					style="font-size: 20px; border: 1px solid; float: right">등록</a>
 			</div>
 			<div>
-				<a href="" id="reserve">예약</a> <a href="">가입</a>
+				<a href="/faq/list?searchType=ct&searchContent=예약" id="reserve">예약</a> <a href="/faq/list?searchType=ct&searchContent=가입">가입</a>
 			</div>
 			<div id="list">
 			<c:forEach var="faq" items="${list}">
@@ -55,7 +55,7 @@
 				<br>
 			</c:forEach>
 			</div>
-			<div>
+			<div id="page">
 
 				<c:if test="${paging.prev}">
 					<a
@@ -99,7 +99,7 @@
 		alert("처리가 완료되었습니다.");
 	}
 	
-	$("#reserve").on("click", function(event){
+	/* $("#reserve").on("click", function(event){
 		event.preventDefault();
 		$.getJSON("/faq/category?searchType=ct&searchContent=예약",function(data){
 			$.each(data,function(i,val){
@@ -113,7 +113,7 @@
 		});
 			
 		
-	})
+	}); */
 
 </script>
 </html>
