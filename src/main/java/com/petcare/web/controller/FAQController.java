@@ -1,5 +1,6 @@
 package com.petcare.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,11 +69,14 @@ public class FAQController {
 	}
 	
 	@RequestMapping(value="/category", method=RequestMethod.GET)
-	public @ResponseBody List<FAQVO> category(SearchCriteria cri) throws Exception{
-		List<FAQVO> result=service.searchlist(cri);
+	public @ResponseBody HashMap<String,Object> category(SearchCriteria cri) throws Exception{
+		HashMap<String,Object> map=new HashMap<>();
+		List<FAQVO> list=service.searchlist(cri);
 		Paging pageList=service.makePage(cri);
+		map.put("list", list);
+		map.put("paging", pageList);
 		
-		return result;
+		return map;
 		
 	}
 }

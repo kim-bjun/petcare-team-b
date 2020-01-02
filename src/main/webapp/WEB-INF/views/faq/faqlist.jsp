@@ -45,7 +45,7 @@
 					style="font-size: 20px; border: 1px solid; float: right">등록</a>
 			</div>
 			<div>
-				<a href="/faq/list?searchType=ct&searchContent=예약" id="reserve">예약</a> <a href="/faq/list?searchType=ct&searchContent=가입">가입</a>
+				<a href="" id="reserve">예약</a> <a href="/faq/list?searchType=ct&searchContent=가입">가입</a>
 			</div>
 			<div id="list">
 			<c:forEach var="faq" items="${list}">
@@ -94,15 +94,15 @@
 <script>
 	var result = '${msg}';
 	var content='';
-	var list=document.querySelector("#list");
+	var page='';
 	if (result == 'SUCCESS') {
 		alert("처리가 완료되었습니다.");
 	}
 	
-	/* $("#reserve").on("click", function(event){
+	 $("#reserve").on("click", function(event){
 		event.preventDefault();
 		$.getJSON("/faq/category?searchType=ct&searchContent=예약",function(data){
-			$.each(data,function(i,val){
+			$.each(data.list,function(i,val){
 				$.each(val,function(key,value){
 					content+='<span>'+value+'</span>';	
 				});
@@ -110,10 +110,16 @@
 				content+='<br>';
 			});
 			$("#list").html(content);
+			
+			if(data.paging.next){
+				page='12345';
+			}
+			$("#page").html(page);
+			
 		});
 			
 		
-	}); */
+	}); 
 
 </script>
 </html>
